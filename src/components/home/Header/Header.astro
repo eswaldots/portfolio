@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+import AboutMeIcon from "../../icons/AboutMeIcon.astro";
+import HomeIcon from "../../icons/HomeIcon.astro";
+import InfoIcon from "../../icons/InfoIcon.astro";
+import ProjectIcon from "../../icons/ProjectIcon.astro";
+import WorkIcon from "../../icons/WorkIcon.astro";
+import HeaderButton from "./HeaderButton.astro";
+
+---
+
+<header class="fixed transition top-0 left-0 max-w-screen w-full px-12 py-3 flex justify-between">
+    <Image width={10} height={10} class="size-[39px] rounded-full" src="/squid.jpeg" alt="logo" />
+
+    <nav class="flex gap-4">
+        <HeaderButton>
+            <HomeIcon />
+        </HeaderButton>
+        <HeaderButton>
+            <WorkIcon />
+        </HeaderButton>
+        <HeaderButton>
+            <ProjectIcon />
+        </HeaderButton>
+        <HeaderButton>
+            <AboutMeIcon />
+        </HeaderButton>
+        <HeaderButton>
+            <InfoIcon />
+        </HeaderButton>
+    </nav>
+</header>
+
+<style>
+    header {
+      animation: nav-shadown 0.5s linear both;
+      animation-timeline: scroll();
+      animation-range: 0 300px;
+    }
+  
+    header {
+      @apply dark:bg-foreground/90 bg-background/50;
+    }
+  
+    @keyframes nav-shadown {
+      0% {
+        @apply dark:bg-foreground/0 bg-background/0 invisible;
+      }
+      to {
+        @apply shadow-lg ring-1 backdrop-blur ring-white/10;
+      }
+    }
+  </style>

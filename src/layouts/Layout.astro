@@ -1,4 +1,7 @@
 ---
+import Header from '../components/home/Header/Header.astro';
+import '@fontsource/inter';
+
 interface Props {
 	title: string;
 }
@@ -16,12 +19,16 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class='bg-background text-text dark:text-text-foreground px-12 dark:bg-foreground'>
+		<Header />
+		<main class=''>
 		<slot />
+	</main>
 	</body>
 </html>
 <style is:global>
 	:root {
+		--background: 0, 0, 12;
 		--accent: 136, 58, 234;
 		--accent-light: 224, 204, 250;
 		--accent-dark: 49, 10, 101;
@@ -32,9 +39,11 @@ const { title } = Astro.props;
 			white 60%
 		);
 	}
+	.dark {
+		--background: 255, 255, 255;
+  }
 	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
+		font-family: "Inter", sans-serif;
 	}
 	code {
 		font-family:
