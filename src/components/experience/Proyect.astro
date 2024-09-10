@@ -1,0 +1,15 @@
+---
+import { Image } from "astro:assets";
+---
+
+<div class="flex flex-col gap-8 w-full my-12">
+    <section class="flex sm:flex-row flex-col w-full justify-between items-start sm:items-center sm:gap-6">
+        <span class='opacity-30'>2024</span>
+        <h1 class="text-[33px] font-medium">Avila Beauty</h1>
+        <p class="opacity-60 sm:w-[470px] text-wrap">Creando una nueva identidad para una startup de moda local. Tomando su estilo tradicional al siguiente nivel. </p>
+        <span class="opacity-30 sm:py-0 pt-4">Freelance</span>
+    </section>
+    <a href='https://avilabeauty.vercel.app/' class="group flex items-center justify-center dark:bg-background/[0.04] bg-foreground/[0.04] w-full h-[300px] sm:h-[490px] rounded-[33px]">
+    <Image width={300} height={300} class="rounded-full sm:p-0 p-10 size-[300px] transition group-hover:scale-105 duration-700" src="/avila_beauty.png" alt="logo" />
+    </a>
+</div>

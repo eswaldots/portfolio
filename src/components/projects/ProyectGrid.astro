@@ -1,0 +1,150 @@
+
+---
+import NextJs from "../brands/icons/NextJs.astro";
+import React from "../brands/icons/React.astro";
+import Tailwind from "../brands/icons/Tailwind.astro";
+import VSCode from "../brands/icons/VSCode.astro";
+import Electron from "../brands/icons/Electron.astro";
+import Proyect from "./Proyect.astro";
+import PostgreSQL from "../brands/icons/PostgreSQL.astro";
+import Django from "../brands/icons/Django.astro";
+import JWT from "../brands/icons/JWT.astro";
+import MySQL from "../brands/icons/MySQL.astro";
+import Prisma from "../brands/icons/Prisma.astro";
+import TipTap from "../brands/icons/TipTap.astro";
+import Express from "../brands/icons/Express.astro";
+import Zustand from "../brands/icons/Zustand.astro";
+
+const tags = {
+  VSCode: {title: "VSCode",
+  icon: VSCode,
+},
+
+ NextJs: {title: "Next.js",
+  icon: NextJs,
+},
+
+React: {title: "React",
+  icon: React,
+},
+
+Tailwind: {title: "Tailwind",
+  icon: Tailwind,
+},
+
+Electron: {title: "Electron",
+  icon: Electron,
+},
+
+Django: {
+    title: "Django",
+    icon: Django,
+},
+
+JWT: {
+    title: "JWT",
+    icon: JWT,
+},
+
+PostgreSQL: {
+    title: "PostgreSQL",
+    icon: PostgreSQL,   
+},
+
+MySQL: {
+    title: "MySQL",
+    icon: MySQL,
+},
+
+Prisma: {
+    title: "Prisma",
+    icon: Prisma,
+},
+
+TipTap: {
+    title: "TipTap",
+    icon: TipTap,
+},
+
+Express: {
+    title: "Express",
+    icon: Express,
+},
+
+Zustand: {
+    title: "Zustand",
+    icon: Zustand,
+}
+
+
+
+}
+
+const proyects = [
+    {
+        title: "Weathify",
+        description: "Aplicación de escritorio que cambia el fondo de pantalla dependiendo del clima local. Totalmente perzonalizable.",
+        image: "/logo.png",
+        tags: [tags.React, tags.Tailwind, tags.Electron ],
+        href: "https://github.com/ezwal/Weathify"
+    },
+    {
+        title: "Luxure",
+        description: "Pagina de hoteles con un diseño moderno y una interfaz de usuario atractiva. Con una API REST con autenticación JWT.",
+        image: "/Luxure.png",
+        href: "https://luxure.netlify.app/",
+        tags: [tags.React, tags.Tailwind, tags.Django, tags.MySQL, tags.JWT],
+    },
+    {
+        title: "iCloud Notes Clone",
+        description: "Clon hecho completamente desde cero de una de las famosas aplicaciones de iCloud.",
+        image: "/notes.png",
+        href: "https://noteios.vercel.app/",
+        tags: [tags.NextJs, tags.Prisma, tags.PostgreSQL, tags.TipTap, tags.Tailwind],
+    },
+      {
+        title: "Creaciones Laura",
+        description: "Aplicacion de reposteria para creaciones de artistas. Con REST API y con un diseño moderno.",
+        image: "/donut.gif",
+        href: "https://noteios.vercel.app/",
+        tags: [tags.NextJs, tags.Prisma, tags.PostgreSQL, tags.Express, tags.Zustand, tags.Tailwind],
+    },
+    
+];
+---
+
+<div class="flex flex-col lg:grid lg:grid-cols-3 gap-8 w-full">
+   <Proyect size='icon' class='transition duration-700 ease-in show '  {...proyects[0]} />
+    <Proyect size='screen' class='transition duration-700 ease-in show lg:col-span-2' {...proyects[1]} />
+    <Proyect size='screen' class='transition duration-700 ease-in show lg:col-span-2' {...proyects[2]} />
+    <Proyect size="icon" class='transition duration-700 ease-in show' {...proyects[3]} />
+</div>
+
+<script>
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0');
+        entry.target.classList.remove('translate-y-[50%]');
+        entry.target.classList.add('opacity-100');
+        entry.target.classList.add('translate-y-0');
+        
+      } else {
+        entry.target.classList.remove('translate-y-0');
+        entry.target.classList.remove('opacity-100');
+        entry.target.classList.add('opacity-0'); 
+        entry.target.classList.add('translate-y-[50%]');
+
+      }
+    });
+  });
+
+  const proyects = document.querySelectorAll('.show');
+  
+  proyects.forEach((proyect) => {
+    observer.observe(proyect);
+  });
+
+</script>
+

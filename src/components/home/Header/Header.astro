@@ -6,45 +6,52 @@ import InfoIcon from "../../icons/InfoIcon.astro";
 import ProjectIcon from "../../icons/ProjectIcon.astro";
 import WorkIcon from "../../icons/WorkIcon.astro";
 import HeaderButton from "./HeaderButton.astro";
+import MenuIcon from "../../icons/MenuIcon.astro";
 
 ---
 
-<header class="fixed transition top-0 left-0 max-w-screen w-full px-12 py-3 flex justify-between">
+<header class="fixed backdrop-blur-md backdrop-saturate-150 z-50 top-0 left-0 max-w-screen w-full px-6 lg:px-12 border-b-[0.5px] border-background/10 py-3 flex items-center justify-between">
     <Image width={10} height={10} class="size-[39px] rounded-full" src="/squid.jpeg" alt="logo" />
 
-    <nav class="flex gap-4">
-        <HeaderButton>
+    <nav class="hidden gap-4 sm:flex">
+        <HeaderButton href="/#" title="Inicio">
             <HomeIcon />
         </HeaderButton>
-        <HeaderButton>
+        <HeaderButton href="/#experiencie" title="Experiencia">
             <WorkIcon />
         </HeaderButton>
-        <HeaderButton>
+        <HeaderButton href="/#projects" title="Proyectos">
             <ProjectIcon />
         </HeaderButton>
-        <HeaderButton>
+        <HeaderButton href="/#stack" title="Tecnologías">
+          <InfoIcon />
+      </HeaderButton>
+        <HeaderButton href="/#about-me" title="Sobre mí">
             <AboutMeIcon />
         </HeaderButton>
-        <HeaderButton>
-            <InfoIcon />
-        </HeaderButton>
+    </nav>
+
+    <nav class='flex sm:hidden'>
+      <section class="opacity-60 hover:opacity-100 transition ease-in-out hover:scale-105">
+        <MenuIcon />
+      </section>
     </nav>
 </header>
 
 <style>
     header {
-      animation: nav-shadown 0.5s linear both;
+      animation: nav-shadown 5s linear both;
       animation-timeline: scroll();
       animation-range: 0 300px;
     }
   
     header {
-      @apply dark:bg-foreground/90 bg-background/50;
+      @apply dark:bg-foreground/90 bg-background/50 opacity-100;
     }
   
     @keyframes nav-shadown {
       0% {
-        @apply dark:bg-foreground/0 bg-background/0 invisible;
+        @apply dark:bg-foreground/0 bg-background/0 opacity-0;
       }
       to {
         @apply shadow-lg ring-1 backdrop-blur ring-white/10;

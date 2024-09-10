@@ -1,3 +1,8 @@
-<a href="/" class="flex items-center gap-2 opacity-60 hover:opacity-100 transition ease-in-out hover:scale-105 ">
+---
+const { href, title } = Astro.props;
+---
+
+<a aria-label={href} href="/" class="relative group text-left inline-block hover:shadow-2xl opacity-60 hover:opacity-100 transition ease-in-out hover:scale-105">
     <slot />
+    <span class="absolute cursor-auto rounded-md shadow-2xl border-[0.1px] border-background/10 opacity-0 top-8 -ml-[100%] px-3 duration-300 transition group-hover:opacity-100 dark:bg-black/30 bg-black/80 text-text-foreground border-1 p-1">{title}</span>
 </a>
