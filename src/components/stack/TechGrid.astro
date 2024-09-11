@@ -29,7 +29,7 @@ const techs = [
     },
     {
         tag: tags.Python,
-        color: "purple",
+        color: "blue",
     },
     {
         tag: tags.Figma,
@@ -45,11 +45,11 @@ const techs = [
     },
     {
         tag: tags.React,
-        color: "blue-500", 
+        color: "sky", 
     },
     {
         tag: tags.Django,
-        color: "green-500",
+        color: "green",
     },
     {
         tag: tags.PostgreSQL,
@@ -61,12 +61,24 @@ const techs = [
     },
     {
         tag: tags.Prisma,
-        color: "gray-500",
+        color: "white",
+    },
+    {
+        tag: tags.VSCode,
+        color: "black",
+    },
+    {
+        tag: tags.Astro,
+        color: "black",
+    },
+    {
+        tag: tags.Node,
+        color: "green",
     }
 ];
 ---
 
-<div class="grid grid-cols-3 gap-8 w-full">
+<div class="flex flex-wrap gap-4 w-[60%] justify-center">
     {techs.map((tech) => (
         <Tech tag={tech.tag} color={tech.color} />
     ))} 
