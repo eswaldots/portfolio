@@ -1,0 +1,40 @@
+---
+import { tags } from "../projects/ProyectGrid.astro";
+import Tech from "./Tech.astro";
+
+const techs = [
+    {
+        tag: tags.NextJs,
+        color: "black",
+    },
+    {
+        tag: tags.Tailwind,
+        color: "sky",
+    },
+    {
+        tag: tags.React,
+        color: "blue-500", 
+    },
+    {
+        tag: tags.Django,
+        color: "green-500",
+    },
+    {
+        tag: tags.PostgreSQL,
+        color: "blue",
+    },
+    {
+        tag: tags.Express,
+        color: "white",
+    },
+    {
+        tag: tags.Prisma,
+        color: "gray-500",
+    }
+];
+---
+
+<div class="grid grid-cols-3 gap-8 w-full">
+    {techs.map((tech) => (
+        <Tech tag={tech.tag} color={tech.color} />
+    ))} 

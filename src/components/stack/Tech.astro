@@ -1,0 +1,39 @@
+---
+import type { Tag } from '../../lib/definitions/tag';
+
+interface Props {
+    tag: Tag;
+    color: string;
+}
+
+const { tag, color } = Astro.props;
+
+const colorVariants : { [key: string]: string } = {
+    purple: 'bg-purple-600 hover:bg-purple-500',
+    blue: 'bg-blue-600 hover:bg-blue-500',
+    green: 'bg-green-600 hover:bg-green-500',
+    yellow: 'bg-yellow-600 hover:bg-yellow-500',
+    orange: 'bg-orange-600 hover:bg-orange-500',
+    black: 'bg-black border-black text-black',
+    red: 'bg-red-600 hover:bg-red-500',
+    white: 'bg-white border-white text-white',
+  }
+--- 
+
+<article class={`group tooltip flex items-center bg-transparent hover:border-opacity-100 border-opacity-0 border rounded-2xl justify-center size-16 p-4 transition ${colorVariants[color]} backdrop-blur-md backdrop-saturate-150`}>
+    <div 
+          class={`absolute inset-0 transition-opacity ${colorVariants[color]} opacity-10 group-hover:opacity-30 rounded-2xl blur-[1px] group-hover:blur-none`}
+          aria-hidden="true"
+        />
+        <section class="flex items-center justify-center transition size-full group-hover:scale-105">
+    <tag.icon/>
+</section>
+<div class={`absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-2 bg-transparent border ${colorVariants[color]} rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 whitespace-nowrap backdrop-blur-sm`}>
+    {tag.title}
+  </div>
+</div>
+</article>
+
+
+
+
