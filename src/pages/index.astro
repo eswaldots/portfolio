@@ -9,19 +9,19 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Aaron Avila">
-	<SectionContainer class='show' id="inicio">
+	<SectionContainer id="inicio">
 		<Hero />
 	</SectionContainer>
-	<SectionContainer class='show' id="experiencia">
+	<SectionContainer class='transition duration-500 ease show' id="experiencia">
 		<Experience />
 	</SectionContainer>
 	{/*<SectionContainer id="proyectos">
 		<Projects />
 	</SectionContainer> */}
-	<SectionContainer class='show' id="stack">
+	<SectionContainer class='transition duration-500 ease show' id="stack">
 		<Stack />
 	</SectionContainer>
-	<SectionContainer class='show' id="sobre-mi">
+	<SectionContainer class='transition duration-500 ease show' id="sobre-mi">
 		<AboutMe />
 	</SectionContainer>
 </Layout>
