@@ -1,0 +1,103 @@
+---
+import { Image } from "astro:assets";
+---
+
+<div class="card before:border-b-foreground before:border-solid before:border-b-[3px] bg-foreground/[0.04] dark:bg-background/[0.04] rounded-md">
+  <div class="image border-foreground border-solid border-[3px] rounded-full">
+    <Image width={10} height={10} class="size-full rounded-full" src="/squid.jpeg" alt="logo" />
+      </div>
+  <div class="card-info">
+    <span>Aaron Avila</span>
+    <p class="opacity-60">Squid Code</p>
+  </div>
+  <a href="#" class="button">Folow</a>
+</div>
+
+<style>
+
+.card {
+  width: 350px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  width: 350px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,0.8715861344537815) 0%, rgba(10,14,25,1) 35%, rgba(33,60,99,1) 100%);
+  transition: all 0.5s ease;
+}
+
+.card * {
+  z-index: 1;
+}
+
+.image {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-top: 30px;
+  transition: all 0.5s ease;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.5s ease;
+}
+
+.card-info span {
+  font-weight: 600;
+  font-size: 24px;
+  margin-top: 15px;
+  line-height: 5px;
+}
+
+.button {
+  text-decoration: none;
+  background-color: #1468BF;
+  color: white;
+  padding: 5px 20px;
+  border-radius: 5px;
+  border: 1px solid white;
+  transition: all 0.5s ease;
+}
+
+.card:hover::before {
+  width: 350px;
+  height: 300px;
+  border-bottom: none;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  transform: scale(0.95);
+}
+
+.card:hover .card-info {
+  transform: translate(0%,-25%);
+}
+
+.card:hover .image {
+  transform: scale(2) translate(-60%,-40%);
+}
+
+.button:hover {
+  background-color: #FF6844;
+  transform: scale(1.1);
+}
+</style>

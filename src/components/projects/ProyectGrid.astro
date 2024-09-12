@@ -24,6 +24,9 @@ import Html from "../brands/icons/Html.astro";
 import Javascript from "../brands/icons/Javascript.astro";
 import Python from "../brands/icons/Python.astro";
 import Typescript from "../brands/icons/Typescript.astro";
+import Expo from "../brands/icons/Expo.astro";
+import Github from "../brands/icons/Github.astro";
+import Supabase from "../brands/icons/Supabase.astro";
 
 export const tags = {
   VSCode: {title: "VSCode",
@@ -133,9 +136,22 @@ Express: {
 Zustand: {
     title: "Zustand",
     icon: Zustand,
+},
+
+Expo: {
+    title: "Expo", 
+    icon: Expo,
+},
+
+Supabase: {
+    title: "Supabase",
+    icon: Supabase,
+},
+
+Github: {
+    title: "Github",
+    icon: Github,
 }
-
-
 
 }
 
@@ -144,7 +160,7 @@ const proyects = [
         title: "Weathify",
         description: "Aplicación de escritorio que cambia el fondo de pantalla dependiendo del clima local. Totalmente perzonalizable.",
         image: "/logo.png",
-        tags: [tags.React, tags.Tailwind, tags.Electron ],
+        tags: [tags.React, tags.Tailwind, tags.Electron, tags.Node ],
         href: "https://github.com/ezwal/Weathify"
     },
     {

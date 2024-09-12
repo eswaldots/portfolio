@@ -74,11 +74,27 @@ const techs = [
     {
         tag: tags.Node,
         color: "green",
+    },
+    {
+        tag: tags.Expo,
+        color: "black",
+    },
+    {
+        tag: tags.Github,
+        color: "black",
+    },
+    {
+        tag: tags.Supabase,
+        color: "white",
+    },
+    {
+        tag: tags.Zustand,
+        color: "brown"
     }
 ];
 ---
 
-<div class="flex flex-wrap gap-4 w-[60%] justify-center">
+<div class="flex flex-wrap gap-[35px] w-full justify-center">
     {techs.map((tech) => (
         <Tech tag={tech.tag} color={tech.color} />
     ))} 
