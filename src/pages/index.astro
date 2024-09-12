@@ -9,20 +9,46 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Aaron Avila">
-	<SectionContainer id="inicio">
+	<SectionContainer class='show' id="inicio">
 		<Hero />
 	</SectionContainer>
-	<SectionContainer id="experiencia">
+	<SectionContainer class='show' id="experiencia">
 		<Experience />
 	</SectionContainer>
 	{/*<SectionContainer id="proyectos">
 		<Projects />
 	</SectionContainer> */}
-	<SectionContainer id="stack">
+	<SectionContainer class='show' id="stack">
 		<Stack />
 	</SectionContainer>
-	<SectionContainer id="about-me">
+	<SectionContainer class='show' id="sobre-mi">
 		<AboutMe />
 	</SectionContainer>
 </Layout>
+
+<script>
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				entry.target.classList.remove('opacity-0');
+				entry.target.classList.remove('translate-y-[50%]');
+				entry.target.classList.add('opacity-100');
+				entry.target.classList.add('translate-y-0');
+				
+			} else {
+				entry.target.classList.remove('translate-y-0');
+				entry.target.classList.remove('opacity-100');
+				entry.target.classList.add('opacity-0'); 
+				entry.target.classList.add('translate-y-[50%]');
+
+			}
+		});
+	});
+
+	const proyects = document.querySelectorAll('.show');
+	
+	proyects.forEach((proyect) => {
+		observer.observe(proyect);
+	});
+</script>
 

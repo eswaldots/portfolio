@@ -20,7 +20,7 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class='bg-background text-text dark:text-text-foreground px-6 sm:px-12 dark:bg-foreground'>
+	<body class='bg-background scroll-smooth text-text dark:text-text-foreground px-6 sm:px-12 dark:bg-foreground'>
 		<Header />
 		<main class=''>
 		<slot />
@@ -46,6 +46,7 @@ const { title } = Astro.props;
   }
 	html {
 		font-family: "Inter", sans-serif;
+		scroll-behavior: smooth;
 	}
 	code {
 		font-family:

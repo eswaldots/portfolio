@@ -8,6 +8,12 @@ interface Props {
 const { class: className, id } = Astro.props;
 ---
 
-<section class={className} data-section={id}>
+<section class={className} id={id}>
     <slot />
 </section>
+
+<style>
+    section {
+        scroll-margin-top: 60px;
+    }
+</style>
