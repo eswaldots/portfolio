@@ -12,13 +12,13 @@ import Layout from '../layouts/Layout.astro';
 	<SectionContainer id="inicio">
 		<Hero />
 	</SectionContainer>
-	<SectionContainer class='transition duration-500 ease show' id="experiencia">
-		<Experience />
+	<SectionContainer id="experiencia">
+		<Experience client:visible />
 	</SectionContainer>
 	{/*<SectionContainer id="proyectos">
 		<Projects />
 	</SectionContainer> */}
-	<SectionContainer class='transition duration-500 ease show' id="stack">
+	<SectionContainer id="stack">
 		<Stack />
 	</SectionContainer>
 	<SectionContainer class='transition duration-500 ease show' id="sobre-mi">
@@ -50,5 +50,7 @@ import Layout from '../layouts/Layout.astro';
 	proyects.forEach((proyect) => {
 		observer.observe(proyect);
 	});
+
+
 </script>
 

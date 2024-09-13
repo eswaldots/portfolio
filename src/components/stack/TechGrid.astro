@@ -94,7 +94,27 @@ const techs = [
 ];
 ---
 
-<div class="flex flex-wrap gap-[35px] w-full justify-center">
+<div class="experience transition duration-500 ease flex flex-wrap gap-[35px] opacity-0 translate-y-[50%] w-full justify-center">
     {techs.map((tech) => (
         <Tech tag={tech.tag} color={tech.color} />
     ))} 
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.remove('opacity-0');
+                entry.target.classList.remove('translate-y-[50%]');
+                entry.target.classList.add('opacity-100');
+                entry.target.classList.add('translate-y-0');
+                
+            } 
+        });
+    });
+
+    const techs = document.querySelectorAll('.experience');
+     
+     techs.forEach((tech) => {
+         observer.observe(tech);
+     });
+</script>
