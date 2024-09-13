@@ -10,10 +10,10 @@ import MenuIcon from "../../icons/MenuIcon.astro";
 
 ---
 
-<header class="fixed backdrop-blur-md backdrop-saturate-150 z-50 top-0 left-0 max-w-screen w-full px-6 lg:px-12 border-b-[0.5px] border-background/10 py-3 flex items-center justify-between">
-    <Image width={10} height={10} class="size-[39px] rounded-full" src="/squid.jpeg" alt="logo" />
+<header class="fixed backdrop-blur-md backdrop-saturate-150 z-50 sm:top-0 sm:left-0 top-3 sm:rounded-none rounded-[33px] sm:w-full left-[50%] sm:translate-x-0 translate-x-[-50%] w-fit px-6 lg:px-12 border-b-[0.5px] border-background/10 py-3 flex items-center justify-between">
+    <Image width={10} height={10} class="sm:flex hidden size-[39px] rounded-full" src="/squid.jpeg" alt="logo" />
 
-    <nav class="hidden gap-4 sm:flex">
+    <nav class="flex items-center justify-center sm:w-auto gap-4">
         <HeaderButton href="#inicio" title="Inicio">
             <HomeIcon />
         </HeaderButton>
@@ -31,11 +31,6 @@ import MenuIcon from "../../icons/MenuIcon.astro";
         </HeaderButton>
     </nav>
 
-    <nav class='flex sm:hidden'>
-      <section class="opacity-60 hover:opacity-100 transition ease-in-out hover:scale-105">
-        <MenuIcon />
-      </section>
-    </nav>
 </header>
 
 <style>
