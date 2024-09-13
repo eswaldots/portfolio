@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import GithubButton from "../misc/GithubButton.astro";
 ---
 
-<div class="card before:border-b-foreground before:border-solid before:border-b-[3px] bg-foreground/[0.04] dark:bg-background/[0.04] rounded-md">
+<div class="card w-full lg:w-[300px] before:w-full lg:before:w-[350px] before:border-b-foreground before:border-solid before:border-b-[3px] bg-foreground/[0.04] dark:bg-background/[0.04] rounded-md">
   <div class="image border-foreground border-solid border-[3px] rounded-full">
     <Image width={10} height={10} class="size-full rounded-full" src="/squid.jpeg" alt="logo" />
       </div>
@@ -17,7 +17,6 @@ import GithubButton from "../misc/GithubButton.astro";
 <style>
 
 .card {
-  width: 350px;
   height: 300px;
   display: flex;
   flex-direction: column;
@@ -32,7 +31,6 @@ import GithubButton from "../misc/GithubButton.astro";
 
 .card::before {
   content: "";
-  width: 350px;
   height: 100px;
   position: absolute;
   top: 0;
