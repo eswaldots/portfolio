@@ -189,37 +189,31 @@ const proyects = [
 ---
 
 <div class="flex flex-col lg:grid lg:grid-cols-3 gap-8 w-full">
-   <Proyect size='icon' class='transition duration-500 ease show '  {...proyects[0]} />
-    <Proyect size='screen' class='transition duration-500 ease show lg:col-span-2' {...proyects[1]} />
-    <Proyect size='screen' class='transition duration-500 ease show lg:col-span-2' {...proyects[2]} />
-    <Proyect size="icon" class='transition duration-500 ease show' {...proyects[3]} />
+   <Proyect size='icon' class='transition opacity-0 translate-y-[50%] duration-500 ease proyect '  {...proyects[0]} />
+    <Proyect size='screen' class='transition opacity-0 translate-y-[50%] duration-500 ease proyect lg:col-span-2' {...proyects[1]} />
+    <Proyect size='screen' class='transition opacity-0 translate-y-[50%] duration-500 ease proyect lg:col-span-2' {...proyects[2]} />
+    <Proyect size="icon" class='transition opacity-0 translate-y-[50%] duration-500 ease proyect' {...proyects[3]} />
 </div>
 
 <script>
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.remove('opacity-0');
-        entry.target.classList.remove('translate-y-[50%]');
-        entry.target.classList.add('opacity-100');
-        entry.target.classList.add('translate-y-0');
-        
-      } else {
-        entry.target.classList.remove('translate-y-0');
-        entry.target.classList.remove('opacity-100');
-        entry.target.classList.add('opacity-0'); 
-        entry.target.classList.add('translate-y-[50%]');
-
-      }
+const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.remove('opacity-0');
+                entry.target.classList.remove('translate-y-[50%]');
+                entry.target.classList.add('opacity-100');
+                entry.target.classList.add('translate-y-0');
+                observer.unobserve(entry.target);  
+            } 
+        });
     });
-  });
 
-  const proyects = document.querySelectorAll('.show');
-  
-  proyects.forEach((proyect) => {
-    observer.observe(proyect);
-  });
+    const techs = document.querySelectorAll('.proyect');
+     
+     techs.forEach((tech) => {
+         observer.observe(tech);
+     });
 
 </script>
 
