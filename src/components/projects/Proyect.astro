@@ -3,33 +3,54 @@ import { Image } from "astro:assets";
 import Badge from "../brands/Badge.astro";
 
 interface Props {
-    class?: string;
-    title: string;
-    href: string;
-    description: string;
-    image: string;
-    size?: "icon" | "screen";
-    tags: {title: string, icon: any}[];
+  class?: string;
+  title: string;
+  href: string;
+  description: string;
+  image: string;
+  size?: "icon" | "screen";
+  tags: { title: string; icon: any }[];
 }
 
-const { title, description, image, href, size, class: className, tags } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  href,
+  size,
+  class: className,
+  tags,
+} = Astro.props;
 ---
 
+<a
+  target="_blank"
+  href={href}
+  aria-label={href}
+  class={"px-3 group relative items-center justify-center rounded-[39px] backdrop-blur-md shadow-md backdrop-saturate-150 dark:bg-background/[0.04] bg-foreground/[0.04] flex flex-col h-[495px] " +
+    className}
+>
+  <Image
+    width={size === "icon" ? 300 : 650}
+    height={300}
+    class="rounded-md lg:dark:group-hover:brightness-50 dark:brightness-50 brightness-90 lg:group-hover:brightness-90 lg:blur-none lg:brightness-100 dark:lg:brightness-100 blur lg:group-hover:blur transition group-hover:scale-105 duration-700"
+    src={image}
+    alt="logo"
+  />
 
-<a href={href} aria-label={href} class={'px-3 group relative items-center justify-center rounded-[39px] backdrop-blur-md shadow-md backdrop-saturate-150 dark:bg-background/[0.04] bg-foreground/[0.04] flex flex-col h-[495px] ' + className}>
-
-    <Image width={size === 'icon' ? 300 : 650} height={300} class="rounded-md lg:dark:group-hover:brightness-50 dark:brightness-50 brightness-90 lg:group-hover:brightness-90 lg:blur-none lg:brightness-100 dark:lg:brightness-100 blur lg:group-hover:blur transition group-hover:scale-105 duration-700" src={image} alt="logo" />
-
-    <section class="transition-all duration-[500ms] absolute lg:-bottom-24 bottom-6 lg:opacity-0 ease-out lg:group-hover:opacity-100 px-6 group-hover:bottom-6">
-        <h1 class="text-[39px] font-semibold">{title}</h1>
-        <p class="opacity-60 text-wrap">{description}</p>
-        <section class="flex flex-wrap py-4 gap-y-2 gap-x-4">
-            {tags.map((tag) => (
-                <Badge title={tag.title}>
-                    <tag.icon/>
-                </Badge>
-            ))}
-        </section>
-        </section>
+  <section
+    class="transition-all duration-[500ms] absolute lg:-bottom-24 bottom-6 lg:opacity-0 ease-out lg:group-hover:opacity-100 px-6 group-hover:bottom-6"
+  >
+    <h1 class="text-[39px] font-semibold">{title}</h1>
+    <p class="opacity-60 text-wrap">{description}</p>
+    <section class="flex flex-wrap py-4 gap-y-2 gap-x-4">
+      {
+        tags.map((tag) => (
+          <Badge title={tag.title}>
+            <tag.icon />
+          </Badge>
+        ))
+      }
+    </section>
+  </section>
 </a>
-

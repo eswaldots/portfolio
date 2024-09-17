@@ -1,38 +1,39 @@
 <main class="flex items-center justify-start w-full h-screen">
-    <div class="flex flex-col max-w-[520px] animation">
-        <span class="text-3xl mb-2 font-medium text-start">
-            Aaron Avila
-        </span>
-        <h1 class="text-5xl font-bold">Frontend <strong class="bg-clip-text bg-gradient-to-br text-transparent from-[#656565] to-[#CBCBCB] font-bold">Developer</strong></h1>
-        <p class="opacity-60 my-4 text-base">Ingeniero de software especializado en desarrollar y diseñar experiencias digitales unicas. Actualmente enfocado en aprender nuevas tecnologías.</p>
-    </div>
+  <div class="flex flex-col max-w-[520px] animation">
+    <span class="text-3xl mb-2 font-medium text-start"> Aaron Avila </span>
+    <h1 class="text-5xl font-bold">
+      Fullstack <strong
+        class="bg-clip-text bg-gradient-to-br text-transparent from-[#656565] to-[#CBCBCB] font-bold"
+        >Developer</strong>
+    </h1>
+    <p class="opacity-60 my-4 text-base">
+      Ingeniero de software especializado en desarrollar y diseñar experiencias
+      digitales unicas. Actualmente enfocado en aprender nuevas tecnologías.
+    </p>
+  </div>
 </main>
 
 <style>
-    .animation {
-        animation-name: cross-fade-blur;
-        animation-duration: 8s;
-        animation-iteration-count: 1;
+  .animation {
+    animation-name: cross-fade-blur;
+    animation-duration: 8s;
+    animation-iteration-count: 1;
+  }
+
+  @keyframes cross-fade-blur {
+    0% {
+      opacity: 0;
+      filter: blur(1rem);
+      transform: translate3d(0, 3rem, 0);
     }
-
-    @keyframes cross-fade-blur {
-  0% {
-    opacity: 0;
-    filter: blur(1rem);
-    transform: translate3d(0, 3rem, 0);
+    20%,
+    60% {
+      opacity: 1;
+      filter: blur(0px);
+      transform: translate3d(0, 0, 0);
+    }
+    80%,
+    100% {
+    }
   }
-  20%,
-  60% {
-    opacity: 1;
-    filter: blur(0px);
-    transform: translate3d(0, 0, 0);
-  }
-  80%,
-  100% {
-
-  }
-
-}
 </style>
-
-
