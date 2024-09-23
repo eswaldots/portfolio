@@ -6,49 +6,57 @@ import InfoIcon from "../../icons/InfoIcon.astro";
 import ProjectIcon from "../../icons/ProjectIcon.astro";
 import WorkIcon from "../../icons/WorkIcon.astro";
 import HeaderButton from "./HeaderButton.astro";
-
 ---
 
-<header class="fixed backdrop-blur-md backdrop-saturate-150 z-50 sm:top-0 sm:left-0 top-3 sm:rounded-none rounded-[33px] sm:w-full left-[50%] sm:translate-x-0 translate-x-[-50%] w-fit px-6 lg:px-12 border-b-[0.5px] border-background/10 py-3 flex items-center justify-between">
-    <Image width={10} height={10} class="sm:flex hidden size-[39px] rounded-full" src="/squid.jpeg" alt="logo" />
+<header
+  class="fixed backdrop-blur-md backdrop-saturate-150 z-50 sm:top-0 sm:left-0 top-3 sm:rounded-none rounded-[33px] sm:w-full left-[50%] sm:translate-x-0 translate-x-[-50%] w-fit px-6 lg:px-12 border-b-[0.5px] border-background/10 py-3 flex items-center justify-between"
+>
+  <Image
+    loading="lazy"
+    width={10}
+    height={10}
+    class="sm:flex hidden size-[39px] rounded-full"
+    src="/squid.jpeg"
+    alt="logo"
+  />
 
-    <nav class="flex items-center justify-center sm:w-auto gap-4">
-        <HeaderButton href="#inicio" title="Inicio">
-            <HomeIcon />
-        </HeaderButton>
-        <HeaderButton href="#experiencia" title="Experiencia">
-            <WorkIcon />
-        </HeaderButton>
-        <HeaderButton href="/#proyectos" title="Proyectos">
-            <ProjectIcon />
-        </HeaderButton>
-        <HeaderButton href="/#stack" title="Tecnologías">
-          <InfoIcon />
-      </HeaderButton>
-        <HeaderButton href="/#sobre-mi" title="Sobre mí">
-            <AboutMeIcon />
-        </HeaderButton>
-    </nav>
-
+  <nav class="flex items-center justify-center sm:w-auto gap-4">
+    <HeaderButton href="#inicio" title="Inicio">
+      <HomeIcon />
+    </HeaderButton>
+    <HeaderButton href="#experiencia" title="Experiencia">
+      <WorkIcon />
+    </HeaderButton>
+    <HeaderButton href="/#proyectos" title="Proyectos">
+      <ProjectIcon />
+    </HeaderButton>
+    <HeaderButton href="/#stack" title="Tecnologías">
+      <InfoIcon />
+    </HeaderButton>
+    <HeaderButton href="/#sobre-mi" title="Sobre mí">
+      <AboutMeIcon />
+    </HeaderButton>
+  </nav>
 </header>
 
 <style>
-    header {
-      animation: nav-shadown 5s linear both;
-      animation-timeline: scroll();
-      animation-range: 0 300px;
+  header {
+    animation: nav-shadown 5s linear both;
+    animation-timeline: scroll();
+    animation-range: 0 300px;
+  }
+
+  header {
+    @apply dark:bg-foreground/90 bg-background/50 opacity-100;
+  }
+
+  @keyframes nav-shadown {
+    0% {
+      @apply dark:bg-foreground/0 bg-background/0 opacity-0;
     }
-  
-    header {
-      @apply dark:bg-foreground/90 bg-background/50 opacity-100;
+    to {
+      @apply shadow-lg ring-1 backdrop-blur ring-white/10;
     }
-  
-    @keyframes nav-shadown {
-      0% {
-        @apply dark:bg-foreground/0 bg-background/0 opacity-0;
-      }
-      to {
-        @apply shadow-lg ring-1 backdrop-blur ring-white/10;
-      }
-    }
-  </style>
+  }
+</style>
+
