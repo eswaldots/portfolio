@@ -1,0 +1,96 @@
+---
+import DarkIcon from "../../icons/DarkIcon.astro";
+import LightIcon from "../../icons/LightIcon.astro";
+import SystemIcon from "../../icons/SystemIcon.astro";
+
+const items = ["Dark", "Light", "System"];
+---
+
+<button class="relative group transition ease-in-out h-auto w-auto" id="button">
+  <LightIcon
+    class="icon-scheme transition ease-in-out size-6 hover:opacity-100 hover:scale-105 opacity-60"
+    id="light"
+  />
+  <DarkIcon
+    id="dark"
+    class="icon-scheme transition ease-in-out size-6 hover:opacity-100 hover:scale-105 opacity-60"
+  />
+  <SystemIcon
+    class="icon-scheme transition ease-in-out size-6 hover:opacity-100 hover:scale-105 opacity-60"
+    id="system"
+  />
+  <div
+    id="dropdown"
+    class="flex flex-col scale-0 transtion ease-in-out absolute cursor-auto rounded-md shadow-2xl border-background/10 top-8 right-1 opacity-0 -ml-[100%] duration-300 transition dark:bg-black/30 text-left bg-white text-foreground dark:text-text-foreground border-1 p-1"
+  >
+    {
+      items.map((item: string) => (
+        <span
+          class="span-color hover:bg-black/30 dark:hover:bg-white/30 py-1 transition-colors ease-in-out rounded-md cursor-pointer active:bg-white px-2 pr-6"
+          id={item.toLowerCase()}
+        >
+          {item}
+        </span>
+      ))
+    }
+  </div>
+</button>
+
+<script>
+  import { getColorScheme } from "../../../lib/utils/getColorScheme";
+
+  let scheme = getColorScheme();
+
+  const button = document.getElementById("button");
+  const dropdown = document.getElementById("dropdown");
+  const colorButons = document.querySelectorAll<HTMLElement>(".icon-scheme");
+  const spancolor = document.querySelectorAll<HTMLElement>(".span-color");
+
+  const toggleIcon = () => {
+    colorButons.forEach((btn) => {
+      btn.style.display = btn.id === scheme ? "flex" : "none";
+    });
+  };
+
+  const switchScheme = (id: string) => {
+    document.documentElement.classList.remove("light", "dark");
+    document.documentElement.classList.add(id);
+    if (id === "system") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.remove("light", "dark");
+        document.documentElement.classList.add("dark");
+      }
+
+      localStorage.removeItem("theme");
+      scheme = "system";
+      toggleIcon();
+      return;
+    }
+    localStorage.setItem("theme", id);
+    scheme = id;
+    toggleIcon();
+  };
+
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      if (e.matches) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    });
+
+  toggleIcon();
+  const toggleDropdown = () => {
+    dropdown?.classList.toggle("opacity-100");
+    dropdown?.classList.toggle("scale-100");
+  };
+
+  button?.addEventListener("click", toggleDropdown);
+  spancolor.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      switchScheme(btn.id);
+    });
+  });
+</script>
