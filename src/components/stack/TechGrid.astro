@@ -3,118 +3,115 @@ import { tags } from "../projects/ProyectGrid.astro";
 import Tech from "./Tech.astro";
 
 const techs = [
-    {
-        tag: tags.Linux,
-        color: "orange",
-    },
-    {
-        tag: tags.Git,
-        color: "red",
-    },
-    {
-        tag: tags.CSS,
-        color: "blue",
-    },
-    {
-        tag: tags.HTML,
-        color: "orange",
-    },
-    {
-        tag: tags.Javascript,
-        color: "yellow",
-    },
-    {
-        tag: tags.Typescript,
-        color: "blue",
-    },
-    {
-        tag: tags.Python,
-        color: "blue",
-    },
-    {
-        tag: tags.Figma,
-        color: "purple",
-    },
-    {
-        tag: tags.NextJs,
-        color: "black",
-    },
-    {
-        tag: tags.Tailwind,
-        color: "sky",
-    },
-    {
-        tag: tags.React,
-        color: "sky", 
-    },
-    {
-        tag: tags.Django,
-        color: "green",
-    },
-    {
-        tag: tags.PostgreSQL,
-        color: "blue",
-    },
-    {
-        tag: tags.Express,
-        color: "white",
-    },
-    {
-        tag: tags.Prisma,
-        color: "white",
-    },
-    {
-        tag: tags.VSCode,
-        color: "black",
-    },
-    {
-        tag: tags.Astro,
-        color: "black",
-    },
-    {
-        tag: tags.Node,
-        color: "green",
-    },
-    {
-        tag: tags.Expo,
-        color: "black",
-    },
-    {
-        tag: tags.Github,
-        color: "black",
-    },
-    {
-        tag: tags.Supabase,
-        color: "green",
-    },
-    {
-        tag: tags.Zustand,
-        color: "brown"
-    }
+  {
+    tag: tags.Linux,
+    color: "orange",
+  },
+  {
+    tag: tags.Git,
+    color: "red",
+  },
+  {
+    tag: tags.CSS,
+    color: "blue",
+  },
+  {
+    tag: tags.HTML,
+    color: "orange",
+  },
+  {
+    tag: tags.Javascript,
+    color: "yellow",
+  },
+  {
+    tag: tags.Typescript,
+    color: "blue",
+  },
+  {
+    tag: tags.Python,
+    color: "blue",
+  },
+  {
+    tag: tags.Figma,
+    color: "purple",
+  },
+  {
+    tag: tags.NextJs,
+    color: "black",
+  },
+  {
+    tag: tags.Tailwind,
+    color: "sky",
+  },
+  {
+    tag: tags.React,
+    color: "sky",
+  },
+  {
+    tag: tags.Django,
+    color: "green",
+  },
+  {
+    tag: tags.PostgreSQL,
+    color: "blue",
+  },
+  {
+    tag: tags.Express,
+    color: "white",
+  },
+  {
+    tag: tags.Prisma,
+    color: "white",
+  },
+  {
+    tag: tags.VSCode,
+    color: "black",
+  },
+  {
+    tag: tags.Astro,
+    color: "black",
+  },
+  {
+    tag: tags.Node,
+    color: "green",
+  },
+  {
+    tag: tags.Expo,
+    color: "black",
+  },
+  {
+    tag: tags.Github,
+    color: "black",
+  },
+  {
+    tag: tags.Supabase,
+    color: "green",
+  },
+  { tag: tags.Zustand, color: "brown" },
 ];
 ---
 
-<div class="experience transition duration-500 ease flex flex-wrap gap-[35px] opacity-0 translate-y-[50%] w-full justify-center">
-    {techs.map((tech) => (
-        <Tech tag={tech.tag} color={tech.color} />
-    ))} 
+<div
+  class="experience transition duration-500 ease flex flex-wrap gap-[35px] opacity-0 translate-y-[50%] w-full justify-center"
+>
+  {techs.map((tech) => <Tech tag={tech.tag} color={tech.color} />)}
 
-<script>
+  <script>
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.remove('opacity-0');
-                entry.target.classList.remove('translate-y-[50%]');
-                entry.target.classList.add('opacity-100');
-                entry.target.classList.add('translate-y-0');
-                
-            } 
-        });
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("opacity-0");
+          entry.target.classList.remove("translate-y-[50%]");
+          entry.target.classList.add("opacity-100");
+          entry.target.classList.add("translate-y-0");
+        }
+      });
     });
 
-    const techs = document.querySelectorAll('.experience');
-     
-     techs.forEach((tech) => {
-         observer.observe(tech);
-     });
-</script>
+    const techs = document.querySelectorAll(".experience");
+
+    techs.forEach((tech) => {
+      observer.observe(tech);
+    });
+  </script>
+</div>
