@@ -15,14 +15,14 @@ export default function Initial() {
       transition={{
         delay: 5.2
       }}
-      className="fixed z-10 w-screen h-screen font-mono text-lg"
+      className="fixed z-10 w-screen h-screen font-mono text-sm sm:text-lg"
     >
       <div className="p-6 grid gap-6">
         <div className="flex flex-col">
-          <span className="text-[#fabd2f]">~</span>
+          <span className="text-chart-4">~</span>
 
           <div className="flex items-center gap-3 justify-start">
-            <h1 className="text-[#b8bb26]">
+            <h1 className="text-chart-2">
               ❯
             </h1>
             <TypewriterTitle sequences={[{ text: "cd Dev/portfolio", pauseAfter: 1 }]} autoLoop={false} />
@@ -34,10 +34,10 @@ export default function Initial() {
           whileInView={{ visibility: "visible" }}
           transition={{ delay: 2 }}
           className="flex flex-col">
-          <span className="text-[#fabd2f]">…/portfolio on main [!?] via v22.19.0</span>
+          <span className="text-chart-4">…/portfolio <span className="text-background">on</span> <span className="text-chart-1">main [!?]</span> <span className="text-background">via</span> <span className="text-chart-2">v22.19.0</span></span>
 
           <div className="flex items-center gap-3 justify-start">
-            <h1 className="text-[#b8bb26]">
+            <h1 className="text-chart-2">
               ❯
             </h1>
             <TypewriterTitle startDelay={3000} sequences={[{ text: "pnpm dev", pauseAfter: 1 }]} autoLoop={false} />
@@ -71,7 +71,7 @@ export default function Initial() {
           transition={{ delay: 4.5 }}
         >
           <strong className="text-[#d3869b]">▲ Next.js 16.0.3</strong> (Turbopack)
-          <p>
+          <div>
             <h1>
               - Local:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://localhost:3000
             </h1>
@@ -79,7 +79,7 @@ export default function Initial() {
             <h1>
               - Network:&nbsp;&nbsp;&nbsp;&nbsp;http://192.168.1.102:3000
             </h1>
-          </p>
+          </div>
         </motion.div>
 
         <div className="indent-3">
@@ -117,7 +117,7 @@ export default function Initial() {
             whileInView={{ visibility: "visible" }}
             transition={{ delay: 5 }}
           >
-            <strong className="text-[#fabd2f]">GET</strong> / 200 in 4.3s <span className="opacity-50">(compile: 4.0s, render: 287ms)</span>
+            <strong className="text-chart-5">GET</strong> / 200 in 4.3s <span className="opacity-50">(compile: 4.0s, render: 287ms)</span>
           </motion.div>
         </div>
 
