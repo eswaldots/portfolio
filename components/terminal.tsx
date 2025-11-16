@@ -15,7 +15,7 @@ export default function Initial() {
       transition={{
         delay: 5.2
       }}
-      className="fixed z-10 w-screen h-screen font-mono text-sm sm:text-lg"
+      className="absolute z-10 w-screen h-screen font-mono text-sm sm:text-lg"
     >
       <div className="p-6 grid gap-6">
         <div className="flex flex-col">
