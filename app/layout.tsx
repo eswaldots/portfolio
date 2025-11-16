@@ -9,6 +9,7 @@ const geistSans = Inter({
 
 const jetBrainsMono = JetBrains_Mono({
   variable: "--font-mono",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
