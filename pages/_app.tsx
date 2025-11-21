@@ -1,17 +1,18 @@
-import { Header } from '@/components/header';
-import Head from 'next/head'
-import { AnimatePresence, motion } from 'motion/react'
-import "./globals.css"
-import { Inter, JetBrains_Mono } from 'next/font/google'
-import { AppProps } from 'next/app';
+import { Header } from "@/components/header";
+import Terminal from "@/components/terminal";
+import Head from "next/head";
+import { AnimatePresence, motion } from "motion/react";
+import "./globals.css";
+import { Inter, JetBrains_Mono } from "next/font/google";
+import { AppProps } from "next/app";
 
 const interFont = Inter({
-  variable: "--font-inter"
-})
+  variable: "--font-inter",
+});
 
 const jebrainsMonoFont = JetBrains_Mono({
-  variable: "--font-jetbrains-mono"
-})
+  variable: "--font-jetbrains-mono",
+});
 
 export default function App({ Component, pageProps, router }: AppProps) {
   return (
@@ -22,9 +23,11 @@ export default function App({ Component, pageProps, router }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* <link rel="icon" href="/icon" type="image/png" sizes="32x32" /> */}
       </Head>
-      <div className={`${interFont.variable} ${jebrainsMonoFont.variable} relative min-h-screen overflow-hidden`}>
-        <Header key="header" />
-        <AnimatePresence mode='sync' initial={false}>
+      <div
+        className={`${interFont.variable} ${jebrainsMonoFont.variable} relative`}
+      >
+        {/* <Header key="header" /> */}
+        <AnimatePresence mode="sync" initial={false}>
           <motion.div
             key={router.asPath}
             style={{ position: "absolute", inset: 0 }}
@@ -32,16 +35,14 @@ export default function App({ Component, pageProps, router }: AppProps) {
             animate={{ y: 0, zIndex: 2 }}
             exit={{ y: "-10%", opacity: 0.6, zIndex: 1 }}
             transition={{ type: "spring", damping: 24, stiffness: 160 }}
+            className="relative min-h-screen"
           >
             <Component {...pageProps} />
-            {/* <Terminal /> */}
           </motion.div>
 
+          <Terminal />
         </AnimatePresence>
-
-
       </div>
     </>
-  )
+  );
 }
-

@@ -11,7 +11,7 @@
  */
 
 import { motion, useAnimate } from "motion/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface TypewriterSequence {
   text: string;
@@ -25,6 +25,7 @@ interface TypewriterTitleProps {
   startDelay?: number;
   autoLoop?: boolean;
   loopDelay?: number;
+  hideCursorOnComplete?: boolean;
 }
 
 export default function TypewriterTitle({
@@ -37,8 +38,10 @@ export default function TypewriterTitle({
   startDelay = 500,
   autoLoop = true,
   loopDelay = 2000,
+  hideCursorOnComplete = false,
 }: TypewriterTitleProps) {
   const [scope, animate] = useAnimate();
+  const [isFinished, setIsFinished] = useState(false);
 
   useEffect(() => {
     let isActive = true;
@@ -88,7 +91,12 @@ export default function TypewriterTitle({
           }
         }
 
-        if (!(autoLoop && isActive)) break;
+        if (!(autoLoop && isActive)) {
+            if (hideCursorOnComplete) {
+                setIsFinished(true);
+            }
+            break;
+        }
 
         // Wait before starting next loop
         await new Promise((resolve) => setTimeout(resolve, loopDelay));
@@ -101,7 +109,7 @@ export default function TypewriterTitle({
     return () => {
       isActive = false;
     };
-  }, [sequences, typingSpeed, startDelay, autoLoop, loopDelay, animate, scope]);
+  }, [sequences, typingSpeed, startDelay, autoLoop, loopDelay, animate, scope, hideCursorOnComplete]);
 
   return (
     <div className="relative max-w-4xl">
@@ -115,7 +123,7 @@ export default function TypewriterTitle({
           initial={{ opacity: 0 }}
         >
           <span
-            className="inline-block animate-cursor border-background border-r-2"
+            className={`inline-block border-background border-r-2 ${isFinished ? "border-transparent" : "animate-cursor"}`}
             data-typewriter
           >
             {sequences[0].text}

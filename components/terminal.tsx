@@ -5,42 +5,54 @@ import TypewriterTitle from "./kokonutui/type-writer";
 
 export default function Initial() {
   return (
-    <motion.div initial={{
-      backgroundColor: "var(--foreground)",
-      clipPath: 'circle(150% at 50% 50%)',
-    }}
-      whileInView={{
-        clipPath: 'circle(0% at 50% 50%)',
+    <motion.div
+      initial={{
+        backgroundColor: "var(--foreground)",
+        clipPath: "circle(150% at 50% 50%)",
+      }}
+      animate={{
+        clipPath: "circle(0% at 50% 50%)",
       }}
       transition={{
-        delay: 5.2
+        delay: 5.2,
       }}
-      className="absolute z-10 w-screen h-screen font-mono text-sm sm:text-lg"
+      className="fixed top-0 left-0 z-50 w-screen h-screen font-mono text-sm sm:text-lg"
     >
       <div className="p-6 grid gap-6">
         <div className="flex flex-col">
           <span className="text-chart-4">~</span>
 
           <div className="flex items-center gap-3 justify-start">
-            <h1 className="text-chart-2">
-              ❯
-            </h1>
-            <TypewriterTitle sequences={[{ text: "cd Dev/portfolio", pauseAfter: 1 }]} autoLoop={false} />
+            <h1 className="text-chart-2">$</h1>
+            <TypewriterTitle
+              sequences={[{ text: "cd Dev/portfolio", pauseAfter: 1 }]}
+              autoLoop={false}
+              hideCursorOnComplete={true}
+            />
           </div>
         </div>
 
         <motion.div
           initial={{ visibility: "hidden" }}
-          whileInView={{ visibility: "visible" }}
+          animate={{ visibility: "visible" }}
           transition={{ delay: 2 }}
-          className="flex flex-col">
-          <span className="text-chart-4">…/portfolio <span className="text-background">on</span> <span className="text-chart-1">main [!?]</span> <span className="text-background">via</span> <span className="text-chart-2">v22.19.0</span></span>
+          className="flex flex-col"
+        >
+          <span className="text-chart-4">
+            …/portfolio <span className="text-background">on</span>{" "}
+            <span className="text-chart-1">main [!?]</span>{" "}
+            <span className="text-background">via</span>{" "}
+            <span className="text-chart-2">v22.19.0</span>
+          </span>
 
           <div className="flex items-center gap-3 justify-start">
-            <h1 className="text-chart-2">
-              ❯
-            </h1>
-            <TypewriterTitle startDelay={3000} sequences={[{ text: "pnpm dev", pauseAfter: 1 }]} autoLoop={false} />
+            <h1 className="text-chart-2">$</h1>
+            <TypewriterTitle
+              startDelay={3000}
+              sequences={[{ text: "pnpm dev", pauseAfter: 1 }]}
+              autoLoop={false}
+              hideCursorOnComplete={true}
+            />
           </div>
         </motion.div>
 
@@ -48,7 +60,7 @@ export default function Initial() {
           <motion.div
             className="text-background"
             initial={{ visibility: "hidden" }}
-            whileInView={{ visibility: "visible" }}
+            animate={{ visibility: "visible" }}
             transition={{ delay: 4 }}
           >
             &gt; portfolio@0.1.0 dev /home/ezwal/Dev/portfolio
@@ -57,7 +69,7 @@ export default function Initial() {
           <motion.div
             className="text-background"
             initial={{ visibility: "hidden" }}
-            whileInView={{ visibility: "visible" }}
+            animate={{ visibility: "visible" }}
             transition={{ delay: 4.2 }}
           >
             &gt; next dev
@@ -67,18 +79,17 @@ export default function Initial() {
         <motion.div
           className="text-background indent-6"
           initial={{ visibility: "hidden" }}
-          whileInView={{ visibility: "visible" }}
+          animate={{ visibility: "visible" }}
           transition={{ delay: 4.5 }}
         >
-          <strong className="text-[#d3869b]">▲ Next.js 16.0.3</strong> (Turbopack)
+          <strong className="text-[#d3869b]">▲ Next.js 16.0.3</strong>{" "}
+          (Turbopack)
           <div>
             <h1>
               - Local:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://localhost:3000
             </h1>
 
-            <h1>
-              - Network:&nbsp;&nbsp;&nbsp;&nbsp;http://192.168.1.102:3000
-            </h1>
+            <h1>- Network:&nbsp;&nbsp;&nbsp;&nbsp;http://192.168.1.102:3000</h1>
           </div>
         </motion.div>
 
@@ -86,7 +97,7 @@ export default function Initial() {
           <motion.div
             className="text-background"
             initial={{ visibility: "hidden" }}
-            whileInView={{ visibility: "visible" }}
+            animate={{ visibility: "visible" }}
             transition={{ delay: 4.6 }}
           >
             ✓ Starting...
@@ -95,7 +106,7 @@ export default function Initial() {
           <motion.div
             className="text-background"
             initial={{ visibility: "hidden" }}
-            whileInView={{ visibility: "visible" }}
+            animate={{ visibility: "visible" }}
             transition={{ delay: 4.7 }}
           >
             ✓ Ready in 473ms
@@ -104,26 +115,23 @@ export default function Initial() {
           <motion.div
             className="text-background indent-3"
             initial={{ visibility: "hidden" }}
-            whileInView={{ visibility: "visible" }}
+            animate={{ visibility: "visible" }}
             transition={{ delay: 4.8 }}
           >
             ○ Compiling / ...
           </motion.div>
 
-
           <motion.div
             className="text-background indent-3"
             initial={{ visibility: "hidden" }}
-            whileInView={{ visibility: "visible" }}
+            animate={{ visibility: "visible" }}
             transition={{ delay: 5 }}
           >
-            <strong className="text-chart-5">GET</strong> / 200 in 4.3s <span className="opacity-50">(compile: 4.0s, render: 287ms)</span>
+            <strong className="text-chart-5">GET</strong> / 200 in 4.3s{" "}
+            <span className="opacity-50">(compile: 4.0s, render: 287ms)</span>
           </motion.div>
         </div>
-
       </div>
     </motion.div>
-  )
+  );
 }
-
-
