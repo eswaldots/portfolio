@@ -2,6 +2,7 @@
 
 import { About } from "@/components/about";
 import { Experience } from "@/components/experience";
+import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { Projects } from "@/components/projects";
 import ReactLenis, { LenisRef } from "lenis/react";
@@ -24,12 +25,17 @@ export default function Home() {
   }, []);
 
   return (
-    <Fragment key={"home"}>
+    <main className="bg-primary">
       <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
-      <Hero key={"hero"} />
-      <About />
-      <Experience />
+      <div className="rounded-b-3xl z-50 bg-background">
+        <Hero key={"hero"} />
+        <About />
+        {/* <Experience /> */}
+      </div>
+
+      <Footer />
+
       {/* <Projects /> */}
-    </Fragment>
+    </main>
   );
 }

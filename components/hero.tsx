@@ -3,7 +3,7 @@ import { TextAnimate } from "./ui/text-animate";
 
 function Hero() {
   return (
-    <main className="sticky top-0 z-10 bg-background w-screen h-screen flex flex-col justify-between sm:justify-end sm:px-20 px-6 py-12 sm:pt-22 pt-28 sm:py-22 font-sans">
+    <main className="bg-background w-screen h-screen flex flex-col justify-between sm:justify-end sm:px-20 px-6 py-12 sm:pt-22 pt-28 sm:py-22 font-sans">
       <div className="overflow-y-hidden h-fit sm:py-0 py-1">
         <TextAnimate
           animation="slideUp"
@@ -39,7 +39,7 @@ function Hero() {
       </div>
 
       <div className="flex sm:justify-between items-start w-full">
-        <div className="flex flex-col w-full items-start sm:block hidden">
+        <div className="flex-col w-full items-start sm:flex hidden">
           <div className="overflow-y-hidden">
             <TextAnimate
               animation="slideUp"

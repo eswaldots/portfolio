@@ -2,22 +2,35 @@ import Image from "next/image";
 
 function Experience() {
   return (
-    <div className="w-screen h-screen font-sans px-20 py-12 space-y-24">
+    <div className="w-screen h-screen font-sans px-20 py-12 space-y-24 pb-96">
       <div className="w-full flex items-start">
-        <h1 className="text-9xl w-px tracking-tighter font-semibold text-muted-foreground">
-          Experiencia Laboral
+        <h1 className="text-9xl w-px tracking-tighter font-semibold uppercase">
+          Trabajos
         </h1>
       </div>
 
-      <div className="w-full flex items-start gap-12">
-        <picture className="size-12">
-          <Image src="/booster.png" alt="Booster" width={2000} height={2000} />
-        </picture>
+      <div className="flex items-center gap-8">
+        <div className="flex-1 space-y-3">
+          <article className="rounded-xl bg-secondary h-120 w-full"></article>
 
-        <div>
-          <h1 className="text-xl font-medium tracking-tight">Booster</h1>
-          <span className="text-muted-foreground">Desarrollador principal</span>
-          <p className="font-semibold">2024-2025</p>
+          <div>
+            <div className="flex justify-between w-full">
+              <h1 className="font-medium text-xl tracking-tighter">Booster</h1>
+              <span className="text-muted-foreground font-semibold">2025</span>
+            </div>
+            <p className="text-muted-foreground">Full Stack Developer</p>
+          </div>
+        </div>
+        <div className="flex-1 space-y-3">
+          <article className="rounded-xl bg-secondary h-120 w-full"></article>
+
+          <div>
+            <div className="flex justify-between w-full">
+              <h1 className="font-medium text-xl tracking-tighter">Booster</h1>
+              <span className="text-muted-foreground font-semibold">2025</span>
+            </div>
+            <p className="text-muted-foreground">Full Stack Developer</p>
+          </div>
         </div>
       </div>
     </div>

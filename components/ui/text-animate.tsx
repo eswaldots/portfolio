@@ -234,16 +234,22 @@ const defaultItemAnimationVariants: Record<
   slideDown: {
     container: defaultContainerVariants,
     item: {
-      hidden: { y: -20, opacity: 0 },
+      hidden: { y: -250, opacity: 1 },
       show: {
         y: 0,
         opacity: 1,
-        transition: { duration: 0.3 },
+        transition: {
+          duration: 0.3,
+          type: "spring",
+          damping: 30, stiffness: 75
+        },
       },
       exit: {
-        y: 20,
-        opacity: 0,
-        transition: { duration: 0.3 },
+        y: 250,
+        opacity: 1,
+        transition: {
+          duration: 0.3,
+        },
       },
     },
   },
