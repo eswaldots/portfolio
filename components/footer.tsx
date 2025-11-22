@@ -8,9 +8,9 @@ function Footer() {
       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
     >
       <div className="fixed bottom-0 h-[100vh] w-full z-10">
-        <div className="bg-primary z-10 h-full w-full flex flex-col justify-between font-sans px-20 relative">
+        <div className="bg-primary z-10 h-full w-full flex flex-col justify-between font-sans px-6 sm:px-20 relative">
           <div className="my-auto space-y-12">
-            <h1 className="text-9xl text-background font-semibold tracking-tighter">Vamos a colaborar</h1>
+            <h1 className="text-6xl sm:text-9xl text-background font-semibold tracking-tighter leading-[1.1]">Vamos a colaborar</h1>
 
             <div className="flex items-center gap-3">
               <Button size="lg" className="bg-primary-foreground text-primary tracking-tighter hover:bg-primary-foreground/80 rounded-full" asChild>

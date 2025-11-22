@@ -39,8 +39,7 @@ function ScrollReveal({
         <span
           key={index}
           className={cn(
-            "text-muted-foreground transition-colors",
-            index <= indexState && "text-foreground"
+            "text-muted-foreground transition-colors", index <= indexState && "text-foreground"
           )}
         >
           {" "}

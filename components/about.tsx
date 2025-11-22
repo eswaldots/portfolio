@@ -11,7 +11,7 @@ function About() {
           Sobre mi
         </h1>
 
-        <ScrollReveal className="text-5xl tracking-tighter font-semibold leading-[1.2] sm:max-w-6xl font-sans">
+        <ScrollReveal className="text-4xl sm:text-5xl tracking-tighter font-semibold leading-[1.2] sm:max-w-6xl font-sans">
           Hola, soy Aaron, un desarrollador fullstack apasionado por crear
           experiencias visuales cautivadoras y construir sistemas robustos y
           seguros de alto calibre.
