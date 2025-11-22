@@ -30,7 +30,7 @@ export default function Home() {
       <div className="rounded-b-3xl z-50 bg-background">
         <Hero key={"hero"} />
         <About />
-        {/* <Experience /> */}
+        <Experience />
       </div>
 
       <Footer />
