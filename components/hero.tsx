@@ -58,7 +58,7 @@ function Hero() {
               animation="slideUp"
               delay={0.3}
               by="line"
-              className="leading-0 text-lg sm:text-xl font-medium tracking-tighter"
+              className="leading-0 text-lg sm:text-xl font-medium tracking-tighter font-mono"
             >
               *(ezwal)
             </TextAnimate>
@@ -71,7 +71,7 @@ function Hero() {
               by="line"
               className="sm:text-end text-sm sm:text-sm max-w-xs leading-normal tracking-tight"
             >
-              Aaron Avila es un ingeniero de software especializado en
+              Aaron Avila, ingeniero de software especializado en
               desarrollar y diseñar experiencias digitales unicas.
             </TextAnimate>
           </div>

@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import {
   motion,
+  useInView,
   useMotionValueEvent,
   useScroll,
   useTransform,
@@ -36,7 +37,7 @@ function ScrollReveal({
   return (
     <motion.p className={className} ref={ref}>
       {words.map((word, index) => (
-        <span
+        <motion.span
           key={index}
           className={cn(
             "text-muted-foreground transition-colors", index <= indexState && "text-foreground"
@@ -44,7 +45,7 @@ function ScrollReveal({
         >
           {" "}
           {word}{" "}
-        </span>
+        </motion.span>
       ))}
     </motion.p>
   );

@@ -92,10 +92,10 @@ export default function TypewriterTitle({
         }
 
         if (!(autoLoop && isActive)) {
-            if (hideCursorOnComplete) {
-                setIsFinished(true);
-            }
-            break;
+          if (hideCursorOnComplete && isFinished) {
+            setIsFinished(true)
+          }
+          break;
         }
 
         // Wait before starting next loop
@@ -119,11 +119,11 @@ export default function TypewriterTitle({
       >
         <motion.div
           animate={{ opacity: 1 }}
-          className="flex items-center font-mono text-background tracking-tight"
+          className="flex items-center font-mono text-primary-foreground"
           initial={{ opacity: 0 }}
         >
           <span
-            className={`inline-block border-background border-r-2 ${isFinished ? "border-transparent" : "animate-cursor"}`}
+            className={`inline-block border-primary-foreground border-r-8 ${isFinished ? "border-transparent" : "animate-cursor"}`}
             data-typewriter
           >
             {sequences[0].text}

@@ -195,9 +195,9 @@ const defaultItemAnimationVariants: Record<
         y: 0,
         opacity: 1,
         transition: {
-          duration: 0.3,
+          duration: 0.5,
           type: "spring",
-          damping: 30, stiffness: 75
+          damping: 30, stiffness: 100
         },
       },
       exit: {
@@ -432,6 +432,7 @@ const TextAnimateBase = ({
             variants={finalVariants.item}
             custom={i * staggerTimings[by]}
             className={cn(
+              "my-0 py-0",
               by === "line" ? "block" : "inline-block whitespace-pre",
               by === "character" && "",
               segmentClassName
