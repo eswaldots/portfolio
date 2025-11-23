@@ -23,7 +23,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
         <title>Aaron Avila</title>
         <meta name="description" content="Generado por Aaron Avila" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* <link rel="icon" href="/icon" type="image/png" sizes="32x32" /> */}
+        <link rel="icon" href="/favicon.png" type="image/png" sizes="196x196" />
       </Head>
       <div
         className={`${interFont.variable} ${jebrainsMonoFont.variable} relative`}

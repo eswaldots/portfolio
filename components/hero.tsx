@@ -2,12 +2,14 @@ import Link from "next/link";
 import { TextAnimate } from "./ui/text-animate";
 
 function Hero() {
+  const initialDelay = 1;
   return (
     <main className="bg-background w-screen h-screen flex flex-col justify-between sm:justify-end sm:px-20 px-6 py-12 sm:pt-22 pt-28 sm:py-22 font-sans">
       <div className="overflow-y-hidden h-fit sm:py-0 py-1">
         <TextAnimate
+          once
           animation="slideUp"
-          delay={0.1}
+          delay={initialDelay + 0.1}
           by="line"
           className="sm:hidden block w-px text-2xl leading-none font-medium tracking-tighter"
         >
@@ -17,6 +19,8 @@ function Hero() {
 
       <div className="w-full flex justify-start sm:justify-end h-fit items-center overflow-y-hidden sm:py-0 sm:my-6 my-0">
         <TextAnimate
+          once
+          delay={initialDelay}
           animation="slideUp"
           by="line"
           className="text-6xl sm:text-9xl font-semibold tracking-tighter"
@@ -29,7 +33,8 @@ function Hero() {
         <Link href="mailto:aaronvendedor@gmail.com" className="h-fit">
           <TextAnimate
             animation="slideUp"
-            delay={0.1}
+            once
+            delay={initialDelay + 0.1}
             by="line"
             className="cursor-pointer underline text-sm tracking-tighter w-fit"
           >
@@ -43,7 +48,8 @@ function Hero() {
           <div className="overflow-y-hidden">
             <TextAnimate
               animation="slideUp"
-              delay={0.2}
+              delay={initialDelay + 0.2}
+              once
               by="line"
               className=" leading-none text-5xl max-w-sm font-medium tracking-tighter"
             >
@@ -56,8 +62,9 @@ function Hero() {
           <div className="overflow-y-hidden">
             <TextAnimate
               animation="slideUp"
-              delay={0.3}
+              delay={initialDelay + 0.3}
               by="line"
+              once
               className="leading-0 text-lg sm:text-xl font-medium tracking-tighter font-mono"
             >
               *(ezwal)
@@ -67,7 +74,8 @@ function Hero() {
           <div className="overflow-y-hidden overflow-x-hidden">
             <TextAnimate
               animation="slideUp"
-              delay={0.4}
+              delay={initialDelay + 0.4}
+              once
               by="line"
               className="sm:text-end text-sm sm:text-sm max-w-xs leading-normal tracking-tight"
             >
