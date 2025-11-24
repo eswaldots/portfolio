@@ -125,3 +125,5 @@
   @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
 }
 
+@utility scrollbar-hidden {  &::-webkit-scrollbar {    display: none;  }}
+

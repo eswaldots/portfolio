@@ -8,7 +8,7 @@ export default function Home() {
 
   return (
     <main className="bg-primary relative">
-      <div className="z-20 bg-background">
+      <div className="z-20 bg-background [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         <Hero key={"hero"} />
         <About />
         {/* <Experience /> */}

@@ -34,25 +34,24 @@ export default function App({ Component, pageProps, router }: AppProps) {
         <link rel="icon" href="/favicon.png" type="image/png" sizes="424x424" />
       </Head>
       <div
-        className={`${interFont.variable} ${jebrainsMonoFont.variable} relative`}
+        className={`${interFont.variable} ${jebrainsMonoFont.variable} [scrollbar-width:none] [&::-webkit-scrollbar]:hidden`}
       >
         <Header key="header" />
         <AnimatePresence mode="wait" initial={false}>
           <motion.main
             key={router.asPath}
-            className="relative min-h-screen overflow-hidden bg-transparent no-scrollbar"
+            className="relative min-h-screen overflow-hidden bg-transparent [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
-            <ReactLenis root>
-              {/* <motion.div */}
-              {/*   initial={{ opacity: 0 }} */}
-              {/*   animate={{ opacity: 1 }} */}
-              {/*   exit={{ opacity: 0 }} */}
-              {/*   transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} */}
-              {/*   className="relative z-10" */}
-              {/* > */}
-              {isVisible && <Component {...pageProps} />}
-              {/* </motion.div> */}
-            </ReactLenis>
+            <ReactLenis root />
+            {/* <motion.div */}
+            {/*   initial={{ opacity: 0 }} */}
+            {/*   animate={{ opacity: 1 }} */}
+            {/*   exit={{ opacity: 0 }} */}
+            {/*   transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} */}
+            {/*   className="relative z-10" */}
+            {/* > */}
+            {isVisible && <Component {...pageProps} />}
+            {/* </motion.div> */}
           </motion.main>
         </AnimatePresence>
 

@@ -26,7 +26,7 @@ function Header() {
       initial={{ y: -200, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", delay: initialDelay, damping: 30, stiffness: 150 }}
-      className="flex items-center justify-end sm:justify-between absolute w-screen top-0 left-0 font-sans px-6 py-6 sm:py-20 sm:px-20 z-40">
+      className="flex items-center justify-end sm:justify-between absolute w-full max-w-screen top-0 left-0 font-sans px-6 py-6 sm:py-20 sm:px-20 z-40">
       {!isMobile && <Link href="/" className="tracking-tight text-base after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-foreground pb-px cursor-pointer relative overflow-y-hidden">
         <h1 className="font-mono">
           INICIO
