@@ -7,7 +7,7 @@ const content = "Hola, soy Aaron, un desarrollador fullstack apasionado por crea
 
 function About() {
   return (
-    <motion.div className="z-20 w-screen h-screen py-[25vh] my-22 gap-6 px-6 sm:px-20 relative">
+    <motion.div className="z-20 w-screen py-[25vh] my-22 gap-6 px-6 sm:px-20 relative">
       <div className="flex flex-col gap-12 items-start text-left">
 
         <ScrollReveal className="text-4xl sm:text-8xl tracking-tighter font-semibold leading-[1.2] font-sans">
