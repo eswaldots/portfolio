@@ -18,9 +18,11 @@ const jebrainsMonoFont = JetBrains_Mono({
 
 export default function App({ Component, pageProps, router }: AppProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isTerminalVisible, setIsTerminalVisible] = useState(false);
 
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 1000)
+    setTimeout(() => setIsTerminalVisible(true), 1500)
   }, [])
 
   return (
@@ -54,7 +56,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
           </motion.main>
         </AnimatePresence>
 
-        <Terminal key="terminal" />
+        {!isTerminalVisible && <Terminal key="terminal" />}
 
       </div>
     </>

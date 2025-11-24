@@ -16,7 +16,7 @@ export default function Initial() {
       transition={{
         delay: 1,
       }}
-      className="fixed top-0 left-0 w-screen h-screen bg-primary grid place-content-center"
+      className="absolute inset-0 bg-primary grid place-content-center"
     >
       <div className="overflow-y-hidden">
         <motion.p
