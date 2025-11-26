@@ -15,6 +15,7 @@ export default function Initial() {
       }}
       transition={{
         delay: 1,
+        ease: [0.76, 0, 0.24, 1]
       }}
       className="absolute inset-0 bg-primary grid place-content-center"
     >

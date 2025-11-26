@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { ScrollReveal } from "./bits/scroll-reveal";
 
-const content = "Hola, soy Aaron, un desarrollador fullstack apasionado por crear experiencias visuales cautivadoras y construir sistemas robustos y seguros de alto calibre."
+const content = "Hola, soy Aaron, desarrollador fullstack. Me especializo en crear experiencias visuales memorables y en la ingeniería de sistemas seguros y escalables. Convierto la complejidad en soluciones elegantes y eficientes."
 
 function About() {
   return (

@@ -5,11 +5,11 @@ import { useIsMobile } from "@/hooks/use-is-mobile";
 import { Menu, XIcon } from "lucide-react";
 import { useEffect, useEffectEvent, useState } from "react";
 import { useLenis } from "lenis/react";
-import { TextAnimate } from "./ui/text-animate";
 import { usePathname } from "next/navigation";
+import { TextAnimate } from "./ui/text-animate";
 
 function Header() {
-  const initialDelay = 1;
+  const initialDelay = 0.5;
   const pathname = usePathname();
   const isMobile = useIsMobile()
   const [isOpen, setIsOpen] = useState(false);
@@ -23,28 +23,41 @@ function Header() {
 
   return (
     <motion.header
-      initial={{ y: -200, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ type: "spring", delay: initialDelay, damping: 30, stiffness: 150 }}
-      className="flex items-center justify-end sm:justify-between absolute w-full max-w-screen top-0 left-0 font-sans px-6 py-6 sm:py-20 sm:px-20 z-40">
+      // initial={{ y: -200, opacity: 0 }}
+      // animate={{ y: 0, opacity: 1 }}
+      // transition={{
+      //   type: "spring", delay: initialDelay, damping: 30, stiffness: 150,
+      //   ease: [0.76, 0, 0.24, 1]
+      // }}
+      className="flex items-center justify-end sm:justify-between absolute w-full max-w-screen top-0 left-0 font-sans px-6 py-6 sm:py-20 sm:px-20 z-20">
       {!isMobile && <Link href="/" className="tracking-tight text-base after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-foreground pb-px cursor-pointer relative overflow-y-hidden">
-        <h1 className="font-mono">
+        <TextAnimate className="font-mono"
+          once
+          delay={initialDelay}
+          animation="slideUp"
+          by="line"
+        >
           INICIO
-        </h1>
+        </TextAnimate>
       </Link>}
       <div className="flex items-center gap-6">
         {!isMobile && <Link href="/resume" className="tracking-tight text-base after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-foreground pb-px cursor-pointer relative overflow-y-hidden">
-          <h1 className="font-mono">
+          <TextAnimate className="font-mono"
+            once
+            delay={initialDelay}
+            animation="slideUp"
+            by="line"
+          >
             RESUME
-          </h1>
+          </TextAnimate>
         </Link>}
 
 
-        <Button className="bg-primary rounded-full text-sm sm:text-base font-normal tracking-tighter font-mono hover:text-primary hover:bg-background border border-primary" size={isMobile ? "default" : "lg"} asChild>
-          <Link href="mailto:aaronvendedor@gmail.com">
-            Contactame
-          </Link>
-        </Button>
+        {/* <Button className="bg-primary rounded-full text-sm sm:text-base font-normal tracking-tighter font-mono hover:text-primary hover:bg-background border border-primary" size={isMobile ? "default" : "lg"} asChild> */}
+        {/*   <Link href="mailto:aaronvendedor@gmail.com"> */}
+        {/*     Contactame */}
+        {/*   </Link> */}
+        {/* </Button> */}
 
         {isMobile &&
           <motion.button onClick={() => {
