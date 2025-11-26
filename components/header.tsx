@@ -30,7 +30,7 @@ function Header() {
       //   ease: [0.76, 0, 0.24, 1]
       // }}
       className="flex items-center justify-end sm:justify-between absolute w-full max-w-screen top-0 left-0 font-sans px-6 py-6 sm:py-20 sm:px-20 z-20">
-      {!isMobile && <Link href="/" className="tracking-tight text-base after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-foreground pb-px cursor-pointer relative overflow-y-hidden">
+      {!isMobile && <Link href="/" className="tracking-tighter font-light text-base after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-foreground pb-px cursor-pointer relative overflow-y-hidden">
         <TextAnimate className="font-mono"
           once
           delay={initialDelay}
@@ -41,7 +41,7 @@ function Header() {
         </TextAnimate>
       </Link>}
       <div className="flex items-center gap-6">
-        {!isMobile && <Link href="/resume" className="tracking-tight text-base after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-foreground pb-px cursor-pointer relative overflow-y-hidden">
+        {!isMobile && <Link href="/resume" className="tracking-tighter font-light text-base after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-foreground pb-px cursor-pointer relative overflow-y-hidden">
           <TextAnimate className="font-mono"
             once
             delay={initialDelay}
@@ -64,7 +64,7 @@ function Header() {
             setIsOpen(true)
             lenis?.stop()
           }} layoutId="burger" key="burger">
-            <Menu className="size-6" strokeWidth={1.5} />
+            <Menu className="size-6 text-primary" strokeWidth={1.5} />
           </motion.button>
         }
       </div>
