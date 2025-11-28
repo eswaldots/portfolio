@@ -8,14 +8,19 @@ function Hero() {
           <TextAnimate
             by="line"
             animation="slideUp"
-            className="text-primary-foreground font-sans tracking-tight font-medium text-8xl">Aaron Avila</TextAnimate>
+            className="text-primary-foreground font-sans tracking-tight font-medium text-8xl"
+          >
+            Aaron Avila
+          </TextAnimate>
         </div>
         <div className="overflow-y-hidden">
           <TextAnimate
             by="line"
             animation="slideUp"
-            className="text-primary-foreground font-sans tracking-tight text-xl">Meet your next
-            creative developer</TextAnimate>
+            className="text-primary-foreground font-sans text-xl"
+          >
+            Meet your next creative developer
+          </TextAnimate>
         </div>
       </div>
 
@@ -23,7 +28,10 @@ function Hero() {
         <TextAnimate
           by="line"
           animation="slideUp"
-          className="text-muted-foreground font-sans tracking-tight text-sm mt-auto">Scroll to explore</TextAnimate>
+          className="text-muted-foreground tracking-tighter text-sm mt-auto uppercase font-mono"
+        >
+          Scroll to explore
+        </TextAnimate>
       </div>
     </main>
   );

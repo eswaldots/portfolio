@@ -3,11 +3,12 @@ import Terminal from "@/components/terminal";
 import Head from "next/head";
 import { AnimatePresence, motion } from "motion/react";
 import "./globals.css";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { AppProps } from "next/app";
 import ReactLenis from "lenis/react";
+import { useState } from "react";
 
-const interFont = Inter({
+const interFont = Inter_Tight({
   variable: "--font-inter",
 });
 
@@ -16,8 +17,6 @@ const jebrainsMonoFont = JetBrains_Mono({
 });
 
 export default function App({ Component, pageProps, router }: AppProps) {
-
-
   return (
     <>
       <Head>
@@ -47,7 +46,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
             {/* </motion.div> */}
           </motion.main>
         </AnimatePresence>
-
       </div>
     </>
   );

@@ -29,7 +29,7 @@ function ScrollReveal({
 
   const opacityIndex = useTransform(
     scrollYProgress,
-    [0, 0.5],
+    [0, 0.7],
     [0, words.length]
   );
 

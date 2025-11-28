@@ -9,14 +9,18 @@ const content =
 function About() {
   const ref = useRef(null);
   return (
-    <div ref={ref} className="h-[300vh] relative w-full flex justify-center items-start bg-background rounded-t-4xl">
-
+    <div
+      ref={ref}
+      className="h-[300vh] relative w-full flex justify-center items-start bg-background rounded-t-4xl"
+    >
       <div className="sticky top-0 h-screen flex items-center px-4">
-        <ScrollReveal externalRef={ref} className="text-6xl text-foreground font-sans tracking-tighter leading-[1.2] text-left max-w-5xl">
+        <ScrollReveal
+          externalRef={ref}
+          className="text-6xl text-foreground font-sans tracking-tight leading-[1.2] text-left max-w-5xl font-medium"
+        >
           {content}
         </ScrollReveal>
       </div>
-
     </div>
   );
 }
