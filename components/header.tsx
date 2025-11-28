@@ -29,26 +29,36 @@ function Header() {
       //   type: "spring", delay: initialDelay, damping: 30, stiffness: 150,
       //   ease: [0.76, 0, 0.24, 1]
       // }}
-      className="flex items-center justify-end sm:justify-between absolute w-full max-w-screen top-0 left-0 font-sans px-6 py-6 sm:py-20 sm:px-20 z-20">
-      {!isMobile && <Link href="/" className="tracking-tighter font-light text-base after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-foreground pb-px cursor-pointer relative overflow-y-hidden">
-        <TextAnimate className="font-mono"
+      className="flex items-center justify-end sm:justify-between fixed w-full max-w-screen top-0 left-0 font-sans px-6 py-6 sm:py-20 sm:px-20 z-20">
+      {!isMobile && <Link href="/" className="tracking-tighter text-primary-foreground text-xl after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-primary-foreground pb-px cursor-pointer relative overflow-y-hidden">
+        <TextAnimate className="font-sans"
           once
           delay={initialDelay}
           animation="slideUp"
           by="line"
         >
-          INICIO
+          Aaron
         </TextAnimate>
       </Link>}
-      <div className="flex items-center gap-6">
-        {!isMobile && <Link href="/resume" className="tracking-tighter font-light text-base after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-foreground pb-px cursor-pointer relative overflow-y-hidden">
-          <TextAnimate className="font-mono"
+      <div className="flex items-center gap-6 text-primary-foreground">
+        {!isMobile && <Link href="/" className="tracking-tight text-sm after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-primary-foreground pb-px cursor-pointer relative overflow-y-hidden">
+          <TextAnimate className="font-sans"
             once
             delay={initialDelay}
             animation="slideUp"
             by="line"
           >
-            RESUME
+            Inicio
+          </TextAnimate>
+        </Link>}
+        {!isMobile && <Link href="/resume" className="tracking-tight text-sm after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-primary-foreground pb-px cursor-pointer relative overflow-y-hidden">
+          <TextAnimate className="font-sans"
+            once
+            delay={initialDelay}
+            animation="slideUp"
+            by="line"
+          >
+            Resume
           </TextAnimate>
         </Link>}
 

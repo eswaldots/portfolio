@@ -6,7 +6,6 @@ import "./globals.css";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { AppProps } from "next/app";
 import ReactLenis from "lenis/react";
-import { useEffect, useState } from "react";
 
 const interFont = Inter({
   variable: "--font-inter",
@@ -17,13 +16,7 @@ const jebrainsMonoFont = JetBrains_Mono({
 });
 
 export default function App({ Component, pageProps, router }: AppProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isTerminalVisible, setIsTerminalVisible] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => setIsVisible(true), 1000)
-    setTimeout(() => setIsTerminalVisible(true), 1500)
-  }, [])
 
   return (
     <>
@@ -40,7 +33,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
         <AnimatePresence mode="wait" initial={false}>
           <motion.main
             key={router.asPath}
-            className="relative min-h-screen overflow-hidden bg-transparent [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="relative min-h-screen bg-transparent [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             <ReactLenis root />
             {/* <motion.div */}
@@ -50,12 +43,10 @@ export default function App({ Component, pageProps, router }: AppProps) {
             {/*   transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} */}
             {/*   className="relative z-10" */}
             {/* > */}
-            {isVisible && <Component {...pageProps} />}
+            <Component {...pageProps} />
             {/* </motion.div> */}
           </motion.main>
         </AnimatePresence>
-
-        {!isTerminalVisible && <Terminal key="terminal" />}
 
       </div>
     </>

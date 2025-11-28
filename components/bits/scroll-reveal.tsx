@@ -6,21 +6,24 @@ import {
   useScroll,
   useTransform,
 } from "motion/react";
-import { ForwardedRef, useRef, useState } from "react";
+import { HtmlContext } from "next/dist/server/route-modules/pages/vendored/contexts/entrypoints";
+import { ForwardedRef, RefObject, useRef, useState } from "react";
 
 function ScrollReveal({
   children,
   className,
+  externalRef
 }: {
   children: string;
   className?: string;
+  externalRef?: RefObject<null | HTMLDivElement>
 }) {
   const ref = useRef(null);
   const words = children.split(" ");
   const [indexState, setIndexState] = useState(0);
 
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: externalRef ?? ref,
     offset: ["start end", "end start"], // Change 'end end' to 'end start' to extend the scroll range
   });
 
