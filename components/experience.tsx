@@ -1,60 +1,142 @@
 import { TextAnimate } from "./ui/text-animate";
-import { Separator } from "./ui/separator";
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { MacbookMockUp } from "./cuicui/macbook";
+import Link from "next/link";
+import Image from "next/image";
 
 function Experience() {
-  const [backgroundColor, setBackgroundColor] = useState("var(--background)")
+  const [backgroundColor, setBackgroundColor] = useState("var(--background)");
   return (
     <motion.div
       animate={{
-        backgroundColor: backgroundColor
+        backgroundColor: backgroundColor,
       }}
-      className="w-screen font-sans px-6 sm:px-20 mt-16 py-12 space-y-24 relative">
-      <div className="w-full mx-auto space-y-16 h-[300vh]">
+      className="w-screen font-sans px-6 sm:px-20 mt-16 py-12 space-y-64 relative"
+    >
+      <div className="w-full grid">
         <div className="overflow-y-hidden">
           <TextAnimate
             animation="slideUp"
             by="character"
-            className="text-3xl sm:text-[10rem] whitespace-nowrap w-full tracking-tight font-medium text-primary"
+            className="text-3xl sm:text-[10rem] whitespace-nowrap w-full tracking-tight text-primary"
           >
             Proyectos
           </TextAnimate>
         </div>
 
-        <Separator className="my-16" />
+        {/* <motion.div */}
+        {/*   className="h-px bg-primary mx-auto" */}
+        {/*   initial={{ width: "0%" }} */}
+        {/*   transition={{ */}
+        {/*     duration: 0.5, */}
+        {/*     type: "spring", */}
+        {/*     damping: 30, */}
+        {/*     stiffness: 100, */}
+        {/*   }} */}
+        {/*   whileInView={{ width: "100%" }} */}
+        {/* /> */}
+      </div>
 
-        <div className="gap-16 grid z-50 sticky top-0 bg-background">
-          <motion.div onHoverStart={() => {
-            setBackgroundColor("#4b1c1300_20.64%")
-          }} className="flex gap-16 justify-between">
-            <div className="flex flex-col justify-between py-48">
-              <div className="overflow-y-hidden">
-                <TextAnimate by="character" animation="slideUp" className="text-7xl font-medium tracking-tight font-sans">Booster AI</TextAnimate>
-              </div>
-              <motion.div className="gap-6 grid" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ delay: 0.8 }}>
-                <Badge variant="secondary">AI Design</Badge>
-                <p className="text-base text-muted-foreground font-sans">
-                  Just outside New York City, this home reimagines Tudor style for modern family living. A painted brick façade, warm wood, and intimate scale blend with the neighborhood, while soft curves, rich textures, and custom details create a cozy retreat that feels both elegant and inviting.
-                </p>
+      <motion.div className="flex items-center justify-between">
+        <div className="space-y-6">
+          <div className="overflow-y-hidden">
+            <h1 className="text-3xl tracking-tight text-primary font-medium">
+              Booster AI
+            </h1>
+          </div>
 
-                <Button className="rounded-full w-fit text-base font-medium" size="lg">Ver proyecto</Button>
-              </motion.div>
-            </div>
+          <p className="text-lg max-w-sm">
+            Software para reparar mineros de criptomonedas utilizando
+            inteligencia artificial
+          </p>
 
-            <div className="relative overflow-hidden bg-[linear-gradient(180deg,#4b1c1300_20.64%,#590f0066),linear-gradient(180deg,#86a7c1,#b98c85)] h-screen -mr-20 min-w-3xl flex items-center justify-center">
-              <div className="my-auto">
-                <MacbookMockUp src="/booster.png" />
-              </div>
-            </div>
-
-          </motion.div>
-
-
+          <Button className="text-lg rounded-full" size="lg" asChild>
+            <Link href="https://miner.repair" target="_blank">
+              Visitar
+            </Link>
+          </Button>
         </div>
+
+        <motion.div className="w-[50vw] h-[90vh] bg-muted-foreground"></motion.div>
+      </motion.div>
+
+      <div className="pt-16 flex items-start w-full justify-between">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ amount: 0.5 }}
+        >
+          <div className="size-[30vw] bg-muted-foreground relative">
+            <Image
+              src={"/fashion.webp"}
+              alt="Link"
+              width={2000}
+              height={2000}
+              className="size-[30vw] object-cover object-top"
+            />
+
+            <motion.div
+              whileHover={{ opacity: 1 }}
+              initial={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/50 z-10 flex flex-col items-center justify-center cursor-pointer"
+            >
+              <h1 className="z-10 text-white tracking-tight text-4xl font-medium font-sans">
+                Avila Beauty
+              </h1>
+              <p className="text-white text-lg tracking-tight">
+                Revolucionando la moda
+              </p>
+
+              <Button
+                className="my-4 text-base rounded-full"
+                disabled
+                size="lg"
+              >
+                Proximamente
+              </Button>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="pt-96"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ amount: 0.7 }}
+        >
+          <div className="h-[40vw] w-[30vw] bg-muted-foreground relative overflow-y-hidden">
+            <div className="absolute z-10 inset-0 backdrop-blur-lg" />
+            <Image
+              src={"/weather.jpg"}
+              alt="Link"
+              width={2000}
+              height={2000}
+              className="absolute inset-0 object-cover"
+            />
+
+            <motion.div
+              whileHover={{ opacity: 1 }}
+              initial={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/50 z-10 flex flex-col items-center justify-center cursor-pointer"
+            >
+              <h1 className="z-10 text-white tracking-tight text-4xl font-medium font-sans">
+                Weathify
+              </h1>
+              <p className="text-white text-lg tracking-tight">
+                Cambia tu escritorio segun el clima
+              </p>
+
+              <Button
+                className="my-4 text-base rounded-full"
+                disabled
+                size="lg"
+              >
+                Proximamente
+              </Button>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </motion.div>
   );

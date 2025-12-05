@@ -1,12 +1,14 @@
 import { Header } from "@/components/header";
-import Terminal from "@/components/terminal";
 import Head from "next/head";
 import { AnimatePresence, motion } from "motion/react";
 import "./globals.css";
-import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { AppProps } from "next/app";
 import ReactLenis from "lenis/react";
-import { useState } from "react";
+import type { LenisRef } from "lenis/react";
+import { cancelFrame, frame } from "motion";
+import { useEffect, useRef } from "react";
+import "lenis/dist/lenis.css";
 
 const interFont = Inter_Tight({
   variable: "--font-inter",
@@ -17,6 +19,19 @@ const jebrainsMonoFont = JetBrains_Mono({
 });
 
 export default function App({ Component, pageProps, router }: AppProps) {
+  const lenisRef = useRef<LenisRef>(null);
+
+  useEffect(() => {
+    function update(data: { timestamp: number }) {
+      const time = data.timestamp;
+      lenisRef.current?.lenis?.raf(time);
+    }
+
+    frame.update(update, true);
+
+    return () => cancelFrame(update);
+  }, []);
+
   return (
     <>
       <Head>
@@ -34,7 +49,16 @@ export default function App({ Component, pageProps, router }: AppProps) {
             key={router.asPath}
             className="relative min-h-screen bg-transparent [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
-            <ReactLenis root />
+            <ReactLenis
+              root
+              ref={lenisRef}
+              options={{
+                wheelMultiplier: 0.8,
+                smoothWheel: true,
+                lerp: 0.1,
+                duration: 1.2,
+              }}
+            />
             {/* <motion.div */}
             {/*   initial={{ opacity: 0 }} */}
             {/*   animate={{ opacity: 1 }} */}

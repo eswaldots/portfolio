@@ -1,22 +1,20 @@
 import { cn } from "@/lib/utils";
 import {
   motion,
-  useInView,
   useMotionValueEvent,
   useScroll,
   useTransform,
 } from "motion/react";
-import { HtmlContext } from "next/dist/server/route-modules/pages/vendored/contexts/entrypoints";
-import { ForwardedRef, RefObject, useRef, useState } from "react";
+import { RefObject, useRef, useState } from "react";
 
 function ScrollReveal({
   children,
   className,
-  externalRef
+  externalRef,
 }: {
   children: string;
   className?: string;
-  externalRef?: RefObject<null | HTMLDivElement>
+  externalRef?: RefObject<null | HTMLDivElement>;
 }) {
   const ref = useRef(null);
   const words = children.split(" ");
@@ -30,7 +28,7 @@ function ScrollReveal({
   const opacityIndex = useTransform(
     scrollYProgress,
     [0, 0.7],
-    [0, words.length]
+    [0, words.length],
   );
 
   useMotionValueEvent(opacityIndex, "change", (latest) => {
@@ -43,7 +41,8 @@ function ScrollReveal({
         <motion.span
           key={index}
           className={cn(
-            "text-muted-foreground transition-colors", index <= indexState && "text-foreground"
+            "text-muted-foreground transition-colors",
+            index <= indexState && "text-foreground",
           )}
         >
           {" "}

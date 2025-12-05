@@ -39,46 +39,50 @@ function Header() {
         <Link
           href="/"
           className={cn(
-            "transition-colors tracking-tight text-xl after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-primary-foreground pb-px cursor-pointer relative overflow-y-hidden",
+            "font-sans transition-colors tracking-tight text-xl after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-primary-foreground pb-px cursor-pointer relative overflow-y-hidden",
             background === "dark"
               ? "text-primary-foreground"
-              : "text-foreground"
+              : "text-foreground",
           )}
         >
-          <TextAnimate
-            className="font-sans"
-            once
-            delay={initialDelay}
-            animation="slideUp"
-            by="line"
-          >
-            Aaron
-          </TextAnimate>
+          Aaron Avila
         </Link>
       )}
       <div
         className={cn(
-          "flex items-center gap-6",
-          background === "dark" ? "text-primary-foreground" : "text-foreground"
+          "flex items-center gap-2",
+          background === "dark" ? "text-primary-foreground" : "text-foreground",
         )}
       >
         {!isMobile && (
-          <Link
-            href="/resume"
+          <Button
+            variant="ghost"
             className={cn(
-              "text-sm after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-primary-foreground pb-px cursor-pointer relative overflow-y-hidden"
+              "rounded-full text-base",
+              background === "dark"
+                ? " hover:text-primary-foreground hover:bg-primary-foreground/10"
+                : "",
             )}
+            size="lg"
           >
-            <TextAnimate
-              className="font-sans"
-              once
-              delay={initialDelay}
-              animation="slideUp"
-              by="line"
-            >
-              Resume
-            </TextAnimate>
-          </Link>
+            Resume
+          </Button>
+        )}
+
+        {!isMobile && (
+          <Button
+            variant="ghost"
+            className={cn(
+              "rounded-full text-base",
+              background === "dark"
+                ? " hover:text-primary-foreground hover:bg-primary-foreground/10"
+                : "",
+            )}
+            size="lg"
+            asChild
+          >
+            <Link href="/about">About</Link>
+          </Button>
         )}
 
         {/* <Button className="bg-primary rounded-full text-sm sm:text-base font-normal tracking-tighter font-mono hover:text-primary hover:bg-background border border-primary" size={isMobile ? "default" : "lg"} asChild> */}
