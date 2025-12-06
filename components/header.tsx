@@ -6,12 +6,10 @@ import { Menu, XIcon } from "lucide-react";
 import { useEffect, useEffectEvent, useState } from "react";
 import { useLenis } from "lenis/react";
 import { usePathname } from "next/navigation";
-import { TextAnimate } from "./ui/text-animate";
 import { useBackgroundStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
 function Header() {
-  const initialDelay = 0.5;
   const pathname = usePathname();
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);

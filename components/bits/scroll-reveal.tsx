@@ -1,11 +1,10 @@
 import { cn } from "@/lib/utils";
 import {
   motion,
-  useMotionValueEvent,
   useScroll,
   useTransform,
 } from "motion/react";
-import { RefObject, useRef, useState } from "react";
+import { RefObject, useRef } from "react";
 
 function ScrollReveal({
   children,
@@ -18,37 +17,35 @@ function ScrollReveal({
 }) {
   const ref = useRef(null);
   const words = children.split(" ");
-  const [indexState, setIndexState] = useState(0);
-
+  
   const { scrollYProgress } = useScroll({
     target: externalRef ?? ref,
-    offset: ["start end", "end start"], // Change 'end end' to 'end start' to extend the scroll range
-  });
-
-  const opacityIndex = useTransform(
-    scrollYProgress,
-    [0, 0.7],
-    [0, words.length],
-  );
-
-  useMotionValueEvent(opacityIndex, "change", (latest) => {
-    setIndexState(latest);
+    offset: ["start end", "end start"],
   });
 
   return (
     <motion.p className={className} ref={ref}>
-      {words.map((word, index) => (
-        <motion.span
-          key={index}
-          className={cn(
-            "text-muted-foreground transition-colors",
-            index <= indexState && "text-foreground",
-          )}
-        >
-          {" "}
-          {word}{" "}
-        </motion.span>
-      ))}
+      {words.map((word, index) => {
+        const start = (index / words.length) * 0.7; 
+        const end = start + (1 / words.length) * 0.1;
+        
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const color = useTransform(
+            scrollYProgress, 
+            [start, end], 
+            ["var(--muted-foreground)", "var(--foreground)"]
+        );
+
+        return (
+          <motion.span
+            key={index}
+            style={{ color }}
+            className={cn("transition-colors")}
+          >
+            {word}{" "}
+          </motion.span>
+        );
+      })}
     </motion.p>
   );
 }

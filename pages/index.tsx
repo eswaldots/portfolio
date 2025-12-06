@@ -41,11 +41,12 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="bg-transparent">
+      <div className="bg-primary">
         <div
           ref={cardRef}
-          className="shadow-2xl rounded-t-4xl bg-background rounded-b-4xl"
+          className="shadow-2xl rounded-t-[4rem] pt-[10vh] bg-background rounded-b-[4rem]"
         >
+          <div className="mx-auto h-10 w-72 rounded-full bg-secondary" />
           <About />
           <Experience />
         </div>

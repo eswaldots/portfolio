@@ -11,12 +11,12 @@ function About() {
   return (
     <div
       ref={ref}
-      className="h-[200vh] relative w-full flex justify-center items-start bg-background rounded-t-4xl"
+      className="h-[200vh] relative w-full flex justify-center items-start bg-background"
     >
       <div className="sticky top-0 h-screen flex items-center px-4">
         <ScrollReveal
           externalRef={ref}
-          className="text-8xl text-foreground font-sans tracking-tight leading-[1.2] text-left max-w-7xl"
+          className="text-[4vw] text-foreground font-sans tracking-tight leading-[1.2] text-left max-w-6xl"
         >
           {content}
         </ScrollReveal>

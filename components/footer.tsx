@@ -5,7 +5,7 @@ import { TextAnimate } from "./ui/text-animate";
 
 function Footer() {
   return (
-    <div className="bg-primary z-10 h-[110vh] pt-[10vh] w-full flex flex-col justify-between font-sans px-6 sm:px-20 relative">
+    <div className="bg-primary z-10 h-[100vh] w-full flex flex-col justify-between font-sans px-6 sm:px-20 relative">
       <div className="my-auto space-y-12">
         <div className="overflow-y-hidden">
           <TextAnimate
@@ -21,7 +21,7 @@ function Footer() {
         <div className="flex items-center gap-3">
           <Button
             size="lg"
-            className="bg-primary-foreground text-primary font-mono tracking-tighter hover:text-primary-foreground hover:bg-primary border border-primary-foreground rounded-full"
+            className="bg-primary-foreground text-primary tracking-tight text-base hover:text-primary-foreground hover:bg-primary border border-primary-foreground rounded-full"
             asChild
           >
             <Link href="mailto:aaronvendedor@gmail.com">Contactame</Link>
