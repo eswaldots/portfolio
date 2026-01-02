@@ -1,4 +1,5 @@
 import Link from "next/link";
+import posthog from "posthog-js";
 import { Button } from "./ui/button";
 import { AnimatePresence, motion } from "motion/react";
 import { useIsMobile } from "@/hooks/use-is-mobile";
@@ -9,7 +10,7 @@ import { usePathname } from "next/navigation";
 import { useBackgroundStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
-function AnimatedLink({ children, href }: { children: string; href: string }) {
+function AnimatedLink({ children, href, onClick }: { children: string; href: string; onClick?: () => void }) {
   const words = children.split("");
   const [isHover, setIsHover] = useState(false);
 
@@ -18,6 +19,7 @@ function AnimatedLink({ children, href }: { children: string; href: string }) {
       href={href}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
+      onClick={onClick}
       className={
         "max-w-96 bg-black w-full items-center justify-center text-white font-mono uppercase tracking-normal font-light relative flex items-baseline gap-2 flex-row relative px-0"
       }
@@ -85,6 +87,7 @@ function Header() {
       {!isMobile && (
         <Link
           href="/"
+          onClick={() => posthog.capture("clicked_navigation_home", { location: "header" })}
           className={cn(
             "font-sans transition-colors text-xl cursor-pointer relative overflow-y-hidden text-white",
           )}
@@ -98,9 +101,9 @@ function Header() {
           background === "dark" ? "text-primary-foreground" : "text-foreground",
         )}
       >
-        {!isMobile && <AnimatedLink href="/resume">RESUME</AnimatedLink>}
+        {!isMobile && <AnimatedLink href="/resume" onClick={() => posthog.capture("clicked_navigation_resume", { location: "header" })}>RESUME</AnimatedLink>}
 
-        {!isMobile && <AnimatedLink href="/about">ABOUT</AnimatedLink>}
+        {!isMobile && <AnimatedLink href="/about" onClick={() => posthog.capture("clicked_navigation_about", { location: "header" })}>ABOUT</AnimatedLink>}
 
         {/* <Button className="bg-primary rounded-full text-sm sm:text-base font-normal tracking-tighter font-mono hover:text-primary hover:bg-background border border-primary" size={isMobile ? "default" : "lg"} asChild> */}
         {/*   <Link href="mailto:aaronvendedor@gmail.com"> */}
@@ -113,6 +116,7 @@ function Header() {
             onClick={() => {
               setIsOpen(true);
               lenis?.stop();
+              posthog.capture("opened_mobile_menu");
             }}
             layoutId="burger"
             key="burger"
@@ -146,7 +150,7 @@ function Header() {
 
             <div className="p-6 py-32 grid gap-2">
               <div className="overflow-y-hidden">
-                <Link href="/">
+                <Link href="/" onClick={() => posthog.capture("clicked_navigation_home", { location: "mobile_menu" })}>
                   <motion.p
                     initial={{ y: 80 }}
                     animate={{ y: 0 }}
@@ -158,7 +162,7 @@ function Header() {
                 </Link>
               </div>
               <div className="overflow-y-hidden">
-                <Link href="/resume">
+                <Link href="/resume" onClick={() => posthog.capture("clicked_navigation_resume", { location: "mobile_menu" })}>
                   <motion.p
                     initial={{ y: 80 }}
                     animate={{ y: 0 }}
@@ -191,7 +195,7 @@ function Header() {
                   size="lg"
                   asChild
                 >
-                  <Link href="mailto:aaronvendedor@gmail.com">Contactame</Link>
+                  <Link href="mailto:aaronvendedor@gmail.com" onClick={() => posthog.capture("clicked_mobile_contact")}>Contactame</Link>
                 </Button>
               </motion.div>
             </div>

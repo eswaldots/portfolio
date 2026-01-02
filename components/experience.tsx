@@ -1,5 +1,6 @@
 import { TextAnimate } from "./ui/text-animate";
 import { motion, useInView } from "motion/react";
+import posthog from "posthog-js";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
@@ -54,7 +55,11 @@ function Experience() {
             variant="outline"
             asChild
           >
-            <Link href="https://miner.repair" target="_blank">
+            <Link
+              href="https://miner.repair"
+              target="_blank"
+              onClick={() => posthog.capture("clicked_project_link", { project: "Booster AI", url: "https://miner.repair" })}
+            >
               VISIT_PROJECT
             </Link>
           </Button>

@@ -1,5 +1,8 @@
+"use client";
+
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import posthog from "posthog-js";
 import { MailIcon, MapPinnedIcon, PhoneIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -23,6 +26,7 @@ export default function Page() {
                 className="after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-[2px] after:bg-foreground pb-1 cursor-pointer relative"
                 href="mailto:aaronvendedor@gmail.com"
                 target="_blank"
+                onClick={() => posthog.capture("clicked_resume_email_link", { location: "resume_header" })}
               >
                 aaronvendedor@gmail.com
               </Link>
