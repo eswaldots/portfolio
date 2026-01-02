@@ -50,7 +50,7 @@ export default function Page() {
             <TextAnimate
               by="character"
               animation="slideUp"
-              className="font-medium tracking-tight text-9xl font-sans text-primary-foreground"
+              className="font-medium tracking-tight text-9xl font-sans text-primary-foreground whitespace-nowrap"
               once
             >
               Aaron is a designer, storyteller, and thinker. He has a gift for
@@ -62,7 +62,7 @@ export default function Page() {
             <TextAnimate
               by="character"
               animation="slideUp"
-              className="font-medium tracking-tight text-9xl font-sans text-primary-foreground"
+              className="font-medium tracking-tight text-9xl font-sans text-primary-foreground whitespace-nowrap"
               once
             >
               meaning and using it to transform
@@ -73,7 +73,7 @@ export default function Page() {
             <TextAnimate
               by="character"
               animation="slideUp"
-              className="font-medium tracking-tight text-9xl font-sans text-primary-foreground"
+              className="font-medium tracking-tight text-9xl font-sans text-primary-foreground whitespace-nowrap"
               once
             >
               brands and products.
