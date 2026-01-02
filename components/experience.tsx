@@ -1,216 +1,250 @@
-import { TextAnimate } from "./ui/text-animate";
-import { motion, useInView } from "motion/react";
-import posthog from "posthog-js";
-import { Button } from "./ui/button";
+"use client";
+
+import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import TypewriterTitle from "./kokonutui/type-writer";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import posthog from "posthog-js";
 
-function Experience() {
-  const boosterRef = useRef(null);
-  const isBoosterInView = useInView(boosterRef);
+// --- Data ---
+const projects = [
+  {
+    id: "01",
+    title: "Booster AI",
+    category: "Development",
+    year: "2026",
+    description: "Software to repair crypto miners with AI",
+    url: "https://miner.repair",
+    image: "/booster.webp", // Ensure you have this or use placeholder
+    placeholder:
+      "https://images.unsplash.com/photo-1639322537228-ad71053db952?q=80&w=3270&auto=format&fit=crop", // Fallback
+    isComingSoon: false,
+  },
+  {
+    id: "02",
+    title: "Avila Beauty",
+    category: "Art Direction",
+    year: "2025",
+    description: "Changing the novelty",
+    url: "#",
+    image: "/fashion.webp",
+    placeholder:
+      "https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=3269&auto=format&fit=crop",
+    isComingSoon: true,
+  },
+  {
+    id: "03",
+    title: "Weathify",
+    category: "Design Engineering",
+    year: "2026",
+    description: "Change your wallpaper with the weather",
+    url: "#",
+    image: "/weather.jpg",
+    placeholder:
+      "https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=3270&auto=format&fit=crop",
+    isComingSoon: true,
+  },
+];
+
+// --- Component: Floating Image Cursor (Desktop Only) ---
+const FloatingPreview = ({
+  activeIndex,
+  mouseX,
+  mouseY,
+}: {
+  activeIndex: number | null;
+  mouseX: any;
+  mouseY: any;
+}) => {
+  // Smooth physics for the image movement
+  const springConfig = { damping: 20, stiffness: 300, mass: 0.5 };
+  const x = useSpring(mouseX, springConfig);
+  const y = useSpring(mouseY, springConfig);
+
+  // Initial positioning offset so it doesn't cover the text directly
+  const xOffset = useTransform(x, (val) => val + 20);
+  const yOffset = useTransform(y, (val) => val - 100);
+
+  if (activeIndex === null) return null;
 
   return (
-    <motion.div className="max-w-screen w-full font-sans px-6 sm:px-20 mt-16 py-12 md:space-y-64 relative">
-      <div className="w-full grid">
-        <div className="overflow-y-hidden">
-          <TextAnimate
-            animation="slideUp"
-            by="character"
-            className="text-8xl md:text-[10rem] whitespace-nowrap w-full tracking-tight text-primary md:mb-0 mb-12"
-          >
-            Work
-          </TextAnimate>
+    <motion.div
+      style={{ x: xOffset, y: yOffset }}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      className="fixed top-0 left-0 z-50 pointer-events-none hidden md:block w-[400px] h-[280px] overflow-hidden rounded-lg border border-border bg-background shadow-2xl"
+    >
+      <div className="relative w-full h-full">
+        {projects.map((project, index) => (
+          <Image
+            key={project.id}
+            src={project.image || project.placeholder}
+            alt={project.title}
+            fill
+            className={`object-cover transition-opacity duration-500 ${index === activeIndex ? "opacity-100" : "opacity-0"}`}
+          />
+        ))}
+        {/* Overlay details on the image */}
+        <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent text-white font-mono text-xs uppercase flex justify-between">
+          <span>{projects[activeIndex].category}</span>
+          <span>{projects[activeIndex].year}</span>
         </div>
-      </div>
-
-      <motion.div className="flex items-center justify-between md:flex-row flex-col-reverse">
-        <div className="space-y-4 md:space-y-6 md:w-fit w-full">
-          <div className="overflow-y-hidden space-y-0" ref={boosterRef}>
-            {isBoosterInView && (
-              <TypewriterTitle
-                hideCursorOnComplete={true}
-                className="text-muted-foreground text-sm font-mono mr-auto tracking-tight h-9"
-                sequences={[
-                  {
-                    text: "[PROJECT_01 // 2026]",
-                    deleteAfter: false,
-                  },
-                ]}
-              />
-            )}
-            <h1 className="text-3xl tracking-tight text-primary font-medium">
-              Booster AI
-            </h1>
-
-            <p className="md:text-base text-sm text-muted-foreground max-w-sm font-mono leading-[1] tracking-tight uppercase font-light leading-relaxed my-3">
-              Software to repair crypto miners with AI
-            </p>
-          </div>
-
-          <Button
-            className="font-mono shadow-none border-primary hover:text-primary-foreground hover:bg-primary font-normal text-sm rounded-full tracking-tight"
-            size="lg"
-            variant="outline"
-            asChild
-          >
-            <Link
-              href="https://miner.repair"
-              target="_blank"
-              onClick={() =>
-                posthog.capture("clicked_project_link", {
-                  project: "Booster AI",
-                  url: "https://miner.repair",
-                })
-              }
-            >
-              VISIT_PROJECT
-            </Link>
-          </Button>
-        </div>
-
-        <motion.div className="w-full md:w-[50vw] md:px-0 px-6 h-[50vh] md:mb-0 mb-8 md:rounded-none rounded-xl md:h-[90vh] bg-primary flex items-center justify-center md:items-end md:justify-end">
-          <div className="md:rounded-tl-xl w-full rounded-3xl md:rounded-none md:w-[30vw] bg-primary-foreground h-[25vh] md:h-[50vh]"></div>
-        </motion.div>
-      </motion.div>
-
-      <div className="pt-16 flex md:flex-row flex-col items-start justify-between">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ amount: 0.5 }}
-          className="md:w-fit w-full"
-        >
-          <div className="w-full md:rounded-none rounded-xl  h-[50vh] md:size-[30vw] bg-muted-foreground relative">
-            <Image
-              src={"/fashion.webp"}
-              alt="Link"
-              width={800}
-              height={800}
-              className="size-full md:size-[30vw] object-cover object-top md:rounded-none rounded-xl"
-            />
-
-            <div className="transition-opacity opacity-0 hover:opacity-100 absolute inset-0 bg-black/50 z-10 flex flex-col items-center justify-center cursor-pointer">
-              <h1 className="z-10 text-white tracking-tight text-4xl font-medium font-sans">
-                Avila Beauty
-              </h1>
-              <p className="text-white text-lg tracking-tight">
-                Changing the novelty
-              </p>
-
-              <Button
-                className="my-4 text-sm tracking-tight rounded-full font-mono font-light"
-                disabled
-                size="lg"
-              >
-                COMING SOON
-              </Button>
-            </div>
-          </div>
-
-          <div className="space-y-4 mt-6 md:space-y-6 md:hidden w-full">
-            <div className="overflow-y-hidden space-y-0">
-              <TypewriterTitle
-                hideCursorOnComplete={true}
-                className="text-muted-foreground text-sm font-mono mr-auto tracking-tight h-9"
-                sequences={[
-                  {
-                    text: "[PROJECT_02 // 2025]",
-                    deleteAfter: false,
-                  },
-                ]}
-              />
-              <h1 className="text-3xl tracking-tight text-primary font-medium">
-                Avila Beauty
-              </h1>
-
-              <p className="md:text-base text-sm text-muted-foreground max-w-sm font-mono leading-[1] tracking-tight uppercase font-light leading-relaxed my-3">
-                Changing the novelty
-              </p>
-
-              <Button
-                className="font-mono shadow-none border-primary hover:text-primary-foreground hover:bg-primary font-normal text-sm rounded-full tracking-tight"
-                size="lg"
-                disabled={true}
-                variant="outline"
-                asChild
-              >
-                COMING SOON
-              </Button>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="pt-6 md:pt-96 md:w-fit w-full"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ amount: 0.7 }}
-        >
-          <div className="md:rounded-none rounded-xl md:h-[40vw] w-full h-[50vh] md:w-[30vw] bg-muted-foreground relative overflow-y-hidden">
-            {/* Removed expensive backdrop-blur-lg */}
-            <div className="absolute z-10 inset-0 bg-black/20" />
-            <Image
-              src={"/weather.jpg"}
-              alt="Link"
-              width={800}
-              height={800}
-              className="absolute inset-0 object-cover blur-[2px]" // Static blur is cheaper
-            />
-
-            <div className="transition-opacity opacity-0 hover:opacity-100 absolute inset-0 bg-black/50 z-50 flex flex-col items-center justify-center cursor-pointer">
-              <h1 className="z-10 text-white tracking-tight text-4xl font-medium font-sans">
-                Weathify
-              </h1>
-              <p className="text-white text-lg tracking-tight">
-                Change your wallpaper with the weather
-              </p>
-
-              <Button
-                className="my-4 text-sm tracking-tight rounded-full font-mono font-light"
-                disabled
-                size="lg"
-              >
-                COMING SOON
-              </Button>
-            </div>
-          </div>
-
-          <div className="space-y-4 mt-6 md:space-y-6 md:hidden w-full">
-            <div className="overflow-y-hidden space-y-0">
-              <TypewriterTitle
-                hideCursorOnComplete={true}
-                className="text-muted-foreground text-sm font-mono mr-auto tracking-tight h-9"
-                sequences={[
-                  {
-                    text: "[PROJECT_03 // 2026]",
-                    deleteAfter: false,
-                  },
-                ]}
-              />
-              <h1 className="text-3xl tracking-tight text-primary font-medium">
-                Weathify
-              </h1>
-
-              <p className="md:text-base text-sm text-muted-foreground max-w-sm font-mono leading-[1] tracking-tight uppercase font-light leading-relaxed my-3">
-                Change your wallpaper with the weather
-              </p>
-
-              <Button
-                className="font-mono shadow-none border-primary hover:text-primary-foreground hover:bg-primary font-normal text-sm rounded-full tracking-tight"
-                size="lg"
-                disabled={true}
-                variant="outline"
-                asChild
-              >
-                COMING SOON
-              </Button>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </motion.div>
+  );
+};
+
+// --- Main Component ---
+function Experience() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  // Mouse tracking for the floating effect
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
+  };
+
+  return (
+    <section
+      className="w-full bg-background text-foreground py-24 md:py-32 relative z-10 font-sans"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Header Metadata */}
+      <div className="px-6 md:px-12 mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-start md:items-end border-b border-border pb-6">
+        <h2 className="text-[12vw] md:text-[8vw] leading-[0.8] font-medium tracking-tighter uppercase text-foreground">
+          Selected <br className="md:hidden" /> Works
+        </h2>
+        <div className="flex flex-col items-end mt-8 md:mt-0 font-mono text-xs md:text-sm text-muted-foreground uppercase tracking-widest text-right">
+          <span className="block mb-2">[ {projects.length} PROJECTS ]</span>
+          <span className="hidden md:block">Hover to preview</span>
+          <span className="md:hidden">Scroll to explore</span>
+        </div>
+      </div>
+
+      {/* --- Desktop: Interactive List --- */}
+      <div className="hidden md:flex flex-col">
+        {projects.map((project, index) => (
+          <Link
+            key={project.id}
+            href={project.isComingSoon ? "#" : project.url}
+            target={project.isComingSoon ? "_self" : "_blank"}
+            onClick={() => {
+              if (!project.isComingSoon) {
+                posthog.capture("clicked_project_link", {
+                  project: project.title,
+                });
+              }
+            }}
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+            className={`group relative border-b border-border py-12 px-12 flex items-center justify-between transition-all duration-300 ${hoveredIndex !== null && hoveredIndex !== index ? "opacity-30 blur-[1px]" : "opacity-100"}`}
+          >
+            <div className="flex items-baseline gap-12 w-1/3">
+              <span className="font-mono text-xs text-muted-foreground">
+                ({project.id})
+              </span>
+              <h3 className="text-5xl font-medium tracking-tight group-hover:translate-x-4 transition-transform duration-500 ease-[0.76,0,0.24,1]">
+                {project.title}
+              </h3>
+            </div>
+
+            <div className="w-1/3 text-left">
+              <span className="font-mono text-xs uppercase text-muted-foreground tracking-widest">
+                {project.category}
+              </span>
+            </div>
+
+            <div className="w-1/3 flex justify-end items-center gap-4">
+              <span className="font-mono text-sm group-hover:mr-4 transition-all duration-300">
+                {project.year}
+              </span>
+              {project.isComingSoon ? (
+                <span className="text-[10px] border border-border px-2 py-1 rounded-full uppercase bg-secondary text-secondary-foreground">
+                  Coming Soon
+                </span>
+              ) : (
+                <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                  <ArrowUpRight className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" />
+                </div>
+              )}
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {/* --- Mobile: Card Stack --- */}
+      <div className="md:hidden flex flex-col gap-12 px-6">
+        {projects.map((project, index) => (
+          <motion.div
+            key={project.id}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col gap-4"
+          >
+            <Link
+              href={project.isComingSoon ? "#" : project.url}
+              className="relative w-full aspect-[4/3] bg-muted rounded-xl overflow-hidden border border-border group"
+            >
+              <Image
+                src={project.image || project.placeholder}
+                alt={project.title}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              {project.isComingSoon && (
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                  <span className="font-mono text-xs border border-white/30 text-white px-3 py-1 rounded-full backdrop-blur-md uppercase">
+                    Coming Soon
+                  </span>
+                </div>
+              )}
+            </Link>
+
+            <div className="flex justify-between items-start">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="font-mono text-[10px] text-muted-foreground">
+                    {project.id}
+                  </span>
+                  <h3 className="text-2xl font-medium tracking-tight">
+                    {project.title}
+                  </h3>
+                </div>
+                <p className="text-muted-foreground text-sm leading-tight max-w-[80%]">
+                  {project.description}
+                </p>
+              </div>
+
+              {!project.isComingSoon && (
+                <Link
+                  href={project.url}
+                  target="_blank"
+                  className="p-2 border border-border rounded-full hover:bg-foreground hover:text-background transition-colors"
+                >
+                  <ArrowUpRight size={16} />
+                </Link>
+              )}
+            </div>
+
+            <div className="w-full h-[1px] bg-border mt-2"></div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Floating Preview Component (Pass state) */}
+      <FloatingPreview
+        activeIndex={hoveredIndex}
+        mouseX={mouseX}
+        mouseY={mouseY}
+      />
+    </section>
   );
 }
 

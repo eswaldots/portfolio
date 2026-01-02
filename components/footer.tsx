@@ -2,94 +2,139 @@
 
 import Link from "next/link";
 import posthog from "posthog-js";
-import { Button } from "./ui/button";
-import { Separator } from "./ui/separator";
-import { TextAnimate } from "./ui/text-animate";
-import TypewriterTitle from "./kokonutui/type-writer";
+import { ArrowUpRight } from "lucide-react";
+import { useRef, useState } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+
+// --- Magnetic Button Component ---
+const MagneticButton = ({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href: string;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseX = useSpring(x, { stiffness: 150, damping: 15, mass: 0.1 });
+  const mouseY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.1 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = ref.current!.getBoundingClientRect();
+    const center = { x: left + width / 2, y: top + height / 2 };
+    x.set(clientX - center.x);
+    y.set(clientY - center.y);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ x: mouseX, y: mouseY }}
+      className="relative"
+    >
+      <Link
+        href={href}
+        className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-primary-foreground text-primary flex items-center justify-center text-sm md:text-lg font-medium tracking-tight uppercase hover:scale-110 transition-transform duration-500 ease-[0.76,0,0.24,1]"
+      >
+        {children}
+      </Link>
+    </motion.div>
+  );
+};
+
+// --- Minimal Link Component ---
+const MinimalLink = ({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) => {
+  return (
+    <Link href={href} className="group relative overflow-hidden inline-block">
+      <div className="flex flex-col transition-transform duration-500 group-hover:-translate-y-full ease-[0.76,0,0.24,1]">
+        <span className="font-sans text-xl md:text-2xl tracking-tight text-primary-foreground">
+          {children}
+        </span>
+        <span className="font-sans text-xl md:text-2xl tracking-tight text-primary-foreground absolute top-full left-0">
+          {children}
+        </span>
+      </div>
+    </Link>
+  );
+};
 
 function Footer() {
   return (
-    <div className="bg-primary z-10 h-[100vh] w-full flex flex-col justify-between font-sans px-6 sm:px-20 relative">
-      <div className="my-auto space-y-12">
-        <div className="overflow-y-hidden">
-          <TextAnimate
-            className="text-6xl sm:text-9xl text-background font-medium tracking-tight leading-[0.8]"
-            once
-            animation="slideUp"
-            by="character"
-          >
+    <div className="font-sans bg-primary text-primary-foreground h-screen w-full flex flex-col justify-between px-6 py-8 md:px-16 md:py-16 relative overflow-hidden selection:bg-background selection:text-foreground">
+      {/* --- Section 1: The Hook (Clean & Direct) --- */}
+      <div className="flex flex-col flex-grow justify-center items-center relative z-10">
+        <div className="flex flex-col items-center text-center gap-8 md:gap-12">
+          {/* Masked Reveal Title */}
+          <div className="overflow-hidden">
+            <motion.h2
+              initial={{ y: "100%" }}
+              whileInView={{ y: 0 }}
+              transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+              className="text-[12vw] md:text-[8vw] leading-[0.9] font-medium tracking-tighter"
+            >
+              Have an idea?
+            </motion.h2>
+          </div>
+
+          {/* Magnetic CTA */}
+          <MagneticButton href="mailto:aaronvendedor@gmail.com">
             Get in touch
-          </TextAnimate>
+          </MagneticButton>
         </div>
-
-        <div className="flex items-center gap-3">
-          <Button
-            size="lg"
-            className="bg-primary-foreground text-primary text-base font-normal tracking-tight hover:text-primary-foreground hover:bg-primary border border-primary-foreground rounded-full font-mono"
-            asChild
-          >
-            <Link
-              href="mailto:aaronvendedor@gmail.com"
-              onClick={() => posthog.capture("clicked_contact_email", { location: "footer" })}
-            >CONTACT</Link>
-          </Button>
-          <Button
-            size="icon-lg"
-            variant="secondary"
-            className="rounded-full bg-foreground hover:bg-primary-foreground group text-primary-foreground"
-            asChild
-          >
-            <Link
-              href="https://github.com/eswaldots"
-              onClick={() => posthog.capture("clicked_github_link", { location: "footer" })}
-            >
-              <svg viewBox="0 0 1024 1024" fill="currentStroke">
-                <path
-                  className="group-hover:fill-primary"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
-                  transform="scale(64)"
-                  fill="#ffff"
-                />
-              </svg>
-            </Link>
-          </Button>
-          <Button
-            size="icon-lg"
-            variant="secondary"
-            className="rounded-full bg-foreground hover:bg-primary-foreground group text-primary-foreground"
-            asChild
-          >
-            <Link
-              href="https://linkedin.com/in/aaron-avila-b57919329"
-              onClick={() => posthog.capture("clicked_linkedin_link", { location: "footer" })}
-            >
-              <svg preserveAspectRatio="xMidYMid" viewBox="0 0 256 256">
-                <path
-                  d="M218.123 218.127h-37.931v-59.403c0-14.165-.253-32.4-19.728-32.4-19.756 0-22.779 15.434-22.779 31.369v60.43h-37.93V95.967h36.413v16.694h.51a39.907 39.907 0 0 1 35.928-19.733c38.445 0 45.533 25.288 45.533 58.186l-.016 67.013ZM56.955 79.27c-12.157.002-22.014-9.852-22.016-22.009-.002-12.157 9.851-22.014 22.008-22.016 12.157-.003 22.014 9.851 22.016 22.008A22.013 22.013 0 0 1 56.955 79.27m18.966 138.858H37.95V95.967h37.97v122.16ZM237.033.018H18.89C8.58-.098.125 8.161-.001 18.471v219.053c.122 10.315 8.576 18.582 18.89 18.474h218.144c10.336.128 18.823-8.139 18.966-18.474V18.454c-.147-10.33-8.635-18.588-18.966-18.453"
-                  className="fill-primary-foreground group-hover:fill-primary"
-                  fill="#0A66C2"
-                />
-              </svg>
-            </Link>
-          </Button>
-        </div>
-
-        <TypewriterTitle
-          className="mr-auto text-base -my-8 text-primary-foreground/60 tracking-tight font-light"
-          startDelay={900}
-          typingSpeed={10}
-          sequences={[{ text: "SEND_EMAIL: aaronvendedor@gmail.com" }]}
-        />
       </div>
 
-      <div className="absolute w-full left-0 bottom-8 sm:px-20 px-6 flex flex-col items-start gap-4">
-        <Separator className="bg-primary-foreground opacity-50" />
+      {/* --- Section 2: Bottom Bar (Spatial & Organized) --- */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end w-full gap-12 md:gap-0 z-10">
+        {/* Column: Info */}
+        <div className="flex flex-col gap-4 md:gap-2">
+          <span className="font-mono text-xs uppercase tracking-widest opacity-50 mb-2">
+            [ CONTACT ]
+          </span>
+          <MinimalLink href="mailto:aaronvendedor@gmail.com">
+            aaronvendedor@gmail.com
+          </MinimalLink>
+          <span className="font-sans text-lg opacity-70">+58 412 019 6456</span>
+        </div>
 
-        <span className="tracking-tighter text-primary-foreground/50 font-mono">
-          © 2025 Aaron Avila
-        </span>
+        {/* Column: Navigation */}
+        <div className="flex flex-col gap-4 md:gap-2 md:text-right">
+          <span className="font-mono text-xs uppercase tracking-widest opacity-50 mb-2">
+            [ MENU ]
+          </span>
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+            <MinimalLink href="/work">Work</MinimalLink>
+            <MinimalLink href="/about">About</MinimalLink>
+            <MinimalLink href="/resume">Resume</MinimalLink>
+          </div>
+        </div>
+
+        {/* Column: Socials */}
+        <div className="flex flex-col gap-4 md:gap-2 md:text-right">
+          <span className="font-mono text-xs uppercase tracking-widest opacity-50 mb-2">
+            [ SOCIALS ]
+          </span>
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+            <MinimalLink href="https://linkedin.com">LinkedIn</MinimalLink>
+            <MinimalLink href="https://github.com">Github</MinimalLink>
+            <MinimalLink href="https://twitter.com">Twitter</MinimalLink>
+          </div>
+        </div>
       </div>
     </div>
   );

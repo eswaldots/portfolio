@@ -32,36 +32,19 @@ export default function Home() {
 
   return (
     <div className="z-20 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden bg-transparent antialiased">
+      <Hero key={"hero"} />
+
+      <About />
+      <Experience />
+
       <div
         className="relative h-screen"
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
       >
         <div className="fixed bottom-0 h-screen w-full">
-          <Hero key={"hero"} />
+          <Footer />
         </div>
       </div>
-
-      <div className="bg-primary">
-        <div
-          ref={cardRef}
-          className="shadow-2xl rounded-t-[3rem] rounded-b-[3rem] md:rounded-t-[6rem]  pt-[2rem] md:pt-[10vh] bg-background md:rounded-b-[6rem]"
-        >
-          <div className="mx-auto h-5 md:w-72 w-36 md:h-10 rounded-full bg-secondary" />
-          <About />
-          <Experience />
-        </div>
-
-        <div
-          className="relative h-screen"
-          style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
-        >
-          <div className="fixed bottom-0 h-screen w-full">
-            <Footer />
-          </div>
-        </div>
-      </div>
-
-      {/* <Projects /> */}
     </div>
   );
 }
