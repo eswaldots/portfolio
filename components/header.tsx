@@ -37,7 +37,7 @@ function Header() {
         <Link
           href="/"
           className={cn(
-            "font-sans transition-colors tracking-tight text-xl after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-px after:bg-primary-foreground pb-px cursor-pointer relative overflow-y-hidden",
+            "font-sans transition-colors text-xl cursor-pointer relative overflow-y-hidden",
             background === "dark"
               ? "text-primary-foreground"
               : "text-foreground",

@@ -9,12 +9,12 @@ function Footer() {
       <div className="my-auto space-y-12">
         <div className="overflow-y-hidden">
           <TextAnimate
-            className="text-6xl sm:text-9xl text-background font-semibold tracking-tighter leading-[1.1]"
+            className="text-6xl sm:text-9xl text-background font-medium tracking-tight leading-[0.8]"
             once
             animation="slideUp"
-            by="line"
+            by="character"
           >
-            Vamos a colaborar
+            Contact with me
           </TextAnimate>
         </div>
 

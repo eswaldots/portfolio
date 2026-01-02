@@ -44,7 +44,7 @@ export default function Home() {
       <div className="bg-primary">
         <div
           ref={cardRef}
-          className="shadow-2xl rounded-t-[4rem] pt-[10vh] bg-background rounded-b-[4rem]"
+          className="shadow-2xl rounded-t-[6rem] pt-[10vh] bg-background rounded-b-[6rem]"
         >
           <div className="mx-auto h-10 w-72 rounded-full bg-secondary" />
           <About />

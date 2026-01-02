@@ -197,7 +197,7 @@ const defaultItemAnimationVariants: Record<
         transition: {
           duration: 0.5,
           type: "spring",
-          damping: 30,
+          damping: 35,
           stiffness: 100,
         },
       },

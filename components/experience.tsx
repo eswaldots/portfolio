@@ -6,9 +6,7 @@ import Image from "next/image";
 
 function Experience() {
   return (
-    <motion.div
-      className="max-w-screen w-full font-sans px-6 sm:px-20 mt-16 py-12 space-y-64 relative"
-    >
+    <motion.div className="max-w-screen w-full font-sans px-6 sm:px-20 mt-16 py-12 space-y-64 relative">
       <div className="w-full grid">
         <div className="overflow-y-hidden">
           <TextAnimate
@@ -16,7 +14,7 @@ function Experience() {
             by="character"
             className="text-3xl sm:text-[10rem] whitespace-nowrap w-full tracking-tight text-primary"
           >
-            Proyectos
+            Work
           </TextAnimate>
         </div>
       </div>
@@ -30,13 +28,12 @@ function Experience() {
           </div>
 
           <p className="text-lg max-w-sm">
-            Software para reparar mineros de criptomonedas utilizando
-            inteligencia artificial
+            Software to repair crypto miners with AI
           </p>
 
-          <Button className="text-lg rounded-full" size="lg" asChild>
+          <Button className="text-base rounded-full" size="lg" asChild>
             <Link href="https://miner.repair" target="_blank">
-              Visitar
+              Visit
             </Link>
           </Button>
         </div>
@@ -70,7 +67,7 @@ function Experience() {
                 Avila Beauty
               </h1>
               <p className="text-white text-lg tracking-tight">
-                Revolucionando la moda
+                Changing the novelty
               </p>
 
               <Button
@@ -78,7 +75,7 @@ function Experience() {
                 disabled
                 size="lg"
               >
-                Proximamente
+                Coming soon
               </Button>
             </motion.div>
           </div>
@@ -92,7 +89,7 @@ function Experience() {
         >
           <div className="h-[40vw] w-[30vw] bg-muted-foreground relative overflow-y-hidden">
             {/* Removed expensive backdrop-blur-lg */}
-            <div className="absolute z-10 inset-0 bg-black/20" /> 
+            <div className="absolute z-10 inset-0 bg-black/20" />
             <Image
               src={"/weather.jpg"}
               alt="Link"
@@ -110,7 +107,7 @@ function Experience() {
                 Weathify
               </h1>
               <p className="text-white text-lg tracking-tight">
-                Cambia tu escritorio segun el clima
+                Change your wallpaper with the weather
               </p>
 
               <Button
@@ -118,7 +115,7 @@ function Experience() {
                 disabled
                 size="lg"
               >
-                Proximamente
+                Coming soon
               </Button>
             </motion.div>
           </div>
