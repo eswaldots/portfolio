@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 /**
  * @author: @dorian_baffier
  * @description: Typewriter
@@ -21,6 +22,7 @@ interface TypewriterSequence {
 
 interface TypewriterTitleProps {
   sequences?: TypewriterSequence[];
+  className?: string;
   typingSpeed?: number;
   startDelay?: number;
   autoLoop?: boolean;
@@ -37,6 +39,7 @@ export default function TypewriterTitle({
   typingSpeed = 50,
   startDelay = 500,
   autoLoop = true,
+  className,
   loopDelay = 2000,
   hideCursorOnComplete = false,
 }: TypewriterTitleProps) {
@@ -72,7 +75,7 @@ export default function TypewriterTitle({
           // Pause after typing if specified
           if (sequence.pauseAfter) {
             await new Promise((resolve) =>
-              setTimeout(resolve, sequence.pauseAfter)
+              setTimeout(resolve, sequence.pauseAfter),
             );
           }
 
@@ -85,21 +88,31 @@ export default function TypewriterTitle({
               if (!isActive) break;
               titleElement.textContent = sequence.text.slice(0, i);
               await new Promise((resolve) =>
-                setTimeout(resolve, typingSpeed / 2)
+                setTimeout(resolve, typingSpeed / 2),
               );
             }
           }
         }
 
         if (!(autoLoop && isActive)) {
-          if (hideCursorOnComplete && isFinished) {
-            setIsFinished(true)
+          if (hideCursorOnComplete) {
+            setIsFinished(true);
           }
           break;
         }
+        //
+        // await new Promise((resolve) =>
+        //   setTimeout(() => {
+        //     setIsFinished(true);
+        //
+        //     resolve;
+        //   }, loopDelay),
+        // );
+        setIsFinished(true);
 
+        break;
         // Wait before starting next loop
-        await new Promise((resolve) => setTimeout(resolve, loopDelay));
+        // await new Promise((resolve) => setTimeout(resolve, loopDelay));
       }
     };
 
@@ -109,7 +122,16 @@ export default function TypewriterTitle({
     return () => {
       isActive = false;
     };
-  }, [sequences, typingSpeed, startDelay, autoLoop, loopDelay, animate, scope, hideCursorOnComplete]);
+  }, [
+    sequences,
+    typingSpeed,
+    startDelay,
+    autoLoop,
+    loopDelay,
+    animate,
+    scope,
+    hideCursorOnComplete,
+  ]);
 
   return (
     <div className="relative max-w-4xl">
@@ -119,11 +141,14 @@ export default function TypewriterTitle({
       >
         <motion.div
           animate={{ opacity: 1 }}
-          className="flex items-center font-mono text-primary-foreground"
+          className={cn(
+            "flex items-center font-mono text-primary-foreground text-2xl h-12",
+            className,
+          )}
           initial={{ opacity: 0 }}
         >
           <span
-            className={`inline-block border-primary-foreground border-r-8 ${isFinished ? "border-transparent" : "animate-cursor"}`}
+            className={`font-mono inline-block tracking-tighter font-light border-primary-foreground border-r-2 pr-px transition-all ${isFinished ? "border-transparent" : "animate-cursor"}`}
             data-typewriter
           >
             {sequences[0].text}

@@ -73,7 +73,7 @@ interface TextAnimateProps extends MotionProps {
 const staggerTimings: Record<AnimationType, number> = {
   text: 0.06,
   word: 0.05,
-  character: 0.03,
+  character: 0.9,
   line: 0.06,
 };
 

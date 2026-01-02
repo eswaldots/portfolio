@@ -1,10 +1,15 @@
 import { TextAnimate } from "./ui/text-animate";
-import { motion } from "motion/react";
+import { motion, useInView } from "motion/react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import TypewriterTitle from "./kokonutui/type-writer";
+import { useRef } from "react";
 
 function Experience() {
+  const boosterRef = useRef(null);
+  const isBoosterInView = useInView(boosterRef);
+
   return (
     <motion.div className="max-w-screen w-full font-sans px-6 sm:px-20 mt-16 py-12 space-y-64 relative">
       <div className="w-full grid">
@@ -21,19 +26,36 @@ function Experience() {
 
       <motion.div className="flex items-center justify-between">
         <div className="space-y-6">
-          <div className="overflow-y-hidden">
+          <div className="overflow-y-hidden" ref={boosterRef}>
+            {isBoosterInView && (
+              <TypewriterTitle
+                hideCursorOnComplete={true}
+                className="text-muted-foreground text-sm font-mono mr-auto tracking-tight h-9"
+                sequences={[
+                  {
+                    text: "[PROJECT_01 // 2025]",
+                    deleteAfter: false,
+                  },
+                ]}
+              />
+            )}
             <h1 className="text-3xl tracking-tight text-primary font-medium">
               Booster AI
             </h1>
           </div>
 
-          <p className="text-lg max-w-sm">
+          <p className="text-base text-muted-foreground max-w-sm font-mono leading-[1] tracking-tight uppercase font-light">
             Software to repair crypto miners with AI
           </p>
 
-          <Button className="text-base rounded-full" size="lg" asChild>
+          <Button
+            className="font-mono shadow-none border-primary hover:text-primary-foreground hover:bg-primary font-normal text-sm rounded-full tracking-tight"
+            size="lg"
+            variant="outline"
+            asChild
+          >
             <Link href="https://miner.repair" target="_blank">
-              Visit
+              VISIT_PROJECT
             </Link>
           </Button>
         </div>
@@ -71,11 +93,11 @@ function Experience() {
               </p>
 
               <Button
-                className="my-4 text-base rounded-full"
+                className="my-4 text-sm tracking-tight rounded-full font-mono font-light"
                 disabled
                 size="lg"
               >
-                Coming soon
+                COMING SOON
               </Button>
             </motion.div>
           </div>
@@ -111,11 +133,11 @@ function Experience() {
               </p>
 
               <Button
-                className="my-4 text-base rounded-full"
+                className="my-4 text-sm tracking-tight rounded-full font-mono font-light"
                 disabled
                 size="lg"
               >
-                Coming soon
+                COMING SOON
               </Button>
             </motion.div>
           </div>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 import { TextAnimate } from "./ui/text-animate";
+import TypewriterTitle from "./kokonutui/type-writer";
 
 function Footer() {
   return (
@@ -14,17 +15,17 @@ function Footer() {
             animation="slideUp"
             by="character"
           >
-            Contact with me
+            Get in touch
           </TextAnimate>
         </div>
 
         <div className="flex items-center gap-3">
           <Button
             size="lg"
-            className="bg-primary-foreground text-primary tracking-tight text-base hover:text-primary-foreground hover:bg-primary border border-primary-foreground rounded-full"
+            className="bg-primary-foreground text-primary text-base font-normal tracking-tight hover:text-primary-foreground hover:bg-primary border border-primary-foreground rounded-full font-mono"
             asChild
           >
-            <Link href="mailto:aaronvendedor@gmail.com">Contactame</Link>
+            <Link href="mailto:aaronvendedor@gmail.com">CONTACT</Link>
           </Button>
           <Button
             size="icon-lg"
@@ -62,12 +63,19 @@ function Footer() {
             </Link>
           </Button>
         </div>
+
+        <TypewriterTitle
+          className="mr-auto text-base -my-8 text-primary-foreground/60 tracking-tight font-light"
+          startDelay={900}
+          typingSpeed={10}
+          sequences={[{ text: "SEND_EMAIL: aaronvendedor@gmail.com" }]}
+        />
       </div>
 
       <div className="absolute w-full left-0 bottom-8 sm:px-20 px-6 flex flex-col items-start gap-4">
-        <Separator className="bg-muted-foreground opacity-50" />
+        <Separator className="bg-primary-foreground opacity-50" />
 
-        <span className="tracking-tighter text-muted-foreground font-mono">
+        <span className="tracking-tighter text-primary-foreground/50 font-mono">
           © 2025 Aaron Avila
         </span>
       </div>

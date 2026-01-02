@@ -9,6 +9,63 @@ import { usePathname } from "next/navigation";
 import { useBackgroundStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
+function AnimatedLink({ children, href }: { children: string; href: string }) {
+  const words = children.split("");
+  const [isHover, setIsHover] = useState(false);
+
+  return (
+    <Link
+      href={href}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+      className={
+        "max-w-96 bg-black w-full items-center justify-center text-white font-mono uppercase tracking-normal font-light relative flex items-baseline gap-2 flex-row relative px-0"
+      }
+    >
+      <div
+        className={cn("inline-block overflow-hidden relative transition-all")}
+      >
+        <div className="flex">
+          {words.map((word, i) => (
+            <motion.span
+              key={`${word}-1-${i}`}
+              initial={{ y: 0 }}
+              animate={{ y: isHover ? "-100%" : "0%" }}
+              transition={{
+                duration: 0.3,
+                delay: i * 0.02,
+                ease: [0.215, 0.61, 0.355, 1],
+              }}
+              style={{ display: "inline-block" }} // Crucial: Must be inline-block
+            >
+              {word === " " ? "\u00A0" : word}
+            </motion.span>
+          ))}
+        </div>
+
+        {/* Second Layer (Sliding in from bottom) */}
+        <div className="flex absolute inset-0">
+          {words.map((word, i) => (
+            <motion.span
+              key={`${word}-2-${i}`}
+              initial={{ y: "100%" }}
+              animate={{ y: isHover ? "0%" : "100%" }}
+              transition={{
+                duration: 0.3,
+                delay: i * 0.02,
+                ease: [0.215, 0.61, 0.355, 1],
+              }}
+              style={{ display: "inline-block" }} // Crucial: Must be inline-block
+            >
+              {word === " " ? "\u00A0" : word}
+            </motion.span>
+          ))}
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 function Header() {
   const pathname = usePathname();
   const isMobile = useIsMobile();
@@ -24,23 +81,12 @@ function Header() {
   const background = useBackgroundStore((e) => e.background);
 
   return (
-    <motion.header
-      // initial={{ y: -200, opacity: 0 }}
-      // animate={{ y: 0, opacity: 1 }}
-      // transition={{
-      //   type: "spring", delay: initialDelay, damping: 30, stiffness: 150,
-      //   ease: [0.76, 0, 0.24, 1]
-      // }}
-      className="flex items-center justify-end sm:justify-between fixed w-full max-w-screen top-0 left-0 font-sans px-6 py-6 sm:py-20 sm:px-20 z-20"
-    >
+    <motion.header className="flex items-center justify-end sm:justify-between fixed w-full max-w-screen top-0 left-0 font-sans px-6 py-6 sm:py-20 sm:px-20 z-20 mix-blend-difference">
       {!isMobile && (
         <Link
           href="/"
           className={cn(
-            "font-sans transition-colors text-xl cursor-pointer relative overflow-y-hidden",
-            background === "dark"
-              ? "text-primary-foreground"
-              : "text-foreground",
+            "font-sans transition-colors text-xl cursor-pointer relative overflow-y-hidden text-white",
           )}
         >
           Aaron Avila
@@ -48,40 +94,13 @@ function Header() {
       )}
       <div
         className={cn(
-          "flex items-center gap-2",
+          "flex items-center gap-12",
           background === "dark" ? "text-primary-foreground" : "text-foreground",
         )}
       >
-        {!isMobile && (
-          <Button
-            variant="ghost"
-            className={cn(
-              "rounded-full text-base",
-              background === "dark"
-                ? " hover:text-primary-foreground hover:bg-primary-foreground/10"
-                : "",
-            )}
-            size="lg"
-          >
-            Resume
-          </Button>
-        )}
+        {!isMobile && <AnimatedLink href="/resume">RESUME</AnimatedLink>}
 
-        {!isMobile && (
-          <Button
-            variant="ghost"
-            className={cn(
-              "rounded-full text-base",
-              background === "dark"
-                ? " hover:text-primary-foreground hover:bg-primary-foreground/10"
-                : "",
-            )}
-            size="lg"
-            asChild
-          >
-            <Link href="/about">About</Link>
-          </Button>
-        )}
+        {!isMobile && <AnimatedLink href="/about">ABOUT</AnimatedLink>}
 
         {/* <Button className="bg-primary rounded-full text-sm sm:text-base font-normal tracking-tighter font-mono hover:text-primary hover:bg-background border border-primary" size={isMobile ? "default" : "lg"} asChild> */}
         {/*   <Link href="mailto:aaronvendedor@gmail.com"> */}

@@ -1,32 +1,39 @@
+"use client";
+
+import { motion } from "motion/react";
 import { TextAnimate } from "./ui/text-animate";
 
 function Hero() {
   return (
     <main className="bg-primary w-screen h-screen flex flex-col justify-center sm:justify-center sm:px-20 px-6 py-12 sm:pt-22 pt-28 sm:py-22 font-sans relative overflow-hidden">
       <div className="mt-auto text-center z-20">
-        <div className="overflow-y-hidden">
+        <div className="overflow-y-hidden my-4">
           <TextAnimate
             by="character"
-            animation="slideUpSubtle"
+            animation="slideDown"
             once={false}
-            className="text-primary-foreground font-sans tracking-tight font-medium text-[18.8vw] leading-none"
+            className="text-primary-foreground font-sans tracking-tighter font-medium text-[12vw] leading-[1.1]"
           >
-            Aaron Avila
+            Creative developer
           </TextAnimate>
         </div>
 
-        <div className="flex flex-row items-end w-fit gap-3 mx-auto">
+        <motion.div
+          className="flex flex-row items-end w-fit gap-3 mx-auto"
+          animate={{ opacity: [0, 1], transition: { delay: 0.9 } }}
+        >
           <div className="overflow-y-hidden">
             <TextAnimate
-              by="character"
-              animation="slideUpSubtle"
+              by="line"
+              animation="slideDown"
               once={false}
-              className="text-primary-foreground font-sans tracking-tight text-4xl leading-none"
+              className="font-thin tracking-tighter text-primary-foreground tracking-tighter text-xl font-mono uppercase"
             >
-              Fullstack developer / UI & UX designer
+              I’m experienced web and ux/ui designer, who design memorable web
+              experiences for brands OF ALL SIZES
             </TextAnimate>
           </div>
-        </div>
+        </motion.div>
       </div>
     </main>
   );

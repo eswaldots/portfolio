@@ -1,3 +1,5 @@
+"use client";
+
 import { TextAnimate } from "@/components/ui/text-animate";
 import { useBackgroundStore } from "@/lib/store";
 import { ArrowRight } from "lucide-react";
@@ -14,7 +16,7 @@ export default function Page() {
   return (
     <>
       <div className="w-screen bg-primary flex items-center flex-col justify-center gap-48 pb-[25vh] px-20">
-        <motion.main className="grid place-content-center w-full py-[10vh] rounded-[3rem] bg-white relative mt-[15vh]">
+        <motion.main className="grid place-content-center w-[64vw] py-[10vh] rounded-[3rem] bg-white relative mt-[25vh]">
           <div className="flex flex-col gap-12 items-center text-center">
             <div className="overflow-y-hidden">
               <TextAnimate
@@ -45,16 +47,26 @@ export default function Page() {
 
           <div className="w-full h-1/2 absolute bottom-0 bg-orange-500 rounded-b-[3rem]"></div>
         </motion.main>
-        <main className=" flex flex-col justify-center">
+        <main className="flex flex-col justify-center w-full text-[6.5rem] leading-[1.1]">
+          <div className="overflow-y-hidden">
+            <TextAnimate
+              by="character"
+              animation="slideUp"
+              className="font-medium tracking-tight font-sans text-primary-foreground whitespace-nowrap"
+              once
+            >
+              Aaron is a designer, storyteller,
+            </TextAnimate>
+          </div>
+
           <div className="overflow-y-hidden py-3">
             <TextAnimate
               by="character"
               animation="slideUp"
-              className="font-medium tracking-tight text-9xl font-sans text-primary-foreground whitespace-nowrap"
+              className="font-medium tracking-tight font-sans text-primary-foreground whitespace-nowrap"
               once
             >
-              Aaron is a designer, storyteller, and thinker. He has a gift for
-              finding
+              and thinker. He has a gift for finding
             </TextAnimate>
           </div>
 
@@ -62,7 +74,7 @@ export default function Page() {
             <TextAnimate
               by="character"
               animation="slideUp"
-              className="font-medium tracking-tight text-9xl font-sans text-primary-foreground whitespace-nowrap"
+              className="font-medium tracking-tight  font-sans text-primary-foreground whitespace-nowrap"
               once
             >
               meaning and using it to transform
@@ -73,7 +85,7 @@ export default function Page() {
             <TextAnimate
               by="character"
               animation="slideUp"
-              className="font-medium tracking-tight text-9xl font-sans text-primary-foreground whitespace-nowrap"
+              className="font-medium tracking-tight font-sans text-primary-foreground whitespace-nowrap"
               once
             >
               brands and products.
@@ -81,21 +93,14 @@ export default function Page() {
           </div>
         </main>
 
-        <div className="flex items-start justify-between w-full">
-          <div className="gap-24 grid">
-            <p className="text-primary-foreground font-sans text-4xl leading-[1.25] max-w-[45vw]">
-              Today, design plays one of the most important roles in a company’s
-              growth. It’s a powerful tool that will help highlight a company’s
-              strengths, enhance connections with its audience, increase brand
-              loyalty, and set it apart from competitors. I
-              believe that quality is always valued more than quantity. Every
-              detail counts. I work closely with my clients, diving deep into
-              each task to focus on what really matters and turn the best ideas
-              into real solutions that will bring maximum benefit.
-            </p>
-            <p className="text-primary-foreground font-sans text-4xl leading-[1.25] max-w-[45vw]">
-              From the ground up, I define, design, and launch work that shapes
-              a brand&apos;s future. The more ambitious the brand, the better.
+        <div className="flex items-center justify-between w-full">
+          <div className="gap-24 grid font-normal">
+            <p className="text-primary-foreground font-sans text-3xl leading-[1.35] max-w-[45vw]">
+              I bridge the gap between aesthetic vision and technical
+              excellence. For me, design is a tool to amplify logic and increase
+              loyalty. I dive deep into every project to ensure that every pixel
+              serves a purpose and every line of code adds value. I define,
+              design, and launch digital experiences from the ground up.
             </p>
           </div>
 
