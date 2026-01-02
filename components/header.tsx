@@ -10,7 +10,15 @@ import { usePathname } from "next/navigation";
 import { useBackgroundStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
-function AnimatedLink({ children, href, onClick }: { children: string; href: string; onClick?: () => void }) {
+function AnimatedLink({
+  children,
+  href,
+  onClick,
+}: {
+  children: string;
+  href: string;
+  onClick?: () => void;
+}) {
   const words = children.split("");
   const [isHover, setIsHover] = useState(false);
 
@@ -21,7 +29,7 @@ function AnimatedLink({ children, href, onClick }: { children: string; href: str
       onMouseLeave={() => setIsHover(false)}
       onClick={onClick}
       className={
-        "max-w-96 bg-black w-full items-center justify-center text-white font-mono uppercase tracking-normal font-light relative flex items-baseline gap-2 flex-row relative px-0"
+        "max-w-96 bg-black w-full items-center justify-center text-white font-mono uppercase tracking-normal font-light relative flex items-baseline gap-2 flex-row relative px-0 "
       }
     >
       <div
@@ -74,7 +82,11 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const lenis = useLenis();
 
-  const close = useEffectEvent(() => setIsOpen(false));
+  const close = useEffectEvent(() => {
+    lenis?.start();
+
+    setIsOpen(false);
+  });
 
   useEffect(() => {
     close();
@@ -83,126 +95,226 @@ function Header() {
   const background = useBackgroundStore((e) => e.background);
 
   return (
-    <motion.header className="flex items-center justify-end sm:justify-between fixed w-full max-w-screen top-0 left-0 font-sans px-6 py-6 sm:py-20 sm:px-20 z-20 mix-blend-difference">
-      {!isMobile && (
-        <Link
-          href="/"
-          onClick={() => posthog.capture("clicked_navigation_home", { location: "header" })}
-          className={cn(
-            "font-sans transition-colors text-xl cursor-pointer relative overflow-y-hidden text-white",
-          )}
-        >
-          Aaron Avila
-        </Link>
-      )}
-      <div
-        className={cn(
-          "flex items-center gap-12",
-          background === "dark" ? "text-primary-foreground" : "text-foreground",
-        )}
-      >
-        {!isMobile && <AnimatedLink href="/resume" onClick={() => posthog.capture("clicked_navigation_resume", { location: "header" })}>RESUME</AnimatedLink>}
-
-        {!isMobile && <AnimatedLink href="/about" onClick={() => posthog.capture("clicked_navigation_about", { location: "header" })}>ABOUT</AnimatedLink>}
-
-        {/* <Button className="bg-primary rounded-full text-sm sm:text-base font-normal tracking-tighter font-mono hover:text-primary hover:bg-background border border-primary" size={isMobile ? "default" : "lg"} asChild> */}
-        {/*   <Link href="mailto:aaronvendedor@gmail.com"> */}
-        {/*     Contactame */}
-        {/*   </Link> */}
-        {/* </Button> */}
-
-        {isMobile && (
-          <motion.button
-            onClick={() => {
-              setIsOpen(true);
-              lenis?.stop();
-              posthog.capture("opened_mobile_menu");
-            }}
-            layoutId="burger"
-            key="burger"
+    <>
+      <motion.header className="fixed max-w-screen top-0 left-0 font-sans z-20 w-full  mix-blend-difference">
+        <nav className="flex items-center justify-between w-full px-6 py-6 sm:py-20 sm:px-20">
+          <Link
+            href="/"
+            onClick={() =>
+              posthog.capture("clicked_navigation_home", { location: "header" })
+            }
+            className={cn(
+              "font-sans transition-colors text-xl cursor-pointer relative overflow-y-hidden text-white z-50",
+            )}
           >
-            <Menu className="size-6 text-primary" strokeWidth={1.5} />
-          </motion.button>
-        )}
-      </div>
+            Aaron Avila
+          </Link>
+          <div
+            className={cn(
+              "flex items-center gap-12",
+              background === "dark"
+                ? "text-primary-foreground"
+                : "text-foreground",
+            )}
+          >
+            {!isMobile && (
+              <AnimatedLink
+                href="/resume"
+                onClick={() =>
+                  posthog.capture("clicked_navigation_resume", {
+                    location: "header",
+                  })
+                }
+              >
+                RESUME
+              </AnimatedLink>
+            )}
+
+            {!isMobile && (
+              <AnimatedLink
+                href="/about"
+                onClick={() =>
+                  posthog.capture("clicked_navigation_about", {
+                    location: "header",
+                  })
+                }
+              >
+                ABOUT
+              </AnimatedLink>
+            )}
+
+            {/* <Button className="bg-primary rounded-full text-sm sm:text-base font-normal tracking-tighter font-mono hover:text-primary hover:bg-background border border-primary" size={isMobile ? "default" : "lg"} asChild> */}
+            {/*   <Link href="mailto:aaronvendedor@gmail.com"> */}
+            {/*     Contactame */}
+            {/*   </Link> */}
+            {/* </Button> */}
+
+            <AnimatePresence>
+              {isMobile && !isOpen && (
+                <motion.button
+                  onClick={() => {
+                    setIsOpen(true);
+                    lenis?.stop();
+                    posthog.capture("opened_mobile_menu");
+                  }}
+                  key="burgerclo"
+                  initial={{ opacity: 0 }}
+                  exit={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-white font-mono tracking-wide font-thin"
+                >
+                  MENU
+                </motion.button>
+              )}
+            </AnimatePresence>
+          </div>
+        </nav>
+      </motion.header>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 w-screen h-screen bg-transparent backdrop-blur-2xl"
+            initial={{ y: "100vh" }}
+            exit={{ y: "100vh" }}
+            animate={{ y: "0vh" }}
+            transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+            className="fixed inset-0 w-screen h-screen bg-background z-30 font-sans flex flex-col"
           >
             <motion.button
               onClick={() => {
                 lenis?.start();
                 setIsOpen(false);
               }}
-              layoutId="burger"
-              key="burger"
+              key="burgercloes"
+              initial={{ opacity: 0 }}
+              exit={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="absolute top-6 right-6 font-mono tracking-wide font-thin"
             >
-              <XIcon
-                className="size-6 absolute top-8 right-6"
-                strokeWidth={1.5}
-              />
+              [ CLOSE ]
             </motion.button>
 
-            <div className="p-6 py-32 grid gap-2">
+            <div className="p-6 py-32 grid gap-5">
               <div className="overflow-y-hidden">
-                <Link href="/" onClick={() => posthog.capture("clicked_navigation_home", { location: "mobile_menu" })}>
-                  <motion.p
-                    initial={{ y: 80 }}
+                <Link
+                  href="/"
+                  onClick={() =>
+                    posthog.capture("clicked_navigation_home", {
+                      location: "mobile_menu",
+                    })
+                  }
+                >
+                  <motion.span
+                    className="text-5xl tracking-tighter font-medium inline-block"
+                    initial={{ y: "100%" }}
                     animate={{ y: 0 }}
-                    className="text-4xl tracking-tighter font-medium"
-                    transition={{ type: "spring", damping: 20, stiffness: 150 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: 0.6,
+                      ease: [0.33, 1, 0.68, 1],
+                    }}
                   >
-                    Inicio
-                  </motion.p>
+                    Home
+                  </motion.span>
                 </Link>
               </div>
               <div className="overflow-y-hidden">
-                <Link href="/resume" onClick={() => posthog.capture("clicked_navigation_resume", { location: "mobile_menu" })}>
-                  <motion.p
-                    initial={{ y: 80 }}
+                <Link
+                  href="/about"
+                  onClick={() =>
+                    posthog.capture("clicked_navigation_about", {
+                      location: "mobile_menu",
+                    })
+                  }
+                >
+                  <motion.span
+                    className="text-5xl tracking-tight font-medium inline-block"
+                    initial={{ y: "100%" }}
                     animate={{ y: 0 }}
-                    className="text-4xl tracking-tighter font-medium"
                     transition={{
-                      type: "spring",
-                      delay: 0.1,
-                      damping: 20,
-                      stiffness: 150,
+                      duration: 0.8,
+                      delay: 0.7,
+                      ease: [0.33, 1, 0.68, 1],
                     }}
                   >
                     Resume
-                  </motion.p>
+                  </motion.span>
                 </Link>
               </div>
 
-              <motion.div
-                initial={{ x: -200 }}
-                animate={{ x: 0 }}
-                transition={{
-                  type: "spring",
-                  delay: 0.2,
-                  damping: 20,
-                  stiffness: 150,
-                }}
-                className="w-fit"
-              >
-                <Button
-                  className="bg-primary w-fit my-12 rounded-full text-base font-normal tracking-tighter font-mono hover:text-primary hover:bg-background border border-primary"
-                  size="lg"
-                  asChild
+              <div className="overflow-y-hidden">
+                <Link
+                  href="/about"
+                  onClick={() =>
+                    posthog.capture("clicked_navigation_about", {
+                      location: "mobile_menu",
+                    })
+                  }
                 >
-                  <Link href="mailto:aaronvendedor@gmail.com" onClick={() => posthog.capture("clicked_mobile_contact")}>Contactame</Link>
-                </Button>
+                  <motion.span
+                    className="text-5xl tracking-tight font-medium inline-block"
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: 0.8,
+                      ease: [0.33, 1, 0.68, 1],
+                    }}
+                  >
+                    About
+                  </motion.span>
+                </Link>
+              </div>
+            </div>
+
+            <div className="mt-auto px-4 max-w-screen w-full pb-6 flex flex-col gap-4">
+              <motion.div
+                className="w-full text-center my-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 1.1,
+                  ease: [0.33, 1, 0.68, 1],
+                }}
+              >
+                <div className="mx-auto text-xl font-medium">
+                  +58 4120196456
+                </div>
+                <div className="mx-auto text-xl font-medium">
+                  aaronvendedor@gmail.com
+                </div>
+              </motion.div>
+              <motion.div className="flex justify-between items-center">
+                <Link
+                  href="https://linkedin.com/in/aaron-avila-b57919329"
+                  className="font-mono font-thin"
+                  onClick={() =>
+                    posthog.capture("clicked_linkedin_link", {
+                      location: "mobile_menu",
+                    })
+                  }
+                >
+                  [ LINKEDIN ]
+                </Link>
+
+                <Link
+                  href="https://github.com/eswaldots"
+                  className="font-mono font-thin"
+                  onClick={() =>
+                    posthog.capture("clicked_github_link", {
+                      location: "mobile_menu",
+                    })
+                  }
+                >
+                  [ GITHUB ]
+                </Link>
               </motion.div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </>
   );
 }
 

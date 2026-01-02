@@ -12,7 +12,7 @@ function Hero() {
             by="character"
             animation="slideDown"
             once={false}
-            className="text-primary-foreground font-sans tracking-tighter font-medium text-[12vw] leading-[1.1]"
+            className="text-primary-foreground font-sans tracking-tighter font-medium text-[11.5vw] leading-[1.1] md:text-center text-left"
           >
             Creative developer
           </TextAnimate>
@@ -27,7 +27,7 @@ function Hero() {
               by="line"
               animation="slideDown"
               once={false}
-              className="font-thin tracking-tighter text-primary-foreground tracking-tighter text-xl font-mono uppercase"
+              className="font-thin tracking-tighter text-primary-foreground tracking-tighter text-sm md:text-center text-left md:text-xl font-mono uppercase"
             >
               I’m experienced web and ux/ui designer, who design memorable web
               experiences for brands OF ALL SIZES

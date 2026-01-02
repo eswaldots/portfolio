@@ -12,29 +12,29 @@ function Experience() {
   const isBoosterInView = useInView(boosterRef);
 
   return (
-    <motion.div className="max-w-screen w-full font-sans px-6 sm:px-20 mt-16 py-12 space-y-64 relative">
+    <motion.div className="max-w-screen w-full font-sans px-6 sm:px-20 mt-16 py-12 md:space-y-64 relative">
       <div className="w-full grid">
         <div className="overflow-y-hidden">
           <TextAnimate
             animation="slideUp"
             by="character"
-            className="text-3xl sm:text-[10rem] whitespace-nowrap w-full tracking-tight text-primary"
+            className="text-8xl md:text-[10rem] whitespace-nowrap w-full tracking-tight text-primary md:mb-0 mb-12"
           >
             Work
           </TextAnimate>
         </div>
       </div>
 
-      <motion.div className="flex items-center justify-between">
-        <div className="space-y-6">
-          <div className="overflow-y-hidden" ref={boosterRef}>
+      <motion.div className="flex items-center justify-between md:flex-row flex-col-reverse">
+        <div className="space-y-4 md:space-y-6 md:w-fit w-full">
+          <div className="overflow-y-hidden space-y-0" ref={boosterRef}>
             {isBoosterInView && (
               <TypewriterTitle
                 hideCursorOnComplete={true}
                 className="text-muted-foreground text-sm font-mono mr-auto tracking-tight h-9"
                 sequences={[
                   {
-                    text: "[PROJECT_01 // 2025]",
+                    text: "[PROJECT_01 // 2026]",
                     deleteAfter: false,
                   },
                 ]}
@@ -43,11 +43,11 @@ function Experience() {
             <h1 className="text-3xl tracking-tight text-primary font-medium">
               Booster AI
             </h1>
-          </div>
 
-          <p className="text-base text-muted-foreground max-w-sm font-mono leading-[1] tracking-tight uppercase font-light">
-            Software to repair crypto miners with AI
-          </p>
+            <p className="md:text-base text-sm text-muted-foreground max-w-sm font-mono leading-[1] tracking-tight uppercase font-light leading-relaxed my-3">
+              Software to repair crypto miners with AI
+            </p>
+          </div>
 
           <Button
             className="font-mono shadow-none border-primary hover:text-primary-foreground hover:bg-primary font-normal text-sm rounded-full tracking-tight"
@@ -58,38 +58,40 @@ function Experience() {
             <Link
               href="https://miner.repair"
               target="_blank"
-              onClick={() => posthog.capture("clicked_project_link", { project: "Booster AI", url: "https://miner.repair" })}
+              onClick={() =>
+                posthog.capture("clicked_project_link", {
+                  project: "Booster AI",
+                  url: "https://miner.repair",
+                })
+              }
             >
               VISIT_PROJECT
             </Link>
           </Button>
         </div>
 
-        <motion.div className="w-[50vw] h-[90vh] bg-primary flex items-end justify-end">
-          <div className="rounded-tl-xl w-[30vw] bg-primary-foreground h-[50vh]"></div>
+        <motion.div className="w-full md:w-[50vw] md:px-0 px-6 h-[50vh] md:mb-0 mb-8 md:rounded-none rounded-xl md:h-[90vh] bg-primary flex items-center justify-center md:items-end md:justify-end">
+          <div className="md:rounded-tl-xl w-full rounded-3xl md:rounded-none md:w-[30vw] bg-primary-foreground h-[25vh] md:h-[50vh]"></div>
         </motion.div>
       </motion.div>
 
-      <div className="pt-16 flex items-start w-full justify-between">
+      <div className="pt-16 flex md:flex-row flex-col items-start justify-between">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ amount: 0.5 }}
+          className="md:w-fit w-full"
         >
-          <div className="size-[30vw] bg-muted-foreground relative">
+          <div className="w-full md:rounded-none rounded-xl  h-[50vh] md:size-[30vw] bg-muted-foreground relative">
             <Image
               src={"/fashion.webp"}
               alt="Link"
               width={800}
               height={800}
-              className="size-[30vw] object-cover object-top"
+              className="size-full md:size-[30vw] object-cover object-top md:rounded-none rounded-xl"
             />
 
-            <motion.div
-              whileHover={{ opacity: 1 }}
-              initial={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/50 z-10 flex flex-col items-center justify-center cursor-pointer"
-            >
+            <div className="transition-opacity opacity-0 hover:opacity-100 absolute inset-0 bg-black/50 z-10 flex flex-col items-center justify-center cursor-pointer">
               <h1 className="z-10 text-white tracking-tight text-4xl font-medium font-sans">
                 Avila Beauty
               </h1>
@@ -104,17 +106,49 @@ function Experience() {
               >
                 COMING SOON
               </Button>
-            </motion.div>
+            </div>
+          </div>
+
+          <div className="space-y-4 mt-6 md:space-y-6 md:hidden w-full">
+            <div className="overflow-y-hidden space-y-0">
+              <TypewriterTitle
+                hideCursorOnComplete={true}
+                className="text-muted-foreground text-sm font-mono mr-auto tracking-tight h-9"
+                sequences={[
+                  {
+                    text: "[PROJECT_02 // 2025]",
+                    deleteAfter: false,
+                  },
+                ]}
+              />
+              <h1 className="text-3xl tracking-tight text-primary font-medium">
+                Avila Beauty
+              </h1>
+
+              <p className="md:text-base text-sm text-muted-foreground max-w-sm font-mono leading-[1] tracking-tight uppercase font-light leading-relaxed my-3">
+                Changing the novelty
+              </p>
+
+              <Button
+                className="font-mono shadow-none border-primary hover:text-primary-foreground hover:bg-primary font-normal text-sm rounded-full tracking-tight"
+                size="lg"
+                disabled={true}
+                variant="outline"
+                asChild
+              >
+                COMING SOON
+              </Button>
+            </div>
           </div>
         </motion.div>
 
         <motion.div
-          className="pt-96"
+          className="pt-6 md:pt-96 md:w-fit w-full"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ amount: 0.7 }}
         >
-          <div className="h-[40vw] w-[30vw] bg-muted-foreground relative overflow-y-hidden">
+          <div className="md:rounded-none rounded-xl md:h-[40vw] w-full h-[50vh] md:w-[30vw] bg-muted-foreground relative overflow-y-hidden">
             {/* Removed expensive backdrop-blur-lg */}
             <div className="absolute z-10 inset-0 bg-black/20" />
             <Image
@@ -125,11 +159,7 @@ function Experience() {
               className="absolute inset-0 object-cover blur-[2px]" // Static blur is cheaper
             />
 
-            <motion.div
-              whileHover={{ opacity: 1 }}
-              initial={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/50 z-10 flex flex-col items-center justify-center cursor-pointer"
-            >
+            <div className="transition-opacity opacity-0 hover:opacity-100 absolute inset-0 bg-black/50 z-50 flex flex-col items-center justify-center cursor-pointer">
               <h1 className="z-10 text-white tracking-tight text-4xl font-medium font-sans">
                 Weathify
               </h1>
@@ -144,7 +174,39 @@ function Experience() {
               >
                 COMING SOON
               </Button>
-            </motion.div>
+            </div>
+          </div>
+
+          <div className="space-y-4 mt-6 md:space-y-6 md:hidden w-full">
+            <div className="overflow-y-hidden space-y-0">
+              <TypewriterTitle
+                hideCursorOnComplete={true}
+                className="text-muted-foreground text-sm font-mono mr-auto tracking-tight h-9"
+                sequences={[
+                  {
+                    text: "[PROJECT_03 // 2026]",
+                    deleteAfter: false,
+                  },
+                ]}
+              />
+              <h1 className="text-3xl tracking-tight text-primary font-medium">
+                Weathify
+              </h1>
+
+              <p className="md:text-base text-sm text-muted-foreground max-w-sm font-mono leading-[1] tracking-tight uppercase font-light leading-relaxed my-3">
+                Change your wallpaper with the weather
+              </p>
+
+              <Button
+                className="font-mono shadow-none border-primary hover:text-primary-foreground hover:bg-primary font-normal text-sm rounded-full tracking-tight"
+                size="lg"
+                disabled={true}
+                variant="outline"
+                asChild
+              >
+                COMING SOON
+              </Button>
+            </div>
           </div>
         </motion.div>
       </div>

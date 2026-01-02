@@ -13,10 +13,10 @@ function About() {
       ref={ref}
       className="h-[200vh] relative w-full flex justify-center items-start bg-background"
     >
-      <div className="sticky top-0 h-screen flex items-center px-4">
+      <div className="sticky top-0 h-screen flex items-center px-6 md:px-4">
         <ScrollReveal
           externalRef={ref}
-          className="text-[4vw] text-foreground font-sans tracking-tight leading-[1.2] text-left max-w-6xl"
+          className="text-4xl md:text-[4vw] text-foreground font-sans tracking-tight leading-[1.2] text-left max-w-6xl"
         >
           {content}
         </ScrollReveal>
