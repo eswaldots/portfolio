@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { ScrollReveal } from "./bits/scroll-reveal";
 
 const content =
-  "Aaron es un desarrollador fullstack. Me especializo en crear experiencias visuales memorables y en la ingeniería de sistemas seguros y escalables. Convierto la complejidad en soluciones elegantes y eficientes.";
+  "I'm Aaron, a full-stack developer on a mission to build robust and visually appealing products. My expertise ranges from creating memorable user experiences to engineering secure and scalable systems, transforming complex ideas into elegant and efficient solutions.";
 
 function About() {
   const ref = useRef(null);

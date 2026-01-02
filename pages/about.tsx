@@ -53,7 +53,7 @@ export default function Page() {
               className="font-medium tracking-tight text-9xl font-sans text-primary-foreground"
               once
             >
-              Aaron is a a designer, storyteller, and thinker. He has gift for
+              Aaron is a designer, storyteller, and thinker. He has a gift for
               finding
             </TextAnimate>
           </div>
@@ -87,7 +87,7 @@ export default function Page() {
               Today, design plays one of the most important roles in a company’s
               growth. It’s a powerful tool that will help highlight a company’s
               strengths, enhance connections with its audience, increase brand
-              loyalty, and set it apart from competitors. (Value) (Approach) I
+              loyalty, and set it apart from competitors. I
               believe that quality is always valued more than quantity. Every
               detail counts. I work closely with my clients, diving deep into
               each task to focus on what really matters and turn the best ideas
