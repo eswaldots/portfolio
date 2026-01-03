@@ -11,20 +11,32 @@ import posthog from "posthog-js";
 const projects = [
   {
     id: "01",
-    title: "Booster AI",
+    title: "Daimo",
     category: "Development",
     year: "2026",
     description: "Software to repair crypto miners with AI",
-    url: "https://miner.repair",
-    image: "/booster.webp", // Ensure you have this or use placeholder
+    url: "https://daimoapp.netlify.app",
+    image: "/daimo.png", // Ensure you have this or use placeholder
     placeholder:
       "https://images.unsplash.com/photo-1639322537228-ad71053db952?q=80&w=3270&auto=format&fit=crop", // Fallback
     isComingSoon: false,
   },
   {
     id: "02",
+    title: "Booster AI",
+    category: "Development",
+    year: "2026",
+    description: "Software to repair crypto miners with AI",
+    url: "https://miner.repair",
+    image: "/hashboard.png", // Ensure you have this or use placeholder
+    placeholder:
+      "https://images.unsplash.com/photo-1639322537228-ad71053db952?q=80&w=3270&auto=format&fit=crop", // Fallback
+    isComingSoon: false,
+  },
+  {
+    id: "03",
     title: "Avila Beauty",
-    category: "Art Direction",
+    category: "Development",
     year: "2025",
     description: "Changing the novelty",
     url: "#",
@@ -34,9 +46,9 @@ const projects = [
     isComingSoon: true,
   },
   {
-    id: "03",
+    id: "04",
     title: "Weathify",
-    category: "Design Engineering",
+    category: "Development",
     year: "2026",
     description: "Change your wallpaper with the weather",
     url: "#",
@@ -83,14 +95,30 @@ const FloatingPreview = ({
             src={project.image || project.placeholder}
             alt={project.title}
             fill
-            className={`object-cover transition-opacity duration-500 ${index === activeIndex ? "opacity-100" : "opacity-0"}`}
+            className={`object-center object-cover transition-opacity duration-500 ${index === activeIndex ? "opacity-100" : "opacity-0"}`}
           />
         ))}
         {/* Overlay details on the image */}
-        <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent text-white font-mono text-xs uppercase flex justify-between">
-          <span>{projects[activeIndex].category}</span>
-          <span>{projects[activeIndex].year}</span>
-        </div>
+        {!projects[activeIndex].isComingSoon && (
+          <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent text-white font-mono text-xs uppercase flex justify-between">
+            <span>{projects[activeIndex].category}</span>
+            <span>{projects[activeIndex].year}</span>
+          </div>
+        )}
+
+        {projects[activeIndex].isComingSoon && (
+          <>
+            <div className="absolute z-30 inset-0 bg-black/50 backdrop-blur-md" />
+            <div className="z-40 absolute text-white -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 flex flex-col items-center text-center gap-1">
+              <h1 className="tracking-tight font-medium text-xl">
+                WORK IN PROGRESS
+              </h1>
+              <p className="text-white/50 leading-[1.1] text-sm">
+                This work is currently in development
+              </p>
+            </div>
+          </>
+        )}
       </div>
     </motion.div>
   );
@@ -164,7 +192,7 @@ function Experience() {
                 {project.year}
               </span>
               {project.isComingSoon ? (
-                <span className="text-[10px] border border-border px-2 py-1 rounded-full uppercase bg-secondary text-secondary-foreground">
+                <span className="text-[10px] shadow-xs px-2 py-1 rounded-full uppercase bg-secondary text-secondary-foreground">
                   Coming Soon
                 </span>
               ) : (
@@ -199,8 +227,8 @@ function Experience() {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               {project.isComingSoon && (
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                  <span className="font-mono text-xs border border-white/30 text-white px-3 py-1 rounded-full backdrop-blur-md uppercase">
+                <div className="absolute inset-0 backdrop-blur-md bg-black/40 flex items-center justify-center">
+                  <span className="text-xs text-white px-3 py-1 rounded-full uppercase">
                     Coming Soon
                   </span>
                 </div>

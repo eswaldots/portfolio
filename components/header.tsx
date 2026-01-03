@@ -134,7 +134,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="fixed inset-0 z-40 bg-background flex flex-col justify-center px-6"
+            className="fixed inset-0 z-40 bg-background flex flex-col justify-center px-6 font-sans"
           >
             <div className="flex flex-col gap-6 items-center text-center">
               {["Home", "Work", "About", "Contact"].map((item, i) => (
@@ -148,7 +148,7 @@ export function Header() {
                   <Link
                     href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
                     onClick={() => setIsOpen(false)}
-                    className="text-[15vw] leading-[0.9] font-black uppercase tracking-tighter text-foreground hover:text-muted-foreground transition-colors"
+                    className="text-[15vw] leading-[0.9] font-medium uppercase tracking-tighter text-foreground hover:text-muted-foreground transition-colors"
                   >
                     {item}
                   </Link>

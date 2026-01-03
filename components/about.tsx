@@ -47,7 +47,7 @@ const ScrollRevealText = ({
   });
 
   return (
-    <p className="flex flex-wrap text-4xl md:text-5xl font-medium tracking-tight leading-[1.15] md:leading-[1.1]">
+    <p className="flex flex-wrap text-4xl md:text-5xl font-medium tracking-tight leading-[1.15] md:leading-[1.2]">
       {words.map((word, i) => {
         const start = i / words.length;
         const end = start + 1 / words.length;
@@ -86,7 +86,11 @@ function About() {
                 <span>SCROLL TO READ</span>
                 <motion.div
                   animate={{ y: [0, 5, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "backOut",
+                  }}
                 >
                   <ArrowDown size={14} />
                 </motion.div>
@@ -122,13 +126,6 @@ function About() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Spacer for next section (Simulates continuation) */}
-      <div className="h-[50vh] w-full bg-background border-t border-border flex items-center justify-center">
-        <p className="font-mono text-muted-foreground text-xs uppercase tracking-widest">
-          [ Next Section: Work ]
-        </p>
       </div>
     </div>
   );
