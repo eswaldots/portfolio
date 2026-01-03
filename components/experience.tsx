@@ -33,30 +33,30 @@ const projects = [
       "https://images.unsplash.com/photo-1639322537228-ad71053db952?q=80&w=3270&auto=format&fit=crop", // Fallback
     isComingSoon: false,
   },
-  {
-    id: "03",
-    title: "Avila Beauty",
-    category: "Development",
-    year: "2025",
-    description: "Changing the novelty",
-    url: "#",
-    image: "/fashion.webp",
-    placeholder:
-      "https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=3269&auto=format&fit=crop",
-    isComingSoon: true,
-  },
-  {
-    id: "04",
-    title: "Weathify",
-    category: "Development",
-    year: "2026",
-    description: "Change your wallpaper with the weather",
-    url: "#",
-    image: "/weather.jpg",
-    placeholder:
-      "https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=3270&auto=format&fit=crop",
-    isComingSoon: true,
-  },
+  // {
+  //   id: "03",
+  //   title: "Avila Beauty",
+  //   category: "Development",
+  //   year: "2025",
+  //   description: "Changing the novelty",
+  //   url: "#",
+  //   image: "/fashion.webp",
+  //   placeholder:
+  //     "https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=3269&auto=format&fit=crop",
+  //   isComingSoon: true,
+  // },
+  // {
+  //   id: "04",
+  //   title: "Weathify",
+  //   category: "Development",
+  //   year: "2026",
+  //   description: "Change your wallpaper with the weather",
+  //   url: "#",
+  //   image: "/weather.jpg",
+  //   placeholder:
+  //     "https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=3270&auto=format&fit=crop",
+  //   isComingSoon: true,
+  // },
 ];
 
 // --- Component: Floating Image Cursor (Desktop Only) ---
