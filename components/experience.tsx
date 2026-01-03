@@ -139,6 +139,7 @@ function Experience() {
 
   return (
     <section
+      id="work"
       className="w-full bg-background text-foreground py-24 md:py-32 relative z-10 font-sans"
       onMouseMove={handleMouseMove}
     >

@@ -6,7 +6,7 @@ import { ArrowDown } from "lucide-react";
 
 // --- Text Content ---
 const content =
-  "I'm Aaron, a full-stack developer on a mission to build robust and visually appealing products. My expertise ranges from creating memorable user experiences to engineering secure and scalable systems, transforming complex ideas into elegant and efficient solutions.";
+  "I’m Aaron, a Full-Stack Developer dedicated to bridging the gap between sophisticated engineering and intuitive design. I don’t just write code; I engineer secure, scalable systems that deliver seamless user experiences. My goal is to transform your complex requirements into elegant, high-performance solutions.";
 
 // --- Component: Word with Opacity Scroll Effect ---
 const ScrollWord = ({
@@ -47,7 +47,7 @@ const ScrollRevealText = ({
   });
 
   return (
-    <p className="flex flex-wrap text-4xl md:text-5xl font-medium tracking-tight leading-[1.15] md:leading-[1.2]">
+    <p className="flex flex-wrap text-3xl font-normal md:text-5xl font-medium tracking-tight leading-[1.25] md:leading-[1.25]">
       {words.map((word, i) => {
         const start = i / words.length;
         const end = start + 1 / words.length;

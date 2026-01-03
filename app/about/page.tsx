@@ -118,7 +118,7 @@ export default function AboutPage() {
               ● The Mission
             </h2>
 
-            <div className="space-y-8 text-lg md:text-2xl leading-relaxed font-light text-muted-foreground">
+            <div className="space-y-8 text-sm md:text-2xl leading-relaxed font-light text-muted-foreground">
               <p>
                 <span className="text-foreground font-medium">
                   Precision meets performance.
@@ -128,10 +128,10 @@ export default function AboutPage() {
                 calculating user needs and executing with technical rigor.
               </p>
               <p>
-                I am Aaron Avila, a multidisciplinary developer bridging the gap
-                between aesthetic vision and engineering constraints. My
-                approach is systematic: I deconstruct complex problems to build
-                scalable, intuitive interfaces.
+                I a multidisciplinary developer bridging the gap between
+                aesthetic vision and engineering constraints. My approach is
+                systematic: I deconstruct complex problems to build scalable,
+                intuitive interfaces.
               </p>
               <p>
                 From the architecture of the database to the fluidity of the

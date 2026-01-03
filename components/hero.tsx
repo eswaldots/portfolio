@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { ArrowDownRight, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 // --- Utility: Masked Reveal Animation ---
 const RevealText = ({
@@ -33,6 +34,15 @@ const LineSeparator = ({ delay = 0 }: { delay?: number }) => (
     className="w-full h-[1px] bg-border origin-left"
   />
 );
+
+const scrolltoHash = function (elementId: string) {
+  const element = document.getElementById(elementId);
+  element?.scrollIntoView({
+    behavior: "smooth",
+    block: "end",
+    inline: "nearest",
+  });
+};
 
 function Hero() {
   return (
@@ -112,6 +122,9 @@ function Hero() {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 1.6, type: "spring" }}
+              onClick={() => {
+                scrolltoHash("work");
+              }}
               className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:border-primary hover:text-primary-foreground transition-colors cursor-pointer group"
             >
               <ArrowRight

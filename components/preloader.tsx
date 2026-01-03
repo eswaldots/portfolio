@@ -72,18 +72,18 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       className="fixed inset-0 z-[50] flex flex-col justify-between p-6 md:p-12 bg-foreground text-primary-foreground font-sans overflow-hidden"
     >
       {/* --- TOP ROW: Grid Layout typical of Rabbit OS --- */}
-      <div className="grid grid-cols-2 md:grid-cols-4 w-full gap-4 text-xs font-medium uppercase tracking-tight border-b border-primary-foreground/20 pb-6">
+      <div className="grid grid-cols-4 w-full gap-4 text-xs font-medium uppercase tracking-tight border-b border-primary-foreground/20 pb-6 md:pb-12">
         {/* 1. Brand / Status */}
-        <div className="flex flex-col gap-2">
-          <div className="hidden md:flex flex-col">
+        <div className="flex flex-col">
+          <div className="flex flex-col">
             <TypewriterEffect
-              className="text-muted-foreground text-sm font-normal font-mono text-left leading-[0.8]  -my-2"
+              className="text-muted-foreground text-xs md:text-sm font-normal font-mono  text-left md:leading-[0.8] md:-my-2"
               delay={0}
               words={[{ text: "System" }]}
             />
 
             <TypewriterEffect
-              className="text-background text-sm font-normal font-mono  text-left leading-[0.8]"
+              className="text-background text-xs md:text-sm font-normal font-mono  text-left md:leading-[0.8] md:-my-2"
               delay={0.1}
               words={[{ text: "Booting" }]}
             />
@@ -91,15 +91,15 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
         </div>
 
         {/* 2. Empty or Info */}
-        <div className="hidden md:flex flex-col">
+        <div className="flex flex-col">
           <TypewriterEffect
-            className="text-muted-foreground text-sm font-normal font-mono text-left leading-[0.8]  -my-2"
+            className="text-muted-foreground text-xs md:text-sm font-normal font-mono  text-left md:leading-[0.8] md:-my-2"
             words={[{ text: "Boot" }]}
             delay={0.2}
           />
 
           <TypewriterEffect
-            className="text-background text-sm font-normal font-mono  text-left leading-[0.8]"
+            className="text-background text-xs md:text-sm font-normal font-mono  text-left md:leading-[0.8] md:-my-2"
             delay={0.3}
             words={[{ text: "XJ-900" }]}
           />
@@ -120,33 +120,33 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       </div>
 
       {/* --- BOTTOM ROW --- */}
-      <div className="grid grid-cols-1 md:grid-cols-4 w-full gap-4 text-xs font-medium uppercase tracking-tight border-t border-primary-foreground/20 pt-6">
+      <div className="grid grid-cols-4 w-full gap-4 text-xs font-medium uppercase tracking-tight gap-2 md:gap-0 border-t border-primary-foreground/20 pt-6 md:mb-12 mb-6 md:h-fit h-12">
         {/* Intro */}
-        <div className="md:col-span-2 flex flex-col gap-1">
+        <div className="col-span-2 flex flex-col gap-1 w-full h-fit">
           <TypewriterEffect
-            className="text-muted-foreground text-sm font-normal font-mono  text-left leading-[0.8] -my-2"
+            className="text-muted-foreground text-xs md:text-sm font-normal font-mono  text-left md:leading-[0.8] md:-my-2"
             delay={0.4}
             words={[{ text: "ACTIONS" }]}
           />
 
           <TypewriterEffect
-            className="text-background text-sm font-normal font-mono  text-left leading-[0.8]"
+            className="text-background text-xs md:text-sm font-normal font-mono  text-left md:leading-[0.8] md:-my-2"
             delay={0.5}
-            words={[{ text: "INITIALIZING_SYSTEM" }]}
+            words={[{ text: "INITIALIZING" }]}
           />
         </div>
 
         {/* Date / Copyright */}
-        <div className="md:col-start-4 flex flex-col gap-1 md:text-right">
+        <div className="col-start-4 flex flex-col gap-1 text-right w-full">
           <TypewriterEffect
-            className="text-muted-foreground text-sm font-normal font-mono  text-left leading-[0.8] -my-2"
+            className="text-muted-foreground text-xs md:text-sm font-normal font-mono  text-left md:leading-[0.8] md:-my-2"
             delay={0.6}
             words={[{ text: "SESSION" }]}
           />
           <TypewriterEffect
-            className="text-background text-sm font-normal font-mono  text-left leading-[0.8]"
+            className="text-background text-xs md:text-sm font-normal font-mono  text-left md:leading-[0.8] md:-my-2"
             delay={0.7}
-            words={[{ text: `${new Date().getFullYear()} — V.1.0` }]}
+            words={[{ text: `${new Date().getFullYear()}— V.1.0` }]}
           />
         </div>
       </div>

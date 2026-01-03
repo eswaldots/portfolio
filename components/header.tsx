@@ -100,7 +100,7 @@ export function Header() {
           <nav className="flex items-center gap-8 md:gap-12">
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-widest font-medium">
-              <FlipLink href="/work">Work</FlipLink>
+              <FlipLink href="/#work">Work</FlipLink>
               <FlipLink href="/about">About</FlipLink>
               <FlipLink href="/resume">Info</FlipLink>
 
@@ -137,7 +137,7 @@ export function Header() {
             className="fixed inset-0 z-40 bg-background flex flex-col justify-center px-6 font-sans"
           >
             <div className="flex flex-col gap-6 items-center text-center">
-              {["Home", "About", "Resume"].map((item, i) => (
+              {["Home", "Work", "About", "Resume"].map((item, i) => (
                 <motion.div
                   key={item}
                   initial={{ y: 50, opacity: 0 }}
@@ -146,7 +146,13 @@ export function Header() {
                   transition={{ delay: i * 0.1 }}
                 >
                   <Link
-                    href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                    href={
+                      item === "Home"
+                        ? "/"
+                        : item === "Work"
+                          ? "/#work"
+                          : `/${item.toLowerCase()}`
+                    }
                     onClick={() => setIsOpen(false)}
                     className="text-[15vw] leading-[0.9] font-medium uppercase tracking-tighter text-foreground hover:text-muted-foreground transition-colors"
                   >

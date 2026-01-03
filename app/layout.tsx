@@ -12,8 +12,8 @@ const jebrainsMonoFont = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
 });
 
-const title = "Daimo";
-const description = "Daimo es una plataforma de agentes de IA conversacionales";
+const title = "Aaron Avila - Creative Developer";
+const description = "Aaron Avila - Creative Developer";
 
 export const metadata: Metadata = {
   title,
@@ -21,22 +21,11 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    siteName: "Daimo",
+    siteName: "Aaron Avila",
     type: "website",
-  },
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "Daimo",
   },
   formatDetection: {
     telephone: false,
-  },
-  // safe area for iOS PWA
-  other: {
-    "mobile-web-app-capable": "yes",
-    "apple-mobile-web-app-capable": "yes",
-    "apple-mobile-web-app-status-bar-style": "white-translucent",
   },
 };
 
