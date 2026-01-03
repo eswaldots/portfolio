@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "motion/react";
 import { ArrowDown } from "lucide-react";
 
@@ -18,13 +18,14 @@ const ScrollWord = ({
   progress: MotionValue<number>;
   range: [number, number];
 }) => {
-  const opacity = useTransform(progress, range, [0.15, 1]); // Stays visible at 0.15 opacity, goes to 1
+  const opacity = useTransform(progress, range, [0.15, 1]);
 
   return (
     <span className="relative inline-block mr-[0.2em] lg:mr-[0.25em]">
       <motion.span
         style={{ opacity }}
-        className="text-foreground transition-colors duration-200"
+        // Performance: 'will-change-opacity' ayuda al navegador a optimizar la animación
+        className="text-foreground transition-colors duration-200 will-change-opacity"
       >
         {children}
       </motion.span>
@@ -38,23 +39,34 @@ const ScrollRevealText = ({
   targetRef,
 }: {
   children: string;
-  targetRef: React.RefObject<any>;
+  targetRef: React.RefObject<any>; // O HTMLElement si prefieres tipado estricto
 }) => {
-  const words = children.split(" ");
+  // Performance: useMemo evita que el split se ejecute en cada render
+  const words = useMemo(() => children.split(" "), [children]);
+
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start start", "end end"], // Animation starts when top hits top, ends when bottom hits bottom
+    offset: ["start start", "end end"],
   });
 
   return (
-    <p className="flex flex-wrap text-3xl font-normal md:text-5xl md:font-medium tracking-tight leading-[1.25] md:leading-[1.25]">
+    // ACCESIBILIDAD/SEO:
+    // Usamos aria-label para que los screen readers lean la frase completa de corrido,
+    // ignorando los spans individuales gracias a aria-hidden en los hijos (o comportamiento nativo).
+    <p
+      className="flex flex-wrap text-3xl font-normal md:text-5xl md:font-medium tracking-tight leading-[1.25] md:leading-[1.25]"
+      aria-label={children}
+    >
       {words.map((word, i) => {
         const start = i / words.length;
         const end = start + 1 / words.length;
         return (
-          <ScrollWord key={i} progress={scrollYProgress} range={[start, end]}>
-            {word}
-          </ScrollWord>
+          // Aria-hidden para que el lector no lea palabra por palabra con pausas
+          <span key={i} aria-hidden="true">
+            <ScrollWord progress={scrollYProgress} range={[start, end]}>
+              {word}
+            </ScrollWord>
+          </span>
         );
       })}
     </p>
@@ -66,19 +78,32 @@ function About() {
   const containerRef = useRef(null);
 
   return (
-    <div className="bg-background min-h-screen font-sans selection:bg-primary selection:text-primary-foreground">
+    // Semántica: Usamos <section> en lugar de <div>
+    <section
+      id="about-bio"
+      className="bg-background min-h-screen font-sans selection:bg-primary selection:text-primary-foreground relative"
+    >
+      {/* SEO: Título oculto para estructura de documento */}
+      <h2 className="sr-only">About Aaron Avila - Professional Bio</h2>
+
       {/* Background Grain/Noise */}
-      <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-50 bg-foreground mix-blend-overlay"></div>
+      {/* Performance: Cambiado de fixed a absolute para evitar repaints globales innecesarios */}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none z-50 bg-foreground mix-blend-overlay"
+        aria-hidden="true"
+      ></div>
 
       <div
         ref={containerRef}
         className="relative w-full h-[300vh] flex flex-col items-center"
-        // Increased height to 300vh to make the reading speed more comfortable
       >
         {/* Sticky Container */}
         <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
-          {/* Brutalist Grid Layout */}
-          <div className="absolute inset-0 grid grid-cols-12 gap-4 pointer-events-none px-4 md:px-12 border-x border-border/40">
+          {/* Brutalist Grid Layout - Aria-hidden porque es decorativo */}
+          <div
+            className="absolute inset-0 grid grid-cols-12 gap-4 pointer-events-none px-4 md:px-12 border-x border-border/40"
+            aria-hidden="true"
+          >
             {/* Left Sidebar Info */}
             <div className="hidden md:flex col-span-2 border-r border-border/40 flex-col justify-between py-12">
               <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground"></span>
@@ -108,7 +133,7 @@ function About() {
           {/* Main Content Area */}
           <div className="relative w-full max-w-[90vw] md:max-w-[70vw] lg:max-w-[60vw] z-10 px-4 md:px-0">
             {/* Decorative Label above text */}
-            <div className="mb-8 md:mb-12 overflow-hidden">
+            <div className="mb-8 md:mb-12 overflow-hidden" aria-hidden="true">
               <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                 [ 02 — Bio ]
               </span>
@@ -120,14 +145,17 @@ function About() {
             </ScrollRevealText>
 
             {/* Footer Decoration below text */}
-            <div className="mt-12 md:mt-20 h-[1px] w-full bg-border/50 flex items-center justify-between">
+            <div
+              className="mt-12 md:mt-20 h-[1px] w-full bg-border/50 flex items-center justify-between"
+              aria-hidden="true"
+            >
               <div className="w-2 h-2 bg-primary rounded-full -mt-[1px]"></div>
               <div className="w-2 h-2 bg-primary rounded-full -mt-[1px]"></div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

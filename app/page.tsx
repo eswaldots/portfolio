@@ -1,47 +1,44 @@
-"use client";
-
-import { About } from "@/components/about";
-import { Experience } from "@/components/experience";
-import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
-import { Background, useBackgroundStore } from "@/lib/store";
-import { useInView } from "motion/react";
-import { useEffect, useEffectEvent, useRef } from "react";
+import dynamic from "next/dynamic";
+
+// --- PERFORMANCE: Dynamic Imports (Code Splitting) ---
+// Cargamos de forma diferida los componentes que no son visibles al inicio.
+// Esto reduce el "Total Blocking Time" (TBT) y acelera la carga inicial.
+
+const About = dynamic(() =>
+  import("@/components/about").then((mod) => mod.About),
+);
+const Experience = dynamic(() =>
+  import("@/components/experience").then((mod) => mod.Experience),
+);
+const Footer = dynamic(() =>
+  import("@/components/footer").then((mod) => mod.Footer),
+);
 
 export default function Home() {
-  const cardRef = useRef(null);
-
-  const { setBackground } = useBackgroundStore((e) => e.actions);
-
-  const set = useEffectEvent((option: Background) => {
-    setBackground(option);
-  });
-
-  const isCardInView = useInView(cardRef, {
-    amount: 0.15,
-    margin: "0px 0px 0px 0px",
-  });
-
-  useEffect(() => {
-    if (isCardInView) {
-      set("white");
-    } else {
-      set("dark");
-    }
-  }, [isCardInView]);
-
   return (
+    // Se mantiene tu configuración de estilos visuales
     <div className="z-20 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden bg-transparent antialiased">
-      <Hero key={"hero"} />
+      {/* 
+        LCP CRÍTICO: 
+        El Hero se importa normal (no dynamic) para que pinte inmediatamente.
+      */}
+      <Hero />
 
+      {/* Contenido Secundario (Carga optimizada en chunks) */}
       <About />
       <Experience />
 
+      {/* 
+        FOOTER REVEAL EFFECT:
+        Optimización: Usamos 'dvh' en lugar de 'vh' para mejor soporte en móviles (Safari iOS).
+        La técnica de clip-path se mantiene igual para el efecto visual.
+      */}
       <div
-        className="relative h-screen"
+        className="relative h-[100dvh]"
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
       >
-        <div className="fixed bottom-0 h-screen w-full">
+        <div className="fixed bottom-0 h-[100dvh] w-full">
           <Footer />
         </div>
       </div>

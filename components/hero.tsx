@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ArrowDownRight, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link"; // Usamos Link nativo para mejor accesibilidad
 
 // --- Utility: Masked Reveal Animation ---
 const RevealText = ({
@@ -19,6 +19,7 @@ const RevealText = ({
       initial={{ y: "110%" }}
       animate={{ y: "0%" }}
       transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1], delay }}
+      className="will-change-transform" // Performance: Hint para la GPU
     >
       {children}
     </motion.div>
@@ -31,27 +32,33 @@ const LineSeparator = ({ delay = 0 }: { delay?: number }) => (
     initial={{ scaleX: 0 }}
     animate={{ scaleX: 1 }}
     transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay }}
-    className="w-full h-[1px] bg-border origin-left"
+    className="w-full h-[1px] bg-border origin-left will-change-transform"
   />
 );
 
-const scrolltoHash = function (elementId: string) {
-  const element = document.getElementById(elementId);
-  element?.scrollIntoView({
-    behavior: "smooth",
-    block: "end",
-    inline: "nearest",
-  });
-};
-
 function Hero() {
   return (
-    <main className="relative h-screen w-full overflow-hidden bg-background text-foreground selection:bg-primary selection:text-primary-foreground font-sans">
-      {/* 1. Texture & Atmosphere (Anti-Slop) */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-foreground mix-blend-overlay z-10" />
+    <section className="relative h-screen w-full overflow-hidden bg-background text-foreground selection:bg-primary selection:text-primary-foreground font-sans">
+      {/* 
+         SEO CRÍTICO: 
+         Definimos un único H1 descriptivo para Google y Screen Readers.
+         Los textos visuales animados serán decorativos (aria-hidden).
+      */}
+      <h1 className="sr-only">
+        Creative Developer based in Venezuela - Aaron Avila
+      </h1>
+
+      {/* 1. Texture & Atmosphere */}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none bg-foreground mix-blend-overlay z-10"
+        aria-hidden="true"
+      />
 
       {/* 2. Brutalist Grid Background */}
-      <div className="absolute inset-0 grid grid-cols-6 md:grid-cols-12 pointer-events-none z-0">
+      <div
+        className="absolute inset-0 grid grid-cols-6 md:grid-cols-12 pointer-events-none z-0"
+        aria-hidden="true"
+      >
         {[...Array(13)].map((_, i) => (
           <div
             key={i}
@@ -75,21 +82,26 @@ function Hero() {
         </div>
 
         {/* Massive Typography Section */}
-        <div className="flex flex-col justify-center flex-1 gap-4 md:gap-0 mt-8 md:mt-0">
+        {/* Usamos aria-hidden="true" porque el H1 real ya lo leímos arriba */}
+        <div
+          className="flex flex-col justify-center flex-1 gap-4 md:gap-0 mt-8 md:mt-0"
+          aria-hidden="true"
+        >
           {/* Row 1: "CREATIVE" */}
           <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-8">
             <span className="font-mono text-xs text-primary hidden md:block">
               (001)
             </span>
-            <h1 className="text-[13vw] md:text-[11vw] leading-[0.85] font-medium tracking-tighter uppercase text-foreground mix-blend-exclusion">
+            {/* Visualmente parece un H1, semánticamente es un div display */}
+            <div className="text-[13vw] md:text-[11vw] leading-[0.85] font-medium tracking-tighter uppercase text-foreground mix-blend-exclusion">
               <RevealText delay={0.2}>Creative</RevealText>
-            </h1>
+            </div>
             <div className="hidden md:block h-[1px] flex-1 bg-foreground mt-12 opacity-20"></div>
           </div>
 
           {/* Row 2: "DEVELOPER" (Asymmetric Layout) */}
           <div className="flex flex-col md:flex-row items-start md:items-end justify-between w-full relative">
-            {/* The "Manifesto" / Subtext - Purposefully placed off-center */}
+            {/* The "Manifesto" / Subtext */}
             <div className="order-2 md:order-1 max-w-sm mt-6 md:mt-0 md:mb-4 md:ml-12">
               <div className="overflow-hidden">
                 <motion.p
@@ -109,29 +121,31 @@ function Hero() {
             </div>
 
             {/* The Big Text */}
-            <h1 className="text-[13vw] md:text-[11vw] leading-[0.85] font-medium tracking-tighter uppercase text-right order-1 md:order-2 self-end">
+            <div className="text-[13vw] md:text-[11vw] leading-[0.85] font-medium tracking-tighter uppercase text-right order-1 md:order-2 self-end">
               <RevealText delay={0.4}>Developer</RevealText>
-            </h1>
+            </div>
           </div>
         </div>
 
         {/* Bottom Footer Row */}
         <div className="flex justify-between items-end w-full">
           <div className="flex items-center gap-4">
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 1.6, type: "spring" }}
-              onClick={() => {
-                scrolltoHash("work");
-              }}
-              className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:border-primary hover:text-primary-foreground transition-colors cursor-pointer group"
-            >
-              <ArrowRight
-                size={20}
-                className="-rotate-45 group-hover:rotate-0 transition-transform duration-300"
-              />
-            </motion.div>
+            {/* ACCESIBILIDAD: Reemplazo de onClick div por Link real */}
+            <Link href="/#work" scroll={false}>
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 1.6, type: "spring" }}
+                className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:border-primary hover:text-primary-foreground transition-colors cursor-pointer group"
+                aria-label="Scroll to Work Section"
+              >
+                <ArrowRight
+                  size={20}
+                  className="-rotate-45 group-hover:rotate-0 transition-transform duration-300"
+                />
+              </motion.div>
+            </Link>
+
             <div className="hidden md:block overflow-hidden">
               <RevealText
                 delay={1.7}
@@ -148,7 +162,7 @@ function Hero() {
           </div>
         </div>
       </div>
-    </main>
+    </section>
   );
 }
 

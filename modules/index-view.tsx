@@ -2,13 +2,14 @@
 
 import { ReactNode, useEffect, useState } from "react";
 import "lenis/dist/lenis.css";
-import { AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import Preloader from "@/components/preloader";
 import ReactLenis from "lenis/react";
 import { Header } from "@/components/header";
+import { useUIStore } from "@/store/ui-store";
 
 export default function LayoutView({ children }: { children: ReactNode }) {
-  const [isLoading, setIsLoading] = useState(true);
+  const { isLoading, setIsLoading } = useUIStore();
 
   // Optional: Prevent scrolling while loading
   useEffect(() => {
@@ -29,19 +30,14 @@ export default function LayoutView({ children }: { children: ReactNode }) {
           )}
         </AnimatePresence>
 
-        {/* 
-          We render the content immediately but it's hidden under the z-index of the preloader.
-          Alternatively, you can only render it (!isLoading && ...) 
-          if you want to delay the DOM paint.
-      */}
-        {!isLoading && (
-          <div className={isLoading ? "h-screen overflow-hidden" : ""}>
-            <Header />
-            {children}
-          </div>
-        )}
+        <motion.div
+          key={isLoading ? "loading-state" : "loaded-state"}
+          className={isLoading ? "opacity-0" : "opacity-100"}
+        >
+          <Header />
+          {children}
+        </motion.div>
       </main>
     </>
   );
 }
-

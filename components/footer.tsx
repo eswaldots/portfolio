@@ -13,15 +13,24 @@ const MagneticButton = ({
   href: string;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const rectRef = useRef<DOMRect | null>(null);
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
   const mouseX = useSpring(x, { stiffness: 150, damping: 15, mass: 0.1 });
   const mouseY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.1 });
 
+  const handleMouseEnter = () => {
+    if (ref.current) {
+      rectRef.current = ref.current.getBoundingClientRect();
+    }
+  };
+
   const handleMouseMove = (e: React.MouseEvent) => {
+    if (!rectRef.current) return;
     const { clientX, clientY } = e;
-    const { left, top, width, height } = ref.current!.getBoundingClientRect();
+    const { left, top, width, height } = rectRef.current;
     const center = { x: left + width / 2, y: top + height / 2 };
     x.set(clientX - center.x);
     y.set(clientY - center.y);
@@ -30,19 +39,22 @@ const MagneticButton = ({
   const handleMouseLeave = () => {
     x.set(0);
     y.set(0);
+    rectRef.current = null;
   };
 
   return (
     <motion.div
       ref={ref}
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ x: mouseX, y: mouseY }}
-      className="relative"
+      className="relative will-change-transform"
     >
       <Link
         href={href}
         className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-primary-foreground text-primary flex items-center justify-center text-sm md:text-lg font-medium tracking-tight uppercase hover:scale-110 transition-transform duration-500 ease-[0.76,0,0.24,1]"
+        aria-label="Send me an email"
       >
         {children}
       </Link>
@@ -54,14 +66,24 @@ const MagneticButton = ({
 const MinimalLink = ({
   href,
   children,
+  isExternal = false,
 }: {
   href: string;
   children: React.ReactNode;
+  isExternal?: boolean;
 }) => {
   return (
-    <Link href={href} className="group relative overflow-hidden inline-block">
-      <div className="flex flex-col transition-transform duration-500 group-hover:-translate-y-full ease-[0.76,0,0.24,1]">
-        {/* Mobile: text-xl, Desktop: text-2xl */}
+    <Link
+      href={href}
+      className="group relative overflow-hidden inline-block"
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
+    >
+      <span className="sr-only">{children}</span>
+      <div
+        className="flex flex-col transition-transform duration-500 group-hover:-translate-y-full ease-[0.76,0,0.24,1]"
+        aria-hidden="true"
+      >
         <span className="font-sans text-xl md:text-2xl tracking-tight text-primary-foreground">
           {children}
         </span>
@@ -75,76 +97,98 @@ const MinimalLink = ({
 
 function Footer() {
   return (
-    <div className="font-sans bg-primary text-primary-foreground min-h-screen w-full flex flex-col justify-between px-6 pt-24 pb-32 md:px-16 md:py-16 relative overflow-hidden selection:bg-background selection:text-foreground">
-      {/* --- Section 1: The Hook (Clean & Direct) --- */}
+    <footer className="font-sans bg-primary text-primary-foreground min-h-screen w-full flex flex-col justify-between px-6 pt-24 pb-32 md:px-16 md:py-16 relative overflow-hidden selection:bg-background selection:text-foreground">
+      {/* --- Section 1: The Hook --- */}
       <div className="flex flex-col flex-grow justify-center items-center relative z-10 mb-20 md:mb-0">
         <div className="flex flex-col items-center text-center gap-8 md:gap-12">
-          {/* Masked Reveal Title */}
+          {/* --- ANIMACIÓN RESTAURADA --- */}
+          {/* El div overflow-hidden crea el efecto de "máscara" */}
           <div className="overflow-hidden">
             <motion.h2
-              initial={{ y: "100%" }}
-              whileInView={{ y: 0 }}
+              initial={{ y: "99%" }} // Empieza oculto hacia abajo
+              whileInView={{ y: 0 }} // Sube a su posición original
               transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
-              className="text-[12vw] md:text-[8vw] leading-[0.9] font-medium tracking-tighter"
+              viewport={{ once: true }}
+              className="text-[12vw] md:text-[8vw] leading-[0.9] font-medium tracking-tighter will-change-transform"
             >
               Have an idea?
             </motion.h2>
           </div>
 
-          {/* Magnetic CTA */}
           <MagneticButton href="mailto:aaronvendedor@gmail.com">
             Get in touch
           </MagneticButton>
         </div>
       </div>
 
-      {/* --- Section 2: Bottom Bar (Grid Layout) --- */}
-      {/* Changed to Grid for strict alignment control */}
+      {/* --- Section 2: Bottom Bar --- */}
       <div className="grid grid-cols-1 md:grid-cols-12 w-full gap-12 md:gap-0 z-10 items-end">
-        {/* Column: Info (Spans 4 cols) */}
+        {/* Contact */}
         <div className="col-span-1 md:col-span-4 flex flex-col items-start gap-1">
           <span className="font-mono text-[10px] md:text-xs uppercase tracking-widest opacity-50 mb-3 md:mb-4">
             [ CONTACT ]
           </span>
-          <MinimalLink href="mailto:aaronvendedor@gmail.com">
-            aaronvendedor@gmail.com
-          </MinimalLink>
-          <span className="font-sans text-lg md:text-xl opacity-70 mt-1">
-            +58 412 019 6456
-          </span>
+          <address className="not-italic flex flex-col gap-1 items-start">
+            <MinimalLink href="mailto:aaronvendedor@gmail.com">
+              aaronvendedor@gmail.com
+            </MinimalLink>
+            <a
+              href="tel:+584120196456"
+              className="font-sans text-lg md:text-xl opacity-70 mt-1 hover:opacity-100 transition-opacity"
+            >
+              +58 412 019 6456
+            </a>
+          </address>
         </div>
 
-        {/* Column: Navigation (Spans 4 cols, Center on Desktop, Left on Mobile) */}
+        {/* Navigation */}
         <div className="col-span-1 md:col-span-4 flex flex-col items-start md:items-center">
-          <div className="flex flex-col items-start md:items-center gap-1">
+          <nav
+            className="flex flex-col items-start md:items-center gap-1"
+            aria-label="Footer Navigation"
+          >
             <span className="font-mono text-[10px] md:text-xs uppercase tracking-widest opacity-50 mb-3 md:mb-4 w-full text-left md:text-center">
               [ MENU ]
             </span>
-            <div className="flex flex-col md:flex-row gap-2 md:gap-8 items-start md:items-center">
-              <MinimalLink href="/about">About</MinimalLink>
-              <MinimalLink href="/resume">Resume</MinimalLink>
-            </div>
-          </div>
+            <ul className="flex flex-col md:flex-row gap-2 md:gap-8 items-start md:items-center list-none p-0 m-0">
+              <li>
+                <MinimalLink href="/about">About</MinimalLink>
+              </li>
+              <li>
+                <MinimalLink href="/resume">Resume</MinimalLink>
+              </li>
+            </ul>
+          </nav>
         </div>
 
-        {/* Column: Socials (Spans 4 cols, Right on Desktop, Left on Mobile) */}
+        {/* Socials */}
         <div className="col-span-1 md:col-span-4 flex flex-col items-start md:items-end">
-          <div className="flex flex-col items-start md:items-end gap-1">
+          <nav
+            className="flex flex-col items-start md:items-end gap-1"
+            aria-label="Social Media"
+          >
             <span className="font-mono text-[10px] md:text-xs uppercase tracking-widest opacity-50 mb-3 md:mb-4 w-full text-left md:text-right">
               [ SOCIALS ]
             </span>
-            <div className="flex flex-col md:flex-row gap-2 md:gap-8 items-start md:items-center">
-              <MinimalLink href="https://linkedin.com/in/aaron-avila-b57919329">
-                LinkedIn
-              </MinimalLink>
-              <MinimalLink href="https://github.com/eswaldots/">
-                Github
-              </MinimalLink>
-            </div>
-          </div>
+            <ul className="flex flex-col md:flex-row gap-2 md:gap-8 items-start md:items-center list-none p-0 m-0">
+              <li>
+                <MinimalLink
+                  href="https://linkedin.com/in/aaron-avila-b57919329"
+                  isExternal
+                >
+                  LinkedIn
+                </MinimalLink>
+              </li>
+              <li>
+                <MinimalLink href="https://github.com/eswaldots/" isExternal>
+                  Github
+                </MinimalLink>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
 
