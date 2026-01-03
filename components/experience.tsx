@@ -76,7 +76,7 @@ const FloatingPreview = ({
 
   // Initial positioning offset so it doesn't cover the text directly
   const xOffset = useTransform(x, (val) => val + 20);
-  const yOffset = useTransform(y, (val) => val - 100);
+  const yOffset = useTransform(y, (val) => Number(val) - 100);
 
   if (activeIndex === null) return null;
 

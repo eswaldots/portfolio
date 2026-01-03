@@ -137,7 +137,7 @@ export function Header() {
             className="fixed inset-0 z-40 bg-background flex flex-col justify-center px-6 font-sans"
           >
             <div className="flex flex-col gap-6 items-center text-center">
-              {["Home", "Work", "About", "Contact"].map((item, i) => (
+              {["Home", "About", "Resume"].map((item, i) => (
                 <motion.div
                   key={item}
                   initial={{ y: 50, opacity: 0 }}

@@ -84,13 +84,13 @@ export default function AboutPage() {
             <span className="w-12 h-[1px] bg-border"></span>
             <span>OVERVIEW</span>
           </div>
-          <RevealText className="text-[10vw] md:text-[8vw] leading-[0.85] font-bold tracking-tighter uppercase text-foreground">
+          <RevealText className="text-[10vw] md:text-[8vw] leading-[0.85] font-medium tracking-tighter uppercase text-foreground">
             Digital
           </RevealText>
           <div className="flex items-center gap-4">
             <RevealText
               delay={0.1}
-              className="text-[10vw] md:text-[8vw] leading-[0.85] font-bold tracking-tighter uppercase text-muted-foreground"
+              className="text-[10vw] md:text-[8vw] leading-[0.85] font-medium tracking-tighter uppercase text-muted-foreground"
             >
               Architect
             </RevealText>
@@ -139,29 +139,26 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="mt-16 py-8 border-y border-border grid grid-cols-2 gap-8">
+            <div className="mt-16 py-8 border-y border-border gap-8">
               <div className="flex flex-col gap-2">
                 <span className="font-mono text-xs text-muted-foreground">
                   CORE DISCIPLINES
                 </span>
                 <div className="flex flex-wrap gap-2 mt-1">
-                  {["System Design", "UI Engineering", "Performance"].map(
-                    (tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs border border-border px-2 py-1 rounded-sm bg-background"
-                      >
-                        {tag}
-                      </span>
-                    ),
-                  )}
+                  {[
+                    "System Design",
+                    "UI Engineering",
+                    "Performance",
+                    "Backend development",
+                  ].map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs border border-border px-2 py-1 rounded-sm bg-background"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <span className="font-mono text-xs text-muted-foreground">
-                  SELECTED WORKS
-                </span>
-                <span className="text-xl font-bold">40+ Delivered</span>
               </div>
             </div>
           </div>
@@ -172,7 +169,7 @@ export default function AboutPage() {
       <section className="py-24 px-6 md:px-12 bg-background border-b border-border">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="col-span-1">
-            <span className="font-mono text-xs border border-border px-2 py-1 rounded-full uppercase bg-secondary text-secondary-foreground">
+            <span className="font-mono text-xs px-2 py-1 rounded-full uppercase text-muted-foreground">
               [ Capabilities ]
             </span>
           </div>
@@ -213,17 +210,17 @@ export default function AboutPage() {
 
       {/* --- Footer CTA --- */}
       <footer className="h-[60vh] md:h-[70vh] flex flex-col justify-between bg-primary text-primary-foreground p-6 md:p-12 relative overflow-hidden mt-0">
-        <div className="flex justify-between w-full font-mono text-xs uppercase tracking-widest z-10">
-          <span>Availability: Open</span>
-          <span>hello@aaronavila.com</span>
+        <div className="flex justify-between w-full font-mono text-xs tracking-widest z-10">
+          <span className="uppercase">Availability: Open</span>
+          <span>aaronvendedor@gmail.com</span>
         </div>
 
         <div className="z-10 relative">
-          <h2 className="text-[12vw] leading-[0.8] font-bold tracking-tighter mb-4">
+          <h2 className="text-[12vw] leading-[0.8] font-medium tracking-tighter mb-4">
             Let&apos;s Build
           </h2>
           <div className="flex items-center gap-4 md:gap-12">
-            <h2 className="text-[12vw] leading-[0.8] font-bold tracking-tighter">
+            <h2 className="text-[12vw] leading-[0.8] font-medium tracking-tighter">
               The Future
             </h2>
             <div className="w-[10vw] h-[10vw] bg-background rounded-full flex items-center justify-center text-foreground hover:scale-125 transition-transform duration-500 cursor-pointer shadow-2xl">

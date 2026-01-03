@@ -121,7 +121,6 @@ function Footer() {
               [ MENU ]
             </span>
             <div className="flex flex-col md:flex-row gap-2 md:gap-8 items-start md:items-center">
-              <MinimalLink href="/work">Work</MinimalLink>
               <MinimalLink href="/about">About</MinimalLink>
               <MinimalLink href="/resume">Resume</MinimalLink>
             </div>
@@ -135,9 +134,12 @@ function Footer() {
               [ SOCIALS ]
             </span>
             <div className="flex flex-col md:flex-row gap-2 md:gap-8 items-start md:items-center">
-              <MinimalLink href="https://linkedin.com">LinkedIn</MinimalLink>
-              <MinimalLink href="https://github.com">Github</MinimalLink>
-              <MinimalLink href="https://twitter.com">Twitter</MinimalLink>
+              <MinimalLink href="https://linkedin.com/in/aaron-avila-b57919329">
+                LinkedIn
+              </MinimalLink>
+              <MinimalLink href="https://github.com/eswaldots/">
+                Github
+              </MinimalLink>
             </div>
           </div>
         </div>

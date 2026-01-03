@@ -26,7 +26,11 @@ export default function Page() {
                 className="after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:transition-[width] duration-75 ease-in-out after:h-[2px] after:bg-foreground pb-1 cursor-pointer relative"
                 href="mailto:aaronvendedor@gmail.com"
                 target="_blank"
-                onClick={() => posthog.capture("clicked_resume_email_link", { location: "resume_header" })}
+                onClick={() =>
+                  posthog.capture("clicked_resume_email_link", {
+                    location: "resume_header",
+                  })
+                }
               >
                 aaronvendedor@gmail.com
               </Link>
@@ -35,9 +39,9 @@ export default function Page() {
         </div>
 
         <p className="text-xl sm:text-2xl tracking-tighter max-w-4xl my-8 sm:my-10 font-light">
-          Un desarrollador web creativo con pasión por el diseño, la animación,
-          la interacción, la resolución de problemas y por dominar las últimas
-          tecnologías web.
+          A creative web developer with a passion for design, animation,
+          interaction, problem-solving, and mastering the latest web
+          technologies.
         </p>
 
         <h1 className="uppercase tracking-widest font-bold text-lg">SKILLS</h1>
@@ -47,7 +51,7 @@ export default function Page() {
         <div className="my-10 flex sm:flex-row flex-col sm:gap-48 gap-8 items-start w-full">
           <div className="text-base">
             <div className="tracking-tighter font-medium my-2">
-              Frontend moderno
+              Modern Frontend
             </div>
 
             <div className="space-y-1">
@@ -77,7 +81,7 @@ export default function Page() {
 
           <div className="text-base">
             <div className="tracking-tighter font-medium my-2">
-              Herramientas & despliegue
+              Tools & Deployment
             </div>
 
             <div className="space-y-1">
@@ -88,14 +92,12 @@ export default function Page() {
               <p className="tracking-tighter font-light">Git & GitHub</p>
               <p className="tracking-tighter font-light">pnpm</p>
               <p className="tracking-tighter font-light">Linux</p>
-              <p className="tracking-tighter font-light">
-                Automatización con CLI
-              </p>
+              <p className="tracking-tighter font-light">CLI Automation</p>
             </div>
           </div>
         </div>
 
-        <h1 className="uppercase tracking-widest font-bold text-lg">Trabajo</h1>
+        <h1 className="uppercase tracking-widest font-bold text-lg">WORK</h1>
 
         <Separator className="my-4" />
 
@@ -106,42 +108,39 @@ export default function Page() {
                 Booster AI
               </h2>
               <p className="text-lg tracking-tighter text-nowrap font-light">
-                2024 - Actualidad
+                2024 - Present
               </p>
             </div>
             <div className="flex flex-col sm:gap-2 gap-1">
               <h1 className="text-lg font-medium tracking-tighter">
-                Junior fullstack developer
+                Junior Fullstack Developer
               </h1>
               <p className="font-light tracking-tighter">
-                Colaboro estrechamente con equipos de diseño para desarrollar
-                prototipos, herramientas y experiencias web interactivas para
-                contar la historia de los productos y servicios que se
-                encuentran en miner.repair.
+                Collaborating closely with design teams to develop prototypes,
+                tools, and interactive web experiences to tell the story of the
+                products and services found at miner.repair.
               </p>
             </div>
           </div>
         </div>
 
         <h1 className="uppercase tracking-widest font-bold text-lg">
-          Educacion
+          EDUCATION
         </h1>
 
         <Separator className="my-4" />
 
         <div className="my-10 sm:mt-10 mt-4">
           <div className="flex sm:flex-row flex-col justify-between sm:items-center tracking-tighter">
-            <h2 className="text-2xl font-semibold">Nuestros Simbolos</h2>
-            <p className="font-light">2021 - Actualidad</p>
+            <h2 className="text-2xl font-semibold">Nuestros Símbolos</h2>
+            <p className="font-light">2021 - Present</p>
           </div>
           <p className="text-lg tracking-tighter font-light sm:flex hidden">
-            Bachillerato
+            High School Diploma
           </p>
         </div>
 
-        <h1 className="uppercase tracking-widest font-bold text-lg">
-          CONTACTO
-        </h1>
+        <h1 className="uppercase tracking-widest font-bold text-lg">CONTACT</h1>
 
         <Separator className="my-4" />
 
@@ -163,14 +162,6 @@ export default function Page() {
             <span className="tracking-tighter font-light">+58 412 0196456</span>
           </div>
         </div>
-      </div>
-
-      <div className="absolute bottom-0 w-full px-6 sm:px-20 -translate-x-1/2 left-1/2">
-        <Separator className="my-4" />
-
-        <h1 className="my-4 tracking-tighter text-muted-foreground font-mono text-sm">
-          © 2025 Aaron Avila
-        </h1>
       </div>
     </div>
   );
