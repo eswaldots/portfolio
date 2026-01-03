@@ -47,7 +47,7 @@ const ScrollRevealText = ({
   });
 
   return (
-    <p className="flex flex-wrap text-3xl font-normal md:text-5xl font-medium tracking-tight leading-[1.25] md:leading-[1.25]">
+    <p className="flex flex-wrap text-3xl font-normal md:text-5xl md:font-medium tracking-tight leading-[1.25] md:leading-[1.25]">
       {words.map((word, i) => {
         const start = i / words.length;
         const end = start + 1 / words.length;
