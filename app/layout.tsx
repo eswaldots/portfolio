@@ -21,7 +21,7 @@ const jebrainsMonoFont = JetBrains_Mono({
 
 const title = "Home | Aaron Avila";
 const description =
-  "Creative Developer based in Venezuela. Specializing in building digital experiences, accessible interfaces, and scalable full-stack solutions.";
+  "Creative Developer based in Venezuela. Specializing in building digital experiences, accessible interfaces, and scalable full-stack applications.";
 const url = "https://aaronavila.is-a.dev";
 
 // SEO: Configuración del Viewport y Theme Color separada (Estándar Next.js 14+)
