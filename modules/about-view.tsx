@@ -54,15 +54,15 @@ const ProfileCard = () => {
       </div>
 
       {/* Bottom Section: Image */}
-      <div className="h-[70%] relative bg-muted overflow-hidden">
-        <Image
+      <div className="h-[70%] relative bg-primary overflow-hidden">
+        {/*<Image
           src="/profile.jpg"
           alt="Aaron Avila - Creative Developer Portrait"
           fill
           className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-in-out"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority // LCP Optimization
-        />
+        /> */}
         <div className="absolute bottom-4 left-4 text-white/50 text-[10px] tracking-widest uppercase z-10">
           [ REF: 001-DEV ]
         </div>
